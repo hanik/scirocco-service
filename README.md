@@ -1,3 +1,0 @@
-# scirocco-service
-
-Scirocco-service
