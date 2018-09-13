@@ -12,7 +12,7 @@ const jwt = require('_helpers/jwt');
 const errorHandler = require('_helpers/error-handler');
 
 app.use(cors());
-// app.use(jwt());
+app.use(jwt());
 app.use(errorHandler);
 
 // app.use(logger('dev'));
@@ -22,7 +22,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter)
-app.use('/users', require('./users/users.controller'));
+app.use('/users', require('./users/user.controller'));
 // app.use('/users', usersRouter);
 
 module.exports = app;
+
+
+// https://github.com/cornflourblue/node-jwt-authentication-api
