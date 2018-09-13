@@ -1,4 +1,4 @@
-# scirocco-front
+# client
 
 ## Project setup
 ```
