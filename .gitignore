@@ -1,4 +1,4 @@
-
+.
 gs
 logs
 *.log
@@ -26,6 +26,7 @@ server/node_modules/
 .eslintcache
 
 .idea/
+.idea/workspace.xml
 
 client/dist/
 server/public/
