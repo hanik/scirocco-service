@@ -8,8 +8,8 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 const cors = require('cors');
-const jwt = require('_helpers/jwt');
-const errorHandler = require('_helpers/error-handler');
+const jwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 
 app.use(cors());
 app.use(jwt());
