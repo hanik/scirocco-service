@@ -5,7 +5,7 @@ import { router } from './router';
 
 Vue.config.productionTip = false;
 
-// setup fake backend
+// setup fake backend for test
 import { configureFakeBackend } from './helpers';
 configureFakeBackend();
 

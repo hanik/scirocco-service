@@ -14,9 +14,10 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
+    console.log(config)
     console.log('API URL : ', `${config.apiUrl}/users/authenticate`)
 
-    return fetch(`${config.apiUrl}/users/authenticate`, requestOptions)
+    return fetch(`/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
             // login successful if there's a jwt token in the response
@@ -40,7 +41,7 @@ function getAll() {
         headers: authHeader()
     };
 
-    return fetch(`${config.apiUrl}/users`, requestOptions).then(handleResponse);
+    return fetch(`/users`, requestOptions).then(handleResponse);
 }
 
 function handleResponse(response) {
