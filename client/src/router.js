@@ -8,8 +8,11 @@ import LoginPage from './components/LoginPage'
 import Stepper from './components/step/Stepper'
 import StepperTabArea from './components/step/StepperTabArea'
 
-Vue.use(Router);
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 Vue.use(BootstrapVue);
+Vue.use(Router);
 
 export const router = new Router({
     mode: 'history',
