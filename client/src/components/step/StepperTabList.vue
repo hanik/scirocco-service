@@ -64,14 +64,6 @@ back.bind("click", function() {
     display: block;
     height: 0;
   }
-  .nav {
-    margin-top: 40px;
-  }
-
-  .pull-right {
-    float: right;
-  }
-
   a, a:active {
     color: #333;
     text-decoration: none;
@@ -82,7 +74,9 @@ back.bind("click", function() {
   }
 
   /* Breadcrups CSS */
-
+  .arrow-steps {
+    min-width: 1400px;
+  }
   .arrow-steps .step {
     height: 60px;
     font-size: 16px;
@@ -93,7 +87,7 @@ back.bind("click", function() {
     color: #444f57;
     cursor: default;
     margin: 0 1px;
-    padding: 10px 10px 10px 30px;
+    padding-top: 18px;
     min-width: 276px;
     float: left;
     position: relative;
@@ -116,8 +110,8 @@ back.bind("click", function() {
     width: 0;
     height: 0;
     /* stepper의 height크기 변경 시, border-top 및 border-bottom의 크기 조절 필요*/
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
+    border-top: 29px solid transparent;
+    border-bottom: 29px solid transparent;
     border-left: 17px solid #f3f7f8;
     z-index: 2;
     transition: border-color 0.2s ease;
