@@ -1,16 +1,31 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import BootstrapVue from 'bootstrap-vue'
+
 import HomePage from './views/Home'
 import LoginPage from './components/LoginPage'
+import Stepper from './components/step/Stepper'
+import StepperTabArea from './components/step/StepperTabArea'
 
 Vue.use(Router);
+Vue.use(BootstrapVue);
 
 export const router = new Router({
     mode: 'history',
     routes: [
         {path: '/', component: HomePage},
         {path: '/login', component: LoginPage},
+        {
+            path: '/stepper',
+            name: 'Stepper',
+            component: Stepper,
+        },
+        {
+            path: '/stepperTabArea',
+            name: 'StepperTabArea',
+            component: StepperTabArea,
+        },
         {
             path: '/about',
             name: 'about',
