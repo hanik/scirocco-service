@@ -9,7 +9,7 @@
   export default {
     name: 'app',
     components: {
-      'Navigator': Navigator
+      'Navigator': Navigator,
     }
   }
 </script>

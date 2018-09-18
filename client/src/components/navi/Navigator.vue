@@ -1,4 +1,5 @@
 <template>
+  <!-- Navigator Area -->
   <b-navbar toggleable="md" type="dark" variant="secondary">
     <b-navbar-brand href="#">YC-Admin</b-navbar-brand>
     <b-collapse is-nav id="nav_collapse">
@@ -16,7 +17,6 @@
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
           <b-dropdown-item href="#">Signout</b-dropdown-item>
-
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
