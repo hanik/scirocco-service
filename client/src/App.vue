@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <Navigator/>
+    <Status/>
     <router-view/>
   </div>
 </template>
 <script>
   import Navigator from './components/navi/Navigator'
+  import Status from './components/status/Status'
   export default {
     name: 'app',
     components: {
       'Navigator': Navigator,
+      'Status': Status,
     }
   }
 </script>
