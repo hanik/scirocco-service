@@ -13,10 +13,10 @@
       <b-navbar-nav class="ml-auto">
         <b-nav-item-dropdown right>
           <template slot="button-content">
-            <span style="color: white">icebar2002@gmail.com</span>
+            <span class="span-font-color">icebar2002@gmail.com</span>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Signout</b-dropdown-item>
+          <b-dropdown-item href="#">Sign out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -29,6 +29,9 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.span-font-color {
+  color: white;
+}
 
 </style>
