@@ -1,4 +1,3 @@
-import config from 'config';
 import { authHeader } from '../helpers';
 
 export const userService = {
@@ -14,8 +13,7 @@ function login(username, password) {
         body: JSON.stringify({ username, password })
     };
 
-    console.log(config)
-    console.log('API URL : ', `${config.apiUrl}/users/authenticate`)
+    console.log('API URL : ', `/users/authenticate`)
 
     return fetch(`/users/authenticate`, requestOptions)
         .then(handleResponse)
