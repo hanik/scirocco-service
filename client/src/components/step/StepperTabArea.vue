@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="stepper-tab-area">
     <div class="wrapper">
       <StepperTabList/>
       <StepperTabContents/>
@@ -20,17 +20,19 @@
   }
 </script>
 
-<style scoped>
-  .container {
+<style scoped lang="scss">
+
+  #stepper-tab-area {
     font-family: 'Lato', sans-serif;
     margin: 0 auto;
     display: contents;
+
+    .wrapper {
+      display: inline-table;
+      height: 400px;
+      width: 100%;
+      vertical-align: middle;
+    }
   }
 
-  .wrapper {
-    display: inline-table;
-    height: 400px;
-    width: 100%;
-    vertical-align: middle;
-  }
 </style>
