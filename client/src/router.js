@@ -1,9 +1,17 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import BootstrapVue from 'bootstrap-vue'
+
 import HomePage from './views/Home'
 import LoginPage from './components/LoginPage'
+import Stepper from './components/step/Stepper'
+import StepperTabArea from './components/step/StepperTabArea'
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+
+Vue.use(BootstrapVue);
 Vue.use(Router);
 
 export const router = new Router({
@@ -11,6 +19,16 @@ export const router = new Router({
     routes: [
         {path: '/', component: HomePage},
         {path: '/login', component: LoginPage},
+        {
+            path: '/stepper',
+            name: 'Stepper',
+            component: Stepper,
+        },
+        {
+            path: '/stepperTabArea',
+            name: 'StepperTabArea',
+            component: StepperTabArea,
+        },
         {
             path: '/about',
             name: 'about',
@@ -24,15 +42,15 @@ export const router = new Router({
     ]
 });
 
-router.beforeEach((to, from, next) => {
-    // redirect to login page if not logged in and trying to access a restricted page
-    const publicPages = ['/login'];
-    const authRequired = !publicPages.includes(to.path);
-    const loggedIn = localStorage.getItem('user');
-
-    if (authRequired && !loggedIn) {
-        return next('/login');
-    }
-
-    next();
-})
+// router.beforeEach((to, from, next) => {
+//     // redirect to login page if not logged in and trying to access a restricted page
+//     const publicPages = ['/login'];
+//     const authRequired = !publicPages.includes(to.path);
+//     const loggedIn = localStorage.getItem('user');
+//
+//     if (authRequired && !loggedIn) {
+//         return next('/login');
+//     }
+//
+//     next();
+// })

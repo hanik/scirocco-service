@@ -1,13 +1,21 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <Navigator/>
+    <Status/>
     <router-view/>
   </div>
 </template>
-
+<script>
+  import Navigator from './components/navi/Navigator'
+  import Status from './components/status/Status'
+  export default {
+    name: 'app',
+    components: {
+      'Navigator': Navigator,
+      'Status': Status,
+    }
+  }
+</script>
 <style lang="scss">
   #app {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
