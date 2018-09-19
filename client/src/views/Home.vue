@@ -17,17 +17,17 @@
 </template>
 
 <script>
-    export default {
-        computed: {
-            user () {
-                return this.$store.state.authentication.user;
-            },
-            users () {
-                return this.$store.state.users.all;
-            }
-        },
-        created () {
-            this.$store.dispatch('users/getAll');
-        }
-    };
+export default {
+  computed: {
+    user() {
+      return this.$store.state.authentication.user;
+    },
+    users() {
+      return this.$store.state.users.all;
+    },
+  },
+  created() {
+    this.$store.dispatch('users/getAll');
+  },
+};
 </script>
