@@ -12,6 +12,6 @@
 
 <style scoped lang="scss">
 div {
-  display: none;
+  /*display: none;*/
 }
 </style>

@@ -1,59 +1,40 @@
 <template>
   <div class="arrow-steps clearfix">
-    <div class="step current" id="step-feedback">
+    <div class="step" :class="[{current:selected == 'step-feedback'}]" id="step-feedback" @click="select($event)">
       <span> 피드백 수집 </span>
     </div>
-    <div class="step" id="step-prepareData">
+    <div class="step" :class="{current:selected == 'step-prepareData'}" id="step-prepareData" @click="select($event)">
       <span>Data 준비 / 검증</span>
     </div>
-    <div class="step" id="step-learning">
+    <div class="step" :class="{current:selected == 'step-learning'}" id="step-learning" @click="select($event)">
       <span>학습과 적용</span>
     </div>
-    <div class="step" id="step-verifyModel">
+    <div class="step" :class="{current:selected == 'step-verifyModel'}" id="step-verifyModel" @click="select($event)">
       <span>모델 검증</span>
     </div>
-    <div class="step" id="step-restartService">
+    <div class="step" :class="{current:selected == 'step-restartService'}" id="step-restartService" @click="select($event)">
       <span>서비스 재시작</span>
     </div>
   </div>
-  <!--<div class="nav clearfix">-->
-    <!--<a href="#" class="prev">Previous</a>-->
-    <!--<a href="#" class="next pull-right">Next</a>-->
-  <!--</div>-->
 </template>
 
 <script>
   export default {
-    name: "stepper-tab-list"
+    name: "stepper-tab-list",
+    data() {
+      return {
+        selected: 'step-feedback',
+      }
+    },
+    methods: {
+      select: function(event) {
+        var targetId = event.currentTarget.id;
+        this.selected = targetId
+        console.log(targetId);
+        // move to selected page
+      }
+    }
   }
-  /*
-jQuery( document ).ready(function() {
-
-var back =jQuery(".prev");
-var	next = jQuery(".next");
-var	steps = jQuery(".step");
-
-next.bind("click", function() {
-  jQuery.each( steps, function( i ) {
-    if (!jQuery(steps[i]).hasClass('current') && !jQuery(steps[i]).hasClass('done')) {
-      jQuery(steps[i]).addClass('current');
-      jQuery(steps[i - 1]).removeClass('current').addClass('done');
-      return false;
-    }
-  })
-});
-back.bind("click", function() {
-  jQuery.each( steps, function( i ) {
-    if (jQuery(steps[i]).hasClass('done') && jQuery(steps[i + 1]).hasClass('current')) {
-      jQuery(steps[i + 1]).removeClass('current');
-      jQuery(steps[i]).removeClass('done').addClass('current');
-      return false;
-    }
-  })
-});
-
-})
-*/
 
 </script>
 
@@ -85,7 +66,7 @@ back.bind("click", function() {
     font-style: normal;
     font-stretch: normal;
     color: #444f57;
-    cursor: default;
+    cursor: pointer;
     margin: 0 1px;
     padding-top: 18px;
     min-width: 276px;
