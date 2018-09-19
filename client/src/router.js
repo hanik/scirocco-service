@@ -8,6 +8,13 @@ import LoginPage from './components/LoginPage'
 import Stepper from './components/step/Stepper'
 import StepperTabArea from './components/step/StepperTabArea'
 
+import ContentGatherFeedback from './components/step/ContentGatherFeedback'
+import ContentLearning from './components/step/ContentLearning'
+import ContentPrepareData from './components/step/ContentPrepareData'
+import ContentVerifyModel from './components/step/ContentVerifyModel'
+import ContentRestartService from './components/step/ContentRestartService'
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
@@ -28,6 +35,33 @@ export const router = new Router({
             path: '/stepperTabArea',
             name: 'StepperTabArea',
             component: StepperTabArea,
+            children : [
+              {
+                path: '',
+                name: 'step-feedback',
+                component: ContentGatherFeedback,
+              },
+              {
+                path: '/learning',
+                name: 'step-prepareData',
+                component: ContentLearning,
+              },
+              {
+                path: '/prepareData',
+                name: 'step-learning',
+                component: ContentPrepareData,
+              },
+              {
+                path: '/verifyModel',
+                name: 'step-verifyModel',
+                component: ContentVerifyModel,
+              },
+              {
+                path: '/restartService',
+                name: 'step-restartService',
+                component: ContentRestartService,
+              },
+            ]
         },
         {
             path: '/about',

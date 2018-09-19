@@ -23,13 +23,14 @@
 <style scoped>
   .container {
     font-family: 'Lato', sans-serif;
-    width: auto;
     margin: 0 auto;
+    display: contents;
   }
 
   .wrapper {
     display: inline-table;
     height: 400px;
+    width: 100%;
     vertical-align: middle;
   }
 </style>

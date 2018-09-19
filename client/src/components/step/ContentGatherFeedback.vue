@@ -11,6 +11,8 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+div {
+  background-color: grey;
+}
 </style>

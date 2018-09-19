@@ -1,59 +1,41 @@
 <template>
   <div class="arrow-steps clearfix">
-    <div class="step current" id="step-feedback">
+    <div class="step" :class="[{current:selected == 'step-feedback'}]" id="step-feedback" @click="select($event)">
       <span> 피드백 수집 </span>
     </div>
-    <div class="step" id="step-prepareData">
+    <div class="step" :class="{current:selected == 'step-prepareData'}" id="step-prepareData" @click="select($event)">
       <span>Data 준비 / 검증</span>
     </div>
-    <div class="step" id="step-learning">
+    <div class="step" :class="{current:selected == 'step-learning'}" id="step-learning" @click="select($event)">
       <span>학습과 적용</span>
     </div>
-    <div class="step" id="step-verifyModel">
+    <div class="step" :class="{current:selected == 'step-verifyModel'}" id="step-verifyModel" @click="select($event)">
       <span>모델 검증</span>
     </div>
-    <div class="step" id="step-restartService">
+    <div class="step" :class="{current:selected == 'step-restartService'}" id="step-restartService" @click="select($event)">
       <span>서비스 재시작</span>
     </div>
   </div>
-  <!--<div class="nav clearfix">-->
-    <!--<a href="#" class="prev">Previous</a>-->
-    <!--<a href="#" class="next pull-right">Next</a>-->
-  <!--</div>-->
 </template>
 
 <script>
   export default {
-    name: "stepper-tab-list"
+    name: "stepper-tab-list",
+    data() {
+      return {
+        selected: 'step-feedback',
+      }
+    },
+    methods: {
+      select: function(event) {
+        var targetId = event.currentTarget.id;
+        this.selected = targetId
+        this.$router.push({
+          name: targetId
+        })
+      }
+    }
   }
-  /*
-jQuery( document ).ready(function() {
-
-var back =jQuery(".prev");
-var	next = jQuery(".next");
-var	steps = jQuery(".step");
-
-next.bind("click", function() {
-  jQuery.each( steps, function( i ) {
-    if (!jQuery(steps[i]).hasClass('current') && !jQuery(steps[i]).hasClass('done')) {
-      jQuery(steps[i]).addClass('current');
-      jQuery(steps[i - 1]).removeClass('current').addClass('done');
-      return false;
-    }
-  })
-});
-back.bind("click", function() {
-  jQuery.each( steps, function( i ) {
-    if (jQuery(steps[i]).hasClass('done') && jQuery(steps[i + 1]).hasClass('current')) {
-      jQuery(steps[i + 1]).removeClass('current');
-      jQuery(steps[i]).removeClass('done').addClass('current');
-      return false;
-    }
-  })
-});
-
-})
-*/
 
 </script>
 
@@ -64,14 +46,6 @@ back.bind("click", function() {
     display: block;
     height: 0;
   }
-  .nav {
-    margin-top: 40px;
-  }
-
-  .pull-right {
-    float: right;
-  }
-
   a, a:active {
     color: #333;
     text-decoration: none;
@@ -82,7 +56,9 @@ back.bind("click", function() {
   }
 
   /* Breadcrups CSS */
-
+  .arrow-steps {
+    min-width: 1400px;
+  }
   .arrow-steps .step {
     height: 60px;
     font-size: 16px;
@@ -91,9 +67,9 @@ back.bind("click", function() {
     font-style: normal;
     font-stretch: normal;
     color: #444f57;
-    cursor: default;
+    cursor: pointer;
     margin: 0 1px;
-    padding: 10px 10px 10px 30px;
+    padding-top: 18px;
     min-width: 276px;
     float: left;
     position: relative;
@@ -116,8 +92,8 @@ back.bind("click", function() {
     width: 0;
     height: 0;
     /* stepper의 height크기 변경 시, border-top 및 border-bottom의 크기 조절 필요*/
-    border-top: 40px solid transparent;
-    border-bottom: 40px solid transparent;
+    border-top: 29px solid transparent;
+    border-bottom: 29px solid transparent;
     border-left: 17px solid #f3f7f8;
     z-index: 2;
     transition: border-color 0.2s ease;
