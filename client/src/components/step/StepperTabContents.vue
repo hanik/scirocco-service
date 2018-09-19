@@ -6,9 +6,9 @@
 
 <script>
 
-  export default {
-    name: "stepper-tab-contents",
-  }
+export default {
+  name: 'stepper-tab-contents',
+};
 </script>
 
 <style scoped>

@@ -1,9 +1,9 @@
 # .pairs - configuration for 'git pair'
 pairs:
-  km: Kate Ma
-  mc: Mabel Choi
-  hh: Hanik Han
-email_addresses:
-  km: juyeon.kate@gmail.com
-  mc: tandri6@gmail.com
-  hh: estyle81@gmail.com
+  km: Kate Ma; juyeon.kate
+  mc: Mabel Choi; tandri6
+  hh: Hanik Han; estyle81
+email:
+  prefix: pair
+  domain: gmail.com
+

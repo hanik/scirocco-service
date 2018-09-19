@@ -24,9 +24,9 @@
 </template>
 
 <script>
-  export default {
-    name: "navigator"
-  }
+export default {
+  name: 'navigator',
+};
 </script>
 
 <style scoped lang="scss">

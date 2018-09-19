@@ -6,9 +6,9 @@
 </template>
 
 <script>
-  export default {
-    name: "content-gather-feedback"
-  }
+export default {
+  name: 'content-gather-feedback',
+};
 </script>
 
 <style scoped lang="scss">

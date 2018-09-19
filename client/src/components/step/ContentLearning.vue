@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: "content-learning"
-  }
+export default {
+  name: 'content-learning',
+};
 </script>
 
 <style scoped lang="scss">

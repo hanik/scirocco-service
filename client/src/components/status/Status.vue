@@ -31,9 +31,9 @@
 </template>
 
 <script>
-  export default {
-    name: "status"
-  }
+export default {
+  name: 'status',
+};
 </script>
 
 <style scoped lang="scss">

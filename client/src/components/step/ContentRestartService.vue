@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: "content-restart-service"
-  }
+export default {
+  name: 'content-restart-service',
+};
 </script>
 
 <style scoped lang="scss">

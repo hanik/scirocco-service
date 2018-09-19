@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: "content-verify-model"
-  }
+export default {
+  name: 'content-verify-model',
+};
 </script>
 
 <style scoped lang="scss">

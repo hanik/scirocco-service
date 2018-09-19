@@ -1,41 +1,43 @@
 <template>
   <div id="stepper-tab-list">
-    <div class="step" :class="[{current:selected === 'step-feedback'}]" id="step-feedback" @click="select($event)">
+    <div  :class="[{current: selected === 'step-feedback'}, 'step']" id="step-feedback" @click="select($event)">
       <span> 피드백 수집 </span>
     </div>
-    <div class="step" :class="{current:selected === 'step-prepareData'}" id="step-prepareData" @click="select($event)">
+    <div :class="[{current:selected === 'step-prepareData'}, 'step']" id="step-prepareData" @click="select($event)">
       <span>Data 준비 / 검증</span>
     </div>
-    <div class="step" :class="{current:selected === 'step-learning'}" id="step-learning" @click="select($event)">
+    <div :class="[{current:selected === 'step-learning'}, 'step']" id="step-learning" @click="select($event)">
       <span>학습과 적용</span>
     </div>
-    <div class="step" :class="{current:selected === 'step-verifyModel'}" id="step-verifyModel" @click="select($event)">
+    <div :class="[{current:selected === 'step-verifyModel'}, 'step']" id="step-verifyModel" @click="select($event)">
       <span>모델 검증</span>
     </div>
-    <div class="step" :class="{current:selected === 'step-restartService'}" id="step-restartService" @click="select($event)">
+    <div :class="[{current:selected === 'step-restartService'}, 'step']"
+         id="step-restartService" @click="select($event)">
       <span>서비스 재시작</span>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: "stepper-tab-list",
-    data() {
-      return {
-        selected: 'step-feedback',
-      }
+export default {
+
+  name: 'stepper-tab-list',
+  data() {
+    return {
+      selected: 'step-feedback',
+    };
+  },
+  methods: {
+    select(event) {
+      const targetId = event.currentTarget.id;
+      this.selected = targetId;
+      this.$router.push({
+        name: targetId,
+      });
     },
-    methods: {
-      select: function(event) {
-        let targetId = event.currentTarget.id;
-        this.selected = targetId
-        this.$router.push({
-          name: targetId
-        })
-      }
-    }
-  }
+  },
+};
 
 </script>
 

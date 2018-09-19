@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: "content-prepare-data"
-  }
+export default {
+  name: 'content-prepare-data',
+};
 </script>
 
 <style scoped lang="scss">

@@ -8,16 +8,16 @@
 </template>
 
 <script>
-  import StepperTabList from './StepperTabList'
-  import StepperTabContents from './StepperTabContents'
+import StepperTabList from './StepperTabList.vue';
+import StepperTabContents from './StepperTabContents.vue';
 
-  export default {
-    name: "stepper-tab-area",
-    components: {
-      StepperTabList,
-      StepperTabContents,
-    }
-  }
+export default {
+  name: 'stepper-tab-area',
+  components: {
+    StepperTabList,
+    StepperTabContents,
+  },
+};
 </script>
 
 <style scoped lang="scss">
