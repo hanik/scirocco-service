@@ -30,8 +30,9 @@
       select: function(event) {
         var targetId = event.currentTarget.id;
         this.selected = targetId
-        console.log(targetId);
-        // move to selected page
+        this.$router.push({
+          name: targetId
+        })
       }
     }
   }

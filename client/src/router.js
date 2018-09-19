@@ -38,22 +38,27 @@ export const router = new Router({
             children : [
               {
                 path: '',
+                name: 'step-feedback',
                 component: ContentGatherFeedback,
               },
               {
-                path: 'learning',
+                path: '/learning',
+                name: 'step-prepareData',
                 component: ContentLearning,
               },
               {
-                path: 'prepareData',
+                path: '/prepareData',
+                name: 'step-learning',
                 component: ContentPrepareData,
               },
               {
-                path: 'verifyModel',
+                path: '/verifyModel',
+                name: 'step-verifyModel',
                 component: ContentVerifyModel,
               },
               {
-                path: 'restartService',
+                path: '/restartService',
+                name: 'step-restartService',
                 component: ContentRestartService,
               },
             ]
