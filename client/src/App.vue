@@ -6,15 +6,16 @@
   </div>
 </template>
 <script>
-  import Navigator from './components/navi/Navigator'
-  import Status from './components/status/Status'
-  export default {
-    name: 'app',
-    components: {
-      'Navigator': Navigator,
-      'Status': Status,
-    }
-  }
+import Navigator from './components/navi/Navigator.vue';
+import Status from './components/status/Status.vue';
+
+export default {
+  name: 'app',
+  components: {
+    Navigator,
+    Status,
+  },
+};
 </script>
 <style lang="scss">
   #app {
