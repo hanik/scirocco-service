@@ -20,7 +20,7 @@ import ContentRestartService from './components/step/ContentRestartService.vue';
 Vue.use(BootstrapVue);
 Vue.use(Router);
 
-export const router = new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     { path: '/', component: HomePage },
@@ -75,15 +75,17 @@ export const router = new Router({
   ],
 });
 
+export default router;
+
+
 // router.beforeEach((to, from, next) => {
-//     // redirect to login page if not logged in and trying to access a restricted page
-//     const publicPages = ['/login'];
-//     const authRequired = !publicPages.includes(to.path);
-//     const loggedIn = localStorage.getItem('user');
+//   // redirect to login page if not logged in and trying to access a restricted page
+//   const publicPages = ['/login'];
+//   const authRequired = !publicPages.includes(to.path);
+//   const loggedIn = localStorage.getItem('user');
 //
-//     if (authRequired && !loggedIn) {
-//         return next('/login');
-//     }
-//
-//     next();
-// })
+//   if (authRequired && !loggedIn) {
+//     return next('/login');
+//   }
+//   next();
+// });

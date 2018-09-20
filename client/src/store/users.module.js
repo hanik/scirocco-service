@@ -1,6 +1,6 @@
 import { userService } from '../services';
 
-export const users = {
+const users = {
   namespaced: true,
   state: {
     all: {},
@@ -28,3 +28,6 @@ export const users = {
     },
   },
 };
+
+export default users;
+

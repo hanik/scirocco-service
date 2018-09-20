@@ -1,12 +1,12 @@
 import { userService } from '../services';
-import { router } from '../router';
+import router from '../router';
 
 const user = JSON.parse(localStorage.getItem('user'));
 const initialState = user
   ? { status: { loggedIn: true }, user }
   : { status: {}, user: null };
 
-export const authentication = {
+const authentication = {
   namespaced: true,
   state: initialState,
   actions: {
@@ -49,3 +49,5 @@ export const authentication = {
     },
   },
 };
+
+export default authentication;
