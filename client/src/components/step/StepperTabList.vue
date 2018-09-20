@@ -41,6 +41,7 @@ export default {
   #stepper-tab-list {
 
     min-width: 1400px;
+    display: flex;
 
     &:after {
       clear: both;
@@ -50,6 +51,7 @@ export default {
     }
 
     & .step {
+      flex: 1 1 276px;
       height: 60px;
       line-height: 60px;
       font-size: 16px;
@@ -58,7 +60,6 @@ export default {
       color: #444f57;
       cursor: pointer;
       margin: 0 1px;
-      min-width: 276px;
       float: left;
       position: relative;
       background-color: #f3f7f8;
