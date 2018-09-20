@@ -5,7 +5,7 @@
     <b-collapse is-nav id="nav_collapse">
       <b-navbar-nav>
         <b-nav-item href="/stepperTabArea">Current</b-nav-item>
-        <b-nav-item href="/stepper">History</b-nav-item>
+        <b-nav-item href="/">History</b-nav-item>
         <b-nav-item href="/">Home</b-nav-item>
         <b-nav-item href="/about">About</b-nav-item>
       </b-navbar-nav>

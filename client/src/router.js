@@ -8,7 +8,6 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import HomePage from './views/Home.vue';
 import LoginPage from './components/LoginPage.vue';
-import Stepper from './components/step/Stepper.vue';
 import StepperTabArea from './components/step/StepperTabArea.vue';
 
 import ContentGatherFeedback from './components/step/ContentGatherFeedback.vue';
@@ -25,11 +24,6 @@ const router = new Router({
   routes: [
     { path: '/', component: HomePage },
     { path: '/login', component: LoginPage },
-    {
-      path: '/stepper',
-      name: 'Stepper',
-      component: Stepper,
-    },
     {
       path: '/stepperTabArea',
       name: 'StepperTabArea',
