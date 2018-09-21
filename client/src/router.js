@@ -3,12 +3,14 @@ import Router from 'vue-router';
 
 import BootstrapVue from 'bootstrap-vue';
 
+/* eslint-disable import/no-extraneous-dependencies */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import HomePage from './views/Home.vue';
 import LoginPage from './components/LoginPage.vue';
-import StepperTabArea from './components/step/StepperTabArea.vue';
+import Current from './components/step/StepperTabArea.vue';
+import History from './components/history/HistoryContainer.vue';
 
 import ContentGatherFeedback from './components/step/ContentGatherFeedback.vue';
 import ContentLearning from './components/step/ContentLearning.vue';
@@ -25,9 +27,9 @@ const router = new Router({
     { path: '/', component: HomePage },
     { path: '/login', component: LoginPage },
     {
-      path: '/stepperTabArea',
-      name: 'StepperTabArea',
-      component: StepperTabArea,
+      path: '/current',
+      name: 'Current',
+      component: Current,
       children: [
         {
           path: '',
@@ -55,6 +57,11 @@ const router = new Router({
           component: ContentRestartService,
         },
       ],
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: History,
     },
     {
       path: '/about',
