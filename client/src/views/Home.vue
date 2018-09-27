@@ -27,6 +27,7 @@ export default {
     },
   },
   created() {
+    console.log("???")
     this.$store.dispatch('users/getAll');
   },
 };

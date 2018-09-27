@@ -17,6 +17,7 @@ const authentication = {
         .then(
           (user) => {
             commit('loginSuccess', user);
+            dispatch('userState/statusBarVisible', null, { root: true })
             router.push('/');
           },
           (error) => {
@@ -25,9 +26,10 @@ const authentication = {
           },
         );
     },
-    logout({ commit }) {
+    logout({ dispatch, commit }) {
       userService.logout();
       commit('logout');
+      dispatch('userState/statusBarInvisible', null, { root: true })
     },
   },
   mutations: {

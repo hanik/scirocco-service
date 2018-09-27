@@ -5,6 +5,7 @@
     <router-view/>
   </div>
 </template>
+<!--expect(wrapper.find('button').hasStyle('display', 'none')).toBe(true)-->
 <script>
 import Navigator from './components/navi/Navigator.vue';
 import Status from './components/status/Status.vue';
