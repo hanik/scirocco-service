@@ -23,11 +23,17 @@
         </div>
       </div>
     </form>
+      <RButton :title="'대체 왜?'" :width="120" :type="'normal'" ></RButton>
   </div>
 </template>
 
 <script>
+import RButton from './common/RButton.vue';
+
 export default {
+  components: {
+    RButton,
+  },
   data() {
     return {
       username: '',
