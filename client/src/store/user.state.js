@@ -5,7 +5,6 @@ const userState = {
   },
   actions: {
     statusBarVisible({ commit }) {
-      console.log("??????")
       commit('statusBarVisible');
     },
     statusBarInvisible({ commit }) {
@@ -14,14 +13,15 @@ const userState = {
   },
   mutations: {
     statusBarVisible(state) {
-      console.log("~!~~~~~")
-
       state.statusBarState = true;
     },
     statusBarInvisible(state) {
       state.statusBarState = false;
     }
   },
+  getters: {
+    getStatusBarVisibility: state => state.statusBarState
+  }
 };
 
 export default userState;

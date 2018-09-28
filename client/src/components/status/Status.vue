@@ -1,5 +1,5 @@
 <template>
-  <div class="status-container">
+  <div class="status-container" v-show="test">
     <span class="logo">
       Sirocco-YC-v3
     </span>
@@ -25,8 +25,25 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'status',
+  data() {
+    return {
+      // barState: false,
+    }
+  },
+  computed: {
+    ...mapGetters({
+      barState: 'getStatusBarVisibility'
+    }),
+    test() {
+      console.log("???##$#@$@#")
+      console.log(this.$store.state.statusBarState)
+      return this.$store.state.statusBarState
+    }
+  },
 };
 </script>
 
