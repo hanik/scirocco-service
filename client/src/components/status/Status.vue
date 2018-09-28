@@ -1,5 +1,5 @@
 <template>
-  <div class="status-container" v-show="test">
+  <div class="status-container" v-if="loggingIn">
     <span class="logo">
       Sirocco-YC-v3
     </span>
@@ -25,24 +25,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'status',
-  data() {
-    return {
-      // barState: false,
-    }
-  },
   computed: {
     ...mapGetters({
-      barState: 'getStatusBarVisibility'
+      loggingIn: 'authentication/isLogin',
     }),
-    test() {
-      console.log("???##$#@$@#")
-      console.log(this.$store.state.statusBarState)
-      return this.$store.state.statusBarState
-    }
   },
 };
 </script>
