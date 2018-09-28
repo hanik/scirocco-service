@@ -1,0 +1,78 @@
+// js file for temp data
+const gara = {
+  state: {
+    items: [
+      {
+        modelName: 'data1000',
+        startDate: 'data',
+        endDate: 'data',
+        improve: '10%',
+        fix: '10%',
+        base: '10%',
+        admin: 'icebar2002@gmail.com',
+        volume: '16MB',
+        history: 'O',
+      },
+      {
+        modelName: 'data2',
+        startDate: 'data',
+        endDate: 'data',
+        improve: '10%',
+        fix: '10%',
+        base: '10%',
+        admin: 'icebar2002@gmail.com',
+        volume: '16MB',
+        history: 'O',
+      },
+      {
+        modelName: 'data3',
+        startDate: 'data',
+        endDate: 'data',
+        improve: '10%',
+        fix: '10%',
+        base: '10%',
+        admin: 'icebar2002@gmail.com',
+        volume: '16MB',
+        history: 'O',
+      },
+      {
+        modelName: 'data4',
+        startDate: 'data',
+        endDate: 'data',
+        improve: '10%',
+        fix: '10%',
+        base: '10%',
+        admin: 'icebar2002@gmail.com',
+        volume: '16MB',
+        history: 'O',
+      },
+      {
+        modelName: 'data5',
+        startDate: 'data',
+        endDate: 'data',
+        improve: '10%',
+        fix: '10%',
+        base: '10%',
+        admin: 'icebar2002@gmail.com',
+        volume: '16MB',
+        history: 'O',
+      },
+      {
+        modelName: 'data6',
+        startDate: 'data',
+        endDate: 'data',
+        improve: '10%',
+        fix: '10%',
+        base: '10%',
+        admin: 'icebar2002@gmail.com',
+        volume: '16MB',
+        history: 'O',
+      },
+    ],
+  },
+  getters: {
+    getHistoryItems: state => state.items,
+  },
+};
+
+export default gara;

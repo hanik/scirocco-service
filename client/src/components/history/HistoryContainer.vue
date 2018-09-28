@@ -1,108 +1,22 @@
 <template>
   <div id="history-container">
-    <div class="table-header">
-      <div class="checkbox"><input type="checkbox" /> </div>
-      <div class="modelName">modelName</div>
-      <div class="startDate">startDate</div>
-      <div class="endDate">endDate</div>
-      <div class="improve">improve</div>
-      <div class="fix">fix</div>
-      <div class="base">base</div>
-      <div class="admin">admin</div>
-      <div class="volume">volume</div>
-      <div class="history">history</div>
-    </div>
-    <div class="table-body">
-      <div class="table-row" v-for="item in items" :key="item.modelName">
-        <div class="checkbox"><input type="checkbox" /></div>
-        <div class="modelName">{{ item.modelName }}</div>
-        <div class="startDate">{{ item.startDate }}</div>
-        <div class="endDate">{{ item.endDate }}</div>
-        <div class="improve">{{ item.improve }}</div>
-        <div class="fix">{{ item.fix }}</div>
-        <div class="base">{{ item.base }}</div>
-        <div class="admin">{{ item.admin }}</div>
-        <div class="volume">{{ item.volume }}</div>
-        <div class="history">{{ item.history }}</div>
-      </div>
-    </div>
+    <HistoryTable :items="items"/>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+import HistoryTable from './HistoryTable.vue';
+
 export default {
   name: 'History',
-  data() {
-    return {
-      items: [
-        {
-          modelName: 'data1',
-          startDate: 'data',
-          endDate: 'data',
-          improve: '10%',
-          fix: '10%',
-          base: '10%',
-          admin: 'icebar2002@gmail.com',
-          volume: '16MB',
-          history: 'O',
-        },
-        {
-          modelName: 'data2',
-          startDate: 'data',
-          endDate: 'data',
-          improve: '10%',
-          fix: '10%',
-          base: '10%',
-          admin: 'icebar2002@gmail.com',
-          volume: '16MB',
-          history: 'O',
-        },
-        {
-          modelName: 'data3',
-          startDate: 'data',
-          endDate: 'data',
-          improve: '10%',
-          fix: '10%',
-          base: '10%',
-          admin: 'icebar2002@gmail.com',
-          volume: '16MB',
-          history: 'O',
-        },
-        {
-          modelName: 'data4',
-          startDate: 'data',
-          endDate: 'data',
-          improve: '10%',
-          fix: '10%',
-          base: '10%',
-          admin: 'icebar2002@gmail.com',
-          volume: '16MB',
-          history: 'O',
-        },
-        {
-          modelName: 'data5',
-          startDate: 'data',
-          endDate: 'data',
-          improve: '10%',
-          fix: '10%',
-          base: '10%',
-          admin: 'icebar2002@gmail.com',
-          volume: '16MB',
-          history: 'O',
-        },
-        {
-          modelName: 'data6',
-          startDate: 'data',
-          endDate: 'data',
-          improve: '10%',
-          fix: '10%',
-          base: '10%',
-          admin: 'icebar2002@gmail.com',
-          volume: '16MB',
-          history: 'O',
-        },
-      ],
-    };
+  components: {
+    HistoryTable,
+  },
+  computed: {
+    ...mapGetters({
+      items: 'getHistoryItems',
+    }),
   },
 };
 </script>
@@ -110,65 +24,5 @@ export default {
 <style scoped lang="scss">
   #history-container {
     padding: 0 60px;
-
-    .table-header {
-      width: 100%;
-      display: flex;
-      height: 40px;
-      line-height: 40px;
-      background-color: rgba(243, 247, 248, 0.6);
-      border-top: solid 1px #d6dcde;
-    }
-
-    .table-body {
-      width: 100%;
-
-      .table-row {
-        display: flex;
-        height: 48px;
-        line-height: 48px;
-        border-bottom: solid 1px rgba(214, 220, 222, 0.4);
-
-        &:last-of-type {
-          border-bottom: solid 1px #d6dcde;
-        }
-      }
-    }
-    .table-row, .table-header {
-      & > div {
-        padding: 0 22px;
-      }
-
-      .checkbox {
-        flex: 1;
-      }
-      .modelName {
-        flex: 6;
-      }
-      .startDate {
-        flex: 5;
-      }
-      .endDate {
-        flex: 5;
-      }
-      .improve {
-        flex: 3;
-      }
-      .fix {
-        flex: 3;
-      }
-      .base {
-        flex: 3;
-      }
-      .admin {
-        flex: 7;
-      }
-      .volume {
-        flex: 3;
-      }
-      .history {
-        flex: 1;
-      }
-    }
   }
 </style>
