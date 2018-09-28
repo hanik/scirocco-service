@@ -1,5 +1,6 @@
 import { shallowMount } from '@vue/test-utils';
 import sinon from 'sinon';
+// import jest from 'jest-mock';
 import StepperTabList from '@/components/step/StepperTabList.vue';
 
 const stubPush = sinon.stub();

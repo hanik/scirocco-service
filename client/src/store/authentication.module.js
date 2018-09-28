@@ -48,6 +48,9 @@ const authentication = {
       state.user = null;
     },
   },
+  getters: {
+    isLogin: state => state.status.loggedIn,
+  },
 };
 
 export default authentication;

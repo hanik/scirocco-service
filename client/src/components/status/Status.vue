@@ -1,5 +1,5 @@
 <template>
-  <div class="status-container">
+  <div class="status-container" v-if="loggingIn">
     <span class="logo">
       Sirocco-YC-v3
     </span>
@@ -25,8 +25,15 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'status',
+  computed: {
+    ...mapGetters({
+      loggingIn: 'authentication/isLogin',
+    }),
+  },
 };
 </script>
 
