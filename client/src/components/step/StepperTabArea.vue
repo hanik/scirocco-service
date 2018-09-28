@@ -1,5 +1,6 @@
 <template>
   <div id="stepper-tab-area">
+    <Status/>
     <div class="wrapper">
       <StepperTabList/>
       <StepperTabContents/>
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import Status from '../status/Status.vue';
 import StepperTabList from './StepperTabList.vue';
 import StepperTabContents from './StepperTabContents.vue';
 
@@ -16,6 +18,7 @@ export default {
   components: {
     StepperTabList,
     StepperTabContents,
+    Status,
   },
 };
 </script>

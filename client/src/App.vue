@@ -1,19 +1,16 @@
 <template>
   <div id="app">
     <Navigator/>
-    <Status/>
     <router-view/>
   </div>
 </template>
 <script>
 import Navigator from './components/navi/Navigator.vue';
-import Status from './components/status/Status.vue';
 
 export default {
   name: 'app',
   components: {
     Navigator,
-    Status,
   },
 };
 </script>
