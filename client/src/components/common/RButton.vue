@@ -1,6 +1,6 @@
 <template>
   <div id="rbutton">
-    <div :style="{width: width+ 'px'}" :class="type"> {{ title }} </div>
+    <div :style="{width: width+ 'px'}" :class="type" v-on:click="buttonClicked"> {{ title }} </div>
   </div>
 </template>
 
@@ -24,11 +24,21 @@ export default {
       },
     },
   },
+  methods: {
+    buttonClicked() {
+      if (this.type !== 'disabled') {
+        this.$emit('button-clicked');
+      }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
   #rbutton {
+    justify-content: center;
+    display: flex;
+
     & > div {
       height: 40px;
       line-height: 40px;
