@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import StepperTabArea from '@/components/step/StepperTabArea.vue';
+import StepperTabArea from '@/components/current/StepperTabArea.vue';
 
 import VueRouter from 'vue-router';
 

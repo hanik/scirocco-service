@@ -1,12 +1,12 @@
 <template>
-  <div id="content-prepareData">
-    <span>content prepare data</span>
+  <div id="content-learning">
+    <span>content learning</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'content-prepare-data',
+  name: 'Learning',
 };
 </script>
 

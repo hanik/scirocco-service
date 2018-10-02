@@ -9,17 +9,19 @@
 </template>
 
 <script>
+import { STRING_CURRENT } from '../../strings';
+
 export default {
 
-  name: 'stepper-tab-list',
+  name: 'StepperTabList',
   data() {
     return {
       steps: {
-        'step-feedback': '피드백 수집',
-        'step-prepareData': 'Data 준비 / 검증',
-        'step-learning': '학습과 적용',
-        'step-verifyModel': '모델 검증',
-        'step-restartService': '서비스 재시작',
+        'step-feedback': STRING_CURRENT.STEP_FEEDBACK,
+        'step-prepareData': STRING_CURRENT.STEP_PREPARE_DATA,
+        'step-learning': STRING_CURRENT.STEP_LEARNING,
+        'step-verifyModel': STRING_CURRENT.STEP_VERIFY_MODEL,
+        'step-restartService': STRING_CURRENT.STEP_RESTART_SERVICE,
       },
       selected: 'step-feedback',
     };
@@ -30,6 +32,9 @@ export default {
       this.selected = targetId;
       this.$router.push({
         name: targetId,
+        params: {
+          title: this.steps[this.selected],
+        },
       });
     },
   },

@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'content-verify-model',
+  name: 'VerifyModel',
 };
 </script>
 

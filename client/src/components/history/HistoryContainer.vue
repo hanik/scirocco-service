@@ -11,7 +11,7 @@ import HistoryTable from './HistoryTable.vue';
 import HistoryStatus from './HistoryStatus.vue';
 
 export default {
-  name: 'History',
+  name: 'HistoryContainer',
   components: {
     HistoryTable,
     HistoryStatus,

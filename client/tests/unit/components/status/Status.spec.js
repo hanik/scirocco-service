@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Status from '@/components/status/Status.vue';
+import CurrentStatus from '@/components/current/CurrentStatus.vue';
 import Vuex from 'vuex';
 
 const localVue = createLocalVue();
@@ -16,7 +16,7 @@ describe('StepperTabArea.vue', () => {
   });
 
   it('show status-container when user is login', () => {
-    wrapper = shallowMount(Status, { localVue, store });
+    wrapper = shallowMount(CurrentStatus, { localVue, store });
 
     expect(wrapper.find('.status-container').exists()).toBe(true);
   });
@@ -26,7 +26,7 @@ describe('StepperTabArea.vue', () => {
       getters: { 'authentication/isLogin': () => false },
     });
 
-    wrapper = shallowMount(Status, { localVue, store });
+    wrapper = shallowMount(CurrentStatus, { localVue, store });
 
     expect(wrapper.find('.status-container').exists()).toBe(false);
   });

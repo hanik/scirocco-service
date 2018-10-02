@@ -13,7 +13,7 @@
 import ConfirmDialog from '../common/ConfirmDialog.vue';
 
 export default {
-  name: 'content-gather-feedback',
+  name: 'GatherFeedback',
   components: {
     ConfirmDialog,
   },

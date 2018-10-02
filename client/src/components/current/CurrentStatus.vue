@@ -28,7 +28,7 @@
 import { mapGetters } from 'vuex';
 
 export default {
-  name: 'status',
+  name: 'CurrentStatus',
   computed: {
     ...mapGetters({
       loggingIn: 'authentication/isLogin',

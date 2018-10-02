@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: 'content-restart-service',
+  name: 'RestartService',
 };
 </script>
 

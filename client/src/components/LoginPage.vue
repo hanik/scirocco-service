@@ -30,6 +30,7 @@
 import RButton from './common/RButton.vue';
 
 export default {
+  name: 'LoginPage',
   components: {
     RButton,
   },

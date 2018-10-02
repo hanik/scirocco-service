@@ -9,14 +9,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 
 import HomePage from './views/Home.vue';
 import LoginPage from './components/LoginPage.vue';
-import Current from './components/step/StepperTabArea.vue';
+import Current from './components/current/StepperTabArea.vue';
 import History from './components/history/HistoryContainer.vue';
 
-import ContentGatherFeedback from './components/step/ContentGatherFeedback.vue';
-import ContentLearning from './components/step/ContentLearning.vue';
-import ContentPrepareData from './components/step/ContentPrepareData.vue';
-import ContentVerifyModel from './components/step/ContentVerifyModel.vue';
-import ContentRestartService from './components/step/ContentRestartService.vue';
+import ContentGatherFeedback from './components/current/GatherFeedback.vue';
+import ContentLearning from './components/current/Learning.vue';
+import ContentPrepareData from './components/current/PrepareData.vue';
+import ContentVerifyModel from './components/current/VerifyModel.vue';
+import ContentRestartService from './components/current/RestartService.vue';
 
 Vue.use(BootstrapVue);
 Vue.use(Router);
@@ -39,12 +39,12 @@ const router = new Router({
         {
           path: '/learning',
           name: 'step-prepareData',
-          component: ContentLearning,
+          component: ContentPrepareData,
         },
         {
           path: '/prepareData',
           name: 'step-learning',
-          component: ContentPrepareData,
+          component: ContentLearning,
         },
         {
           path: '/verifyModel',

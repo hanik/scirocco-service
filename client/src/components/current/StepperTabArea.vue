@@ -1,7 +1,7 @@
 <template>
   <div id="stepper-tab-area">
     <Status/>
-    <div class="wrapper">
+    <div class="stepper-container">
       <StepperTabList/>
       <StepperTabContents/>
     </div>
@@ -9,12 +9,12 @@
 </template>
 
 <script>
-import Status from '../status/Status.vue';
+import Status from './CurrentStatus.vue';
 import StepperTabList from './StepperTabList.vue';
 import StepperTabContents from './StepperTabContents.vue';
 
 export default {
-  name: 'stepper-tab-area',
+  name: 'StepperTabArea',
   components: {
     StepperTabList,
     StepperTabContents,
@@ -30,7 +30,7 @@ export default {
     margin: 0 auto;
     display: contents;
 
-    .wrapper {
+    .stepper-container {
       display: inline-table;
       height: 400px;
       width: 100%;

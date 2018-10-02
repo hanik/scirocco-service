@@ -1,7 +1,7 @@
 import { shallowMount } from '@vue/test-utils';
 import sinon from 'sinon';
 // import jest from 'jest-mock';
-import StepperTabList from '@/components/step/StepperTabList.vue';
+import StepperTabList from '@/components/current/StepperTabList.vue';
 
 const stubPush = sinon.stub();
 const $router = {
