@@ -2,23 +2,32 @@
   <div id="history-status">
     <div class="left-title">
       <div>
-        서비스 중인 모델 Sirocco-YC-v3
+        {{ labelServiceModel }} {{ currentServiceModel }}
       </div>
     </div>
     <div class="right-buttons">
-      <RButton :title="'아카이브 이동'" :width="140" />
-      <RButton :title="'기준모델 변경'" :width="140" />
+      <RButton :title="buttonMoveArchive" :width="140" />
+      <RButton :title="buttonChangeModel" :width="140" />
     </div>
   </div>
 </template>
 
 <script>
+import { STRING_HISTORY } from "../../strings";
 import RButton from '../common/RButton.vue';
 
 export default {
   name: 'HistoryStatus',
   components: {
     RButton,
+  },
+  data() {
+    return {
+      labelServiceModel: STRING_HISTORY.LABEL_SERVICE_MODEL,
+      buttonMoveArchive: STRING_HISTORY.BUTTON_MOVE_ARCHIVE,
+      buttonChangeModel: STRING_HISTORY.BUTTON_CHANGE_MODEL,
+      currentServiceModel: 'Sirocco-YC-v3',
+    };
   },
 };
 </script>
