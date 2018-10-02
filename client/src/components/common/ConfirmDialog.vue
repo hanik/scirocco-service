@@ -2,7 +2,7 @@
   <div id="confirm-dialog-area">
     <div class="dialog">
       <div class="header">
-        <div class="icon-close" @click="closeDialog"/>
+        <div class="ic-close" @click="closeDialog"/>
       </div>
       <div class="body">
         {{ message }}
@@ -47,7 +47,7 @@ export default {
   top: 0;
   z-index: 100;
 
-  .icon-close {
+  .ic-close {
     background-image: url("../../assets/ic-close.svg");
     width: 30px;
     height: 30px;

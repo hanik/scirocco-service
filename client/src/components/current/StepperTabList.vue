@@ -2,7 +2,10 @@
   <div id="stepper-tab-list">
     <div v-for="(value, key) in steps" class="step" :key="key">
       <div :class="[{current: selected === key}]" :id="key" @click="select($event)">
-        <span> {{ value }} </span>
+        <div class="label">
+          <span class="ic-unchecked"></span>
+          <span> {{ value }} </span>
+        </div>
       </div>
     </div>
   </div>
@@ -48,6 +51,25 @@ export default {
     min-width: 1400px;
     display: flex;
 
+    @mixin ic-check {
+      float: left;
+      width: 16px;
+      height: 18px;
+      margin-right: 8px;
+      background-size: contain;
+      background: no-repeat top;
+    }
+
+    .ic-unchecked {
+      @include ic-check;
+      background-image: url('../../assets/ic-process-unchecked.svg');
+    }
+
+    .ic-checked {
+      @include ic-check;
+      background-image: url('../../assets/ic-process-checked.svg');
+    }
+
     &:after {
       clear: both;
       content: "";
@@ -58,10 +80,6 @@ export default {
     & .step {
       flex: 1 1 276px;
       height: 60px;
-      line-height: 60px;
-      font-size: 16px;
-      font-weight: bold;
-      text-align: center;
       color: #444f57;
       cursor: pointer;
       margin: 0 1px;
@@ -71,7 +89,6 @@ export default {
       border-bottom: solid 1px #dae4e6;
       border-top: solid 1px #dae4e6;
       user-select: none;
-      transition: background-color 0.2s ease;
 
       & > div {
         width: 100%;
@@ -107,16 +124,14 @@ export default {
           z-index: 0;
         }
 
-        & span {
-          position: relative;
-
-          &:before {
-            opacity: 0;
-            content: "✔";
-            position: absolute;
-            top: -2px;
-            left: -20px;
-          }
+        .label {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 58px;
+          font-size: 16px;
+          font-weight: bold;
+          text-align: center;
         }
       }
 
