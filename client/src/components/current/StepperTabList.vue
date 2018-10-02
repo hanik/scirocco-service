@@ -23,8 +23,11 @@ export default {
         'step-verifyModel': STRING_CURRENT.STEP_VERIFY_MODEL,
         'step-restartService': STRING_CURRENT.STEP_RESTART_SERVICE,
       },
-      selected: 'step-feedback',
+      selected: '',
     };
+  },
+  mounted() {
+    this.selected = this.$router.history.current.name;
   },
   methods: {
     select(event) {
@@ -32,9 +35,6 @@ export default {
       this.selected = targetId;
       this.$router.push({
         name: targetId,
-        params: {
-          title: this.steps[this.selected],
-        },
       });
     },
   },

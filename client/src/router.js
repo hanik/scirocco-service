@@ -33,26 +33,30 @@ const router = new Router({
       children: [
         {
           path: '',
+          redirect: 'feedback',
+        },
+        {
+          path: 'feedback',
           name: 'step-feedback',
           component: ContentGatherFeedback,
         },
         {
-          path: '/learning',
+          path: 'learning',
           name: 'step-prepareData',
           component: ContentPrepareData,
         },
         {
-          path: '/prepareData',
+          path: 'prepareData',
           name: 'step-learning',
           component: ContentLearning,
         },
         {
-          path: '/verifyModel',
+          path: 'verifyModel',
           name: 'step-verifyModel',
           component: ContentVerifyModel,
         },
         {
-          path: '/restartService',
+          path: 'restartService',
           name: 'step-restartService',
           component: ContentRestartService,
         },
