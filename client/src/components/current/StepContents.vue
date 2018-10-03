@@ -57,7 +57,6 @@ export default {
         display: block;
         width: 511px;
         height: 260px;
-
       }
     }
   }
@@ -66,8 +65,8 @@ export default {
     display: flex;
     justify-content: center;
 
-    & > :first-child {
-      margin-right: 10px;
+    & > div + div {
+      margin-left: 10px;
     }
   }
 }
