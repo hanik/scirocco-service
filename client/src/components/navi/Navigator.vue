@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import { STRING_COMMONS } from "../../strings";
+import { COMMONS } from '../../strings';
 
 export default {
   name: 'Navigator',
   data() {
     return {
-      brand: STRING_COMMONS.LABEL_BRAND,
-      current: STRING_COMMONS.LABEL_CURRENT,
-      history: STRING_COMMONS.LABEL_HISTORY,
-      profile: STRING_COMMONS.LABEL_PROFILE,
-      signout: STRING_COMMONS.LABEL_SINGOUT,
+      brand: COMMONS.LABEL_BRAND,
+      current: COMMONS.LABEL_CURRENT,
+      history: COMMONS.LABEL_HISTORY,
+      profile: COMMONS.LABEL_PROFILE,
+      signout: COMMONS.LABEL_SINGOUT,
     };
   },
 };

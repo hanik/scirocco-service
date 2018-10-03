@@ -19,7 +19,7 @@
 <script>
 import StepContents from './StepContents.vue';
 import RButton from '../common/RButton.vue';
-import { STRING_CURRENT } from '../../strings';
+import { CURRENT } from '../../strings';
 
 export default {
   name: 'PrepareData',
@@ -29,8 +29,8 @@ export default {
   },
   data() {
     return {
-      title: STRING_CURRENT.STEP_PREPARE_DATA,
-      description: STRING_CURRENT.STEP_PREPARE_DATA_DESCRIPTION,
+      title: CURRENT.STEP_PREPARE_DATA,
+      description: CURRENT.STEP_PREPARE_DATA_DESCRIPTION,
     };
   },
 };

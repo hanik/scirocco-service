@@ -30,22 +30,22 @@
 </template>
 
 <script>
-import { STRING_HISTORY } from "../../strings";
+import { HISTORY } from '../../strings';
 
 export default {
   name: 'HistoryTable',
   props: ['items'],
   data() {
     return {
-      modelName: STRING_HISTORY.TABLE_MODEL_NAME,
-      startDate: STRING_HISTORY.TABLE_START_DATE,
-      endDate: STRING_HISTORY.TABLE_END_DATE,
-      improve: STRING_HISTORY.TABLE_IMPROVE,
-      fix: STRING_HISTORY.TABLE_FIX,
-      base: STRING_HISTORY.TABLE_BASE,
-      admin: STRING_HISTORY.TABLE_ADMIN,
-      volume: STRING_HISTORY.TABLE_VOLUME,
-      history: STRING_HISTORY.TABLE_HISTORY,
+      modelName: HISTORY.TABLE_MODEL_NAME,
+      startDate: HISTORY.TABLE_START_DATE,
+      endDate: HISTORY.TABLE_END_DATE,
+      improve: HISTORY.TABLE_IMPROVE,
+      fix: HISTORY.TABLE_FIX,
+      base: HISTORY.TABLE_BASE,
+      admin: HISTORY.TABLE_ADMIN,
+      volume: HISTORY.TABLE_VOLUME,
+      history: HISTORY.TABLE_HISTORY,
 
     };
   },

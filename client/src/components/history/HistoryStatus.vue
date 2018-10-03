@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { STRING_HISTORY } from "../../strings";
+import { HISTORY } from '../../strings';
 import RButton from '../common/RButton.vue';
 
 export default {
@@ -23,9 +23,9 @@ export default {
   },
   data() {
     return {
-      labelServiceModel: STRING_HISTORY.LABEL_SERVICE_MODEL,
-      buttonMoveArchive: STRING_HISTORY.BUTTON_MOVE_ARCHIVE,
-      buttonChangeModel: STRING_HISTORY.BUTTON_CHANGE_MODEL,
+      labelServiceModel: HISTORY.LABEL_SERVICE_MODEL,
+      buttonMoveArchive: HISTORY.BUTTON_MOVE_ARCHIVE,
+      buttonChangeModel: HISTORY.BUTTON_CHANGE_MODEL,
       currentServiceModel: 'Sirocco-YC-v3',
     };
   },

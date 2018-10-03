@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { STRING_CURRENT } from '../../strings';
+import { CURRENT } from '../../strings';
 
 export default {
 
@@ -20,11 +20,11 @@ export default {
   data() {
     return {
       steps: {
-        'step-feedback': STRING_CURRENT.STEP_FEEDBACK,
-        'step-prepareData': STRING_CURRENT.STEP_PREPARE_DATA,
-        'step-learning': STRING_CURRENT.STEP_LEARNING,
-        'step-verifyModel': STRING_CURRENT.STEP_VERIFY_MODEL,
-        'step-restartService': STRING_CURRENT.STEP_RESTART_SERVICE,
+        'step-feedback': CURRENT.STEP_FEEDBACK,
+        'step-prepareData': CURRENT.STEP_PREPARE_DATA,
+        'step-learning': CURRENT.STEP_LEARNING,
+        'step-verifyModel': CURRENT.STEP_VERIFY_MODEL,
+        'step-restartService': CURRENT.STEP_RESTART_SERVICE,
       },
       selected: '',
     };

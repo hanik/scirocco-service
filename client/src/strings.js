@@ -1,4 +1,4 @@
-const STRING_COMMONS = {
+const COMMONS = {
   ERROR_MESSAGE_MEMORY: '메모리 에러가 발생했습니다.\n' +
     '재시작 버튼을 클릭해주세요.',
   ERROR_MESSAGE_GENERAL: '에러가 발생했습니다.\n' +
@@ -10,7 +10,7 @@ const STRING_COMMONS = {
   LABEL_SINGOUT: 'Sign out',
 };
 
-const STRING_CURRENT = {
+const CURRENT = {
   STEP_FEEDBACK: '피드백 수집',
   STEP_PREPARE_DATA: 'Data 준비 / 검증',
   STEP_LEARNING: '학습과 적용',
@@ -27,23 +27,23 @@ const STRING_CURRENT = {
     '작업 완료 후에는 담당자에게 알림을 보냅니다.',
 };
 
-const STRING_HISTORY = {
+const HISTORY = {
   LABEL_SERVICE_MODEL: '서비스 중인 모델',
   BUTTON_MOVE_ARCHIVE: '아카이브 이동',
   BUTTON_CHANGE_MODEL: '기준 모델 변경',
   TABLE_MODEL_NAME: 'modelName',
-  TABLE_START_DATE:'startDate',
-  TABLE_END_DATE:'endDate',
-  TABLE_IMPROVE:'improve',
-  TABLE_FIX:'fix',
-  TABLE_BASE:'base',
-  TABLE_ADMIN:'admin',
-  TABLE_VOLUME:'volume',
-  TABLE_HISTORY:'history',
+  TABLE_START_DATE: 'startDate',
+  TABLE_END_DATE: 'endDate',
+  TABLE_IMPROVE: 'improve',
+  TABLE_FIX: 'fix',
+  TABLE_BASE: 'base',
+  TABLE_ADMIN: 'admin',
+  TABLE_VOLUME: 'volume',
+  TABLE_HISTORY: 'history',
 };
 
 export {
-  STRING_COMMONS,
-  STRING_CURRENT,
-  STRING_HISTORY,
+  COMMONS,
+  CURRENT,
+  HISTORY,
 };
