@@ -30,7 +30,6 @@
     "jest": "^23.6.0",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
-    "sinon": "^6.3.4",
     "vue-template-compiler": "^2.5.17"
   }
 }

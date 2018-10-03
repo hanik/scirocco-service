@@ -12,7 +12,7 @@ describe('ConfirmDialog.vue', () => {
     });
   });
   it('emitted, when X button is clicked', () => {
-    wrapper.find('.icon-close').trigger('click');
+    wrapper.find('.ic-close').trigger('click');
 
     expect(wrapper.emitted('close')).toBeTruthy();
   });
