@@ -3,7 +3,11 @@ const STRING_COMMONS = {
     '재시작 버튼을 클릭해주세요.',
   ERROR_MESSAGE_GENERAL: '에러가 발생했습니다.\n' +
     '관리자에게 문의해주세요.',
-
+  LABEL_BRAND: 'YC-Admin',
+  LABEL_CURRENT: 'Current',
+  LABEL_HISTORY: 'History',
+  LABEL_PROFILE: 'Profile',
+  LABEL_SINGOUT: 'Sign out',
 };
 
 const STRING_CURRENT = {
@@ -24,7 +28,18 @@ const STRING_CURRENT = {
 };
 
 const STRING_HISTORY = {
-
+  LABEL_SERVICE_MODEL: '서비스 중인 모델',
+  BUTTON_MOVE_ARCHIVE: '아카이브 이동',
+  BUTTON_CHANGE_MODEL: '기준 모델 변경',
+  TABLE_MODEL_NAME: 'modelName',
+  TABLE_START_DATE:'startDate',
+  TABLE_END_DATE:'endDate',
+  TABLE_IMPROVE:'improve',
+  TABLE_FIX:'fix',
+  TABLE_BASE:'base',
+  TABLE_ADMIN:'admin',
+  TABLE_VOLUME:'volume',
+  TABLE_HISTORY:'history',
 };
 
 export {
