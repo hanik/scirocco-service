@@ -6,7 +6,7 @@
     <div class="body">
       <slot></slot>
     </div>
-    <div>
+    <div class="buttons">
       <slot name="buttons"></slot>
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
     justify-content: center;
     margin-bottom: 40px;
 
-    .single-border:first-child {
+    .single-border {
       & {
         display: block;
         width: 505px;
@@ -50,27 +50,24 @@ export default {
       }
     }
 
-    .double-border:first-child {
+    .double-border {
       & {
+        background-size: contain;
+        background: url("../../assets/img-step-contents-body-bg.svg") no-repeat;
         display: block;
-        width: 505px;
-        height: 254px;
-        border: 1px solid #d4d9dc;
-        background-color: white;
-        position: relative;
+        width: 511px;
+        height: 260px;
 
-        &:after {
-          content: "";
-          position: absolute;
-          left: 0;
-          width: 505px;
-          height: 254px;
-          border: 1px solid #d4d9dc;
-          margin-left: -6px;
-          margin-top: -6px;
-          background-color: white;
-        }
       }
+    }
+  }
+
+  .buttons, .buttons > div {
+    display: flex;
+    justify-content: center;
+
+    & > :first-child {
+      margin-right: 10px;
     }
   }
 }

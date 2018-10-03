@@ -1,0 +1,40 @@
+@mixin current-container-body-title {
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+@mixin current-container-body-title-highlight {
+  line-height: 26px;
+  font-size: 22px;
+  color: #1c75b9;
+}
+
+@mixin current-container-body-icon {
+  padding: 21px 0 8px 0;
+  width: 100%;
+}
+
+@mixin current-container-body-icon-process {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100px;
+}
+
+@mixin current-container-body-label {
+  font-size: 16px;
+  font-weight: bold;
+  color: #85b0e5;
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin size($size) {
+  width: $size;
+  height: $size;
+}

@@ -25,6 +25,24 @@ const CURRENT = {
   STEP_VERIFY_MODEL_DESCRIPTION: '학습과 적용이 완료된 모델을 검증하는 단계입니다.',
   STEP_RESTART_SERVICE_DESCRIPTION: '새로운 모델을 서버에 업데이트 하기 위해 서비스를 재시작합니다.\n' +
     '작업 완료 후에는 담당자에게 알림을 보냅니다.',
+  PREPARE_DATA_LABEL_FEEDBACK: '피드백',
+  PREPARE_DATA_LABEL_PREPARING: '건을 준비중입니다.',
+  PREPARE_DATA_LABEL_CHECKING: '준비된 피드백을 검증 중입니다.',
+  PREPARE_DATA_LABEL_DATA_PREPARE: 'Data 준비중…',
+  PREPARE_DATA_LABEL_DATA_CHECKING: 'Data 검증중…',
+  LEARNING_TRANSLATE_KO_EN: '한국어 원문을 영어로 번역중입니다.',
+  LEARNING_TRANSLATE_EN_KO: '영어 원문을 한국어로 번역중입니다.',
+  LEARNING_TRANSLATING: '번역중…',
+  LEARNING_DATA_LEARNING: '번역 data를 학습중입니다.',
+  LEARNING_LEARNING: '학습중…',
+  RESTART_LABEL_NEED: '서버 업데이트를 위해 재시작이 필요합니다.',
+  RESTART_LABEL_RESTARTING: '서버 업데이트를 위해 재시작 중입니다.',
+  RESTART_LABEL_COMPLETE: '재시작이 완료되었습니다.\n History 메뉴에서도 확인 가능합니다.',
+  RESTART_LABEL_INFO_BEFORE: '재시작 이후',
+  RESTART_LABEL_INFO_AFTER: '모델이 서비스에 적용 됩니다.',
+  RESTART_WAITING: '대기중',
+  RESTART_RESTARTING: '재시작중…',
+  RESTART_COMPLETE: '완료',
 };
 
 const HISTORY = {
