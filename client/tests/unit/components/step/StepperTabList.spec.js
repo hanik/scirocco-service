@@ -24,11 +24,11 @@ describe('StepperTabList.vue', () => {
 
   it('show stepper class add and remove, when click stepper list', () => {
     wrapper.find('#stepper-tab-list > .step:last-child > div').trigger('click');
-    expect(wrapper.find('#stepper-tab-list > .step:last-child > div.current').exists()).toBe(true);
-    expect(wrapper.find('#stepper-tab-list > .step:first-child > div.current').exists()).toBe(false);
+    expect(wrapper.find('#stepper-tab-list > .step:last-child > div.selected').exists()).toBe(true);
+    expect(wrapper.find('#stepper-tab-list > .step:first-child > div.selected').exists()).toBe(false);
 
     wrapper.find('#stepper-tab-list > .step:first-child > div').trigger('click');
-    expect(wrapper.find('#stepper-tab-list > .step:first-child > div.current').exists()).toBe(true);
-    expect(wrapper.find('#stepper-tab-list > .step:last-child > div.current').exists()).toBe(false);
+    expect(wrapper.find('#stepper-tab-list > .step:first-child > div.selected').exists()).toBe(true);
+    expect(wrapper.find('#stepper-tab-list > .step:last-child > div.selected').exists()).toBe(false);
   });
 });

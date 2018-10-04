@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 const localVue = createLocalVue();
 localVue.use(Vuex);
 
-describe('StepperTabArea.vue', () => {
+describe('CurrentStatus.vue', () => {
   let store;
   let wrapper;
 
