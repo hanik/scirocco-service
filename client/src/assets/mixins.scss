@@ -29,12 +29,7 @@
   color: #85b0e5;
 }
 
-@mixin size($width, $height) {
+@mixin size($width, $height: $width) {
   width: $width;
   height: $height;
-}
-
-@mixin size($size) {
-  width: $size;
-  height: $size;
 }

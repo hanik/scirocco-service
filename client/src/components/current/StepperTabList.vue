@@ -14,19 +14,22 @@
 <script>
 import { CURRENT } from '../../strings';
 
+const steps = {
+  'step-feedback': CURRENT.STEP_FEEDBACK,
+  'step-prepareData': CURRENT.STEP_PREPARE_DATA,
+  'step-learning': CURRENT.STEP_LEARNING,
+  'step-verifyModel': CURRENT.STEP_VERIFY_MODEL,
+  'step-restartService': CURRENT.STEP_RESTART_SERVICE,
+};
+
 export default {
 
   name: 'StepperTabList',
   data() {
     return {
-      steps: {
-        'step-feedback': CURRENT.STEP_FEEDBACK,
-        'step-prepareData': CURRENT.STEP_PREPARE_DATA,
-        'step-learning': CURRENT.STEP_LEARNING,
-        'step-verifyModel': CURRENT.STEP_VERIFY_MODEL,
-        'step-restartService': CURRENT.STEP_RESTART_SERVICE,
-      },
+      steps,
       selected: '',
+      current: '',
     };
   },
   mounted() {
