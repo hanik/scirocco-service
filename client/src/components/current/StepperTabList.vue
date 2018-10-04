@@ -1,7 +1,7 @@
 <template>
   <div id="stepper-tab-list">
-    <div v-for="(value, key) in steps" class="step" :key="key">
-      <div :class="[{current: selected === key}]" :id="key" @click="select($event)">
+    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: current === key}]">
+      <div :class="[{selected: selected === key}, {current: current === key}]" :id="key" @click="select($event)">
         <div class="label">
           <span class="ic-unchecked"></span>
           <span> {{ value }} </span>
@@ -30,7 +30,8 @@ export default {
     };
   },
   mounted() {
-    this.selected = this.$router.history.current.name;
+    this.selected = 'step-prepareData'; // 사용자가 확인을 위해 클릭한 탭
+    this.current = 'step-prepareData'; // 현재 서버에서 돌아가고 있는 단계
   },
   methods: {
     select(event) {
@@ -46,10 +47,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import '../../assets/mixins.scss';
+
   #stepper-tab-list {
 
     min-width: 1400px;
     display: flex;
+    background-color: #dae4e6;
 
     @mixin ic-check {
       float: left;
@@ -70,13 +74,6 @@ export default {
       background-image: url('../../assets/ic-process-checked.svg');
     }
 
-    &:after {
-      clear: both;
-      content: "";
-      display: block;
-      height: 0;
-    }
-
     & .step {
       flex: 1 1 276px;
       height: 60px;
@@ -88,28 +85,42 @@ export default {
       background-color: #f3f7f8;
       border-bottom: solid 1px #dae4e6;
       border-top: solid 1px #dae4e6;
-      user-select: none;
+
+      &.current {
+        background-color: #129fc8;
+      }
+
+      &.selected {
+        background-color: #fff;
+      }
 
       & > div {
-        width: 100%;
-        height: 100%;
+        @include size(100%);
 
-        &.current {
-          color: #ffffff;
-          background-color: #129fc8;
+        &.selected {
+          color: #444f57;
+          background-color: pink;
 
           &:after {
+            border-left: 17px solid pink;
+          }
+        }
+
+        &.current {
+          color: white;
+          background-color: #129fc8;
+
+          &:after{
             border-left: 17px solid #129fc8;
           }
         }
 
         &:after, &:before {
+          @include size(0);
           content: " ";
           position: absolute;
           top: 0;
           right: -17px;
-          width: 0;
-          height: 0;
           /* stepper의 height크기 변경 시, border-top 및 border-bottom의 크기 조절 필요*/
           border-top: 29px solid transparent;
           border-bottom: 29px solid transparent;
@@ -120,7 +131,7 @@ export default {
         &:before {
           right: auto;
           left: 0;
-          border-left: 17px solid #fff;
+          border-left: 17px solid #dae4e6;
           z-index: 0;
         }
 
@@ -135,24 +146,8 @@ export default {
         }
       }
 
-      &:first-child > div {
-        border-top-left-radius: 4px;
-        border-bottom-left-radius: 4px;
-        border-left: solid 1px #dae4e6;
-
-        &:before {
-          border: none;
-        }
-      }
-
-      &:last-child > div {
-        border-top-right-radius: 4px;
-        border-bottom-right-radius: 4px;
-        border-right: solid 1px #dae4e6;
-
-        &:after {
-          border: none;
-        }
+      &:first-child > div:before, &:last-child > div:after {
+        border: none;
       }
     }
   }

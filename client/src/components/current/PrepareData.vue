@@ -6,7 +6,6 @@
         <div>{{ labels.description }}</div>
       </template>
 
-      <!--<div class="single-border"> </div>-->
       <div class="double-border">
         <div class="container-body" v-if="status === 'preparing'" >
           <div class="container-title">
