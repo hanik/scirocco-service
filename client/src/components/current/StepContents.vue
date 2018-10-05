@@ -37,8 +37,7 @@ export default {
   }
 
   .body {
-    display: flex;
-    justify-content: center;
+    @include flex-align-center-horizontal;
     margin-bottom: 40px;
 
     .single-border {
@@ -62,8 +61,7 @@ export default {
   }
 
   .buttons, .buttons > div {
-    display: flex;
-    justify-content: center;
+    @include flex-align-center-horizontal;
 
     & > div + div {
       margin-left: 10px;

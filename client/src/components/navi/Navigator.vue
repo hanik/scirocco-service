@@ -73,8 +73,7 @@ export default {
 
   .left-area, .right-area {
     flex: 1 1 0;
-    display: flex;
-    align-items: center;
+    @include flex-align-center-vertical;
   }
 
   .left-area {
@@ -123,8 +122,7 @@ export default {
       background-color: pink;
       z-index: 100;
       position: absolute;
-      margin-left: -70px;
-      margin-top: 27px;
+      margin: 27px 0 0 -70px;
     }
   }
 

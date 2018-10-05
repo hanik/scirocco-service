@@ -58,11 +58,10 @@ export default {
     position: fixed;
 
     .header {
+      @include flex-align-center-vertical;
       height: 70px;
-      display: flex;
       justify-content: flex-end;
       padding-right: 20px;
-      align-items: center;
     }
 
     .body {
@@ -73,10 +72,8 @@ export default {
     }
 
     .buttons {
+      @include flex-align-center-horizontal-vertical;
       height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
       & > :first-child {
         margin-right: 10px;

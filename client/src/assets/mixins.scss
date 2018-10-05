@@ -5,6 +5,22 @@
 
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
+@mixin flex-align-center-vertical {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-align-center-horizontal {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin flex-align-center-horizontal-vertical {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @mixin popup-background-wrap {
   @include size(100%);
   position: fixed;

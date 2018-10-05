@@ -49,9 +49,7 @@ div .status-container {
   font-size: 20px;
   opacity: 0.4;
   color: #444f57;
-  margin-left: 30px;
-  margin-top: 15px;
-  margin-right: 38px;
+  margin: 15px 38px 0 30px;
 }
 div .status-content {
   float: left;

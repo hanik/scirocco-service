@@ -142,9 +142,7 @@ export default {
       }
 
       .label {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        @include flex-align-center-horizontal-vertical;
         line-height: 58px;
         font-size: 16px;
         font-weight: bold;

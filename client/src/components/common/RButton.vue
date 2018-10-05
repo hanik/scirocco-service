@@ -35,9 +35,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import '@/assets/mixins.scss';
   #rbutton {
-    justify-content: center;
-    display: flex;
+    @include flex-align-center-horizontal;
 
     & > div {
       height: 40px;

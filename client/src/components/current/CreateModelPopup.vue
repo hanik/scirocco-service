@@ -7,16 +7,16 @@
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" />
+          <div class="label">모델명</div><r-input type="text" />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" />
+          <div class="label">모델명</div><r-input type="text" />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" />
+          <div class="label">모델명</div><r-input type="text" />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" />
+          <div class="label">모델명</div><r-input type="text" />
         </div>
       </div>
       <div class="buttons">
@@ -29,11 +29,13 @@
 
 <script>
 import RButton from '@/components/common/RButton.vue';
+import RInput from '@/components/common/RInput.vue';
 
 export default {
   name: 'CreateModelPopup',
   components: {
     RButton,
+    RInput,
   },
   methods: {
     closePopup() {
@@ -67,11 +69,10 @@ export default {
     position: fixed;
 
     .header {
+      @include flex-align-center-vertical;
       height: 70px;
-      display: flex;
       justify-content: space-between;
       padding-right: 20px;
-      align-items: center;
 
       .header-title {
         font-size: 22px;
@@ -85,13 +86,15 @@ export default {
       height: 50px;
       font-size: 14px;
       line-height: 20px;
+
+      .input-group {
+        @include flex-align-center-vertical;
+      }
     }
 
     .buttons {
       height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include flex-align-center-horizontal-vertical;
 
       & > :first-child {
         margin-right: 10px;
