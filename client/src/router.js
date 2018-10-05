@@ -34,12 +34,12 @@ const router = new Router({
           component: ContentGatherFeedback,
         },
         {
-          path: 'learning',
+          path: 'prepareData',
           name: 'step-prepareData',
           component: ContentPrepareData,
         },
         {
-          path: 'prepareData',
+          path: 'learning',
           name: 'step-learning',
           component: ContentLearning,
         },

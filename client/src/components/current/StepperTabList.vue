@@ -28,18 +28,25 @@ export default {
   data() {
     return {
       steps,
-      selected: '',
-      current: '',
+      selected: '', // 사용자가 확인을 위해 클릭한 탭
+      current: '', // 현재 서버에서 돌아가고 있는 단계
     };
   },
   mounted() {
-    this.selected = 'step-prepareData'; // 사용자가 확인을 위해 클릭한 탭
-    this.current = 'step-prepareData'; // 현재 서버에서 돌아가고 있는 단계
+    console.log(this.current)
+    // 현재 서버에서 돌아가고 있는 단계가 없을 경우
+    if (this.current === '') {
+      this.current = 'step-feedback';
+      this.selected = 'step-feedback';
+    } else {
+      this.selected = this.current;
+    }
   },
   methods: {
     select(event) {
       const targetId = event.currentTarget.id;
       this.selected = targetId;
+      console.log(this.selected)
       this.$router.push({
         name: targetId,
       });
