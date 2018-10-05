@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import StepContents from './StepContents.vue';
-import RButton from '../common/RButton.vue';
-import { CURRENT } from '../../strings';
+import StepContents from '../StepContents.vue';
+import RButton from '../../common/RButton.vue';
+import { CURRENT } from '../../../strings';
 
 const labels = {
   title: CURRENT.STEP_PREPARE_DATA,
@@ -85,7 +85,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/mixins.scss';
+@import '../../../assets/mixins';
 
 #content-prepareData {
   .container-body {
@@ -103,16 +103,18 @@ export default {
 
       .ic-status-wrap {
         @include current-container-body-icon-process;
-        background: url("../../assets/img-processing-1.svg") no-repeat center;
+
+        // TODO 빙글빙글 돌리기
+        background: url("../../../assets/img-processing-1.svg") no-repeat center;
 
         .ic-process-datard {
           @include size(50px);
-          background: url("../../assets/ic-process-datard.svg") no-repeat center;
+          background: url("../../../assets/ic-process-datard.svg") no-repeat center;
         }
 
         .ic-process-datachk {
           @include size(50px);
-          background: url("../../assets/ic-process-datachk.svg") no-repeat center;
+          background: url("../../../assets/ic-process-datachk.svg") no-repeat center;
         }
       }
     }

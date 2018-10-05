@@ -64,9 +64,9 @@
 </template>
 
 <script>
-import StepContents from './StepContents.vue';
-import RButton from '../common/RButton.vue';
-import { CURRENT } from '../../strings';
+import StepContents from '../StepContents.vue';
+import RButton from '../../common/RButton.vue';
+import { CURRENT } from '../../../strings';
 
 const labels = {
   title: CURRENT.STEP_RESTART_SERVICE,
@@ -110,7 +110,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/mixins.scss';
+@import '../../../assets/mixins';
 
 #content-restartService {
   .container-body {
@@ -130,21 +130,21 @@ export default {
 
       .ic-status-wrap-finish {
         @include current-container-body-icon-process;
-        background: url("../../assets/img-processfin.svg") no-repeat center;
+        background: url("../../../assets/img-processfin.svg") no-repeat center;
 
         .ic-process-finish {
           @include size(50px);
-          background: url("../../assets/ic-process-svup.svg") no-repeat center;
+          background: url("../../../assets/ic-process-svup.svg") no-repeat center;
         }
       }
 
       .ic-status-wrap-process {
         @include current-container-body-icon-process;
-        background: url("../../assets/img-processing-1.svg") no-repeat center;
+        background: url("../../../assets/img-processing-1.svg") no-repeat center;
 
         .ic-process-progress {
           @include size(50px);
-          background: url("../../assets/ic-process-svup.svg") no-repeat center;
+          background: url("../../../assets/ic-process-svup.svg") no-repeat center;
         }
       }
     }

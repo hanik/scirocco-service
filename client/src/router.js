@@ -1,24 +1,17 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import BootstrapVue from 'bootstrap-vue';
-
-/* eslint-disable import/no-extraneous-dependencies */
-import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap-vue/dist/bootstrap-vue.css';
-
 import HomePage from './views/Home.vue';
 import LoginPage from './components/LoginPage.vue';
 import Current from './components/current/StepperTabArea.vue';
 import History from './components/history/HistoryContainer.vue';
 
-import ContentGatherFeedback from './components/current/GatherFeedback.vue';
-import ContentLearning from './components/current/Learning.vue';
-import ContentPrepareData from './components/current/PrepareData.vue';
-import ContentVerifyModel from './components/current/VerifyModel.vue';
-import ContentRestartService from './components/current/RestartService.vue';
+import ContentGatherFeedback from './components/current/subcontents/GatherFeedback.vue';
+import ContentLearning from './components/current/subcontents/Learning.vue';
+import ContentPrepareData from './components/current/subcontents/PrepareData.vue';
+import ContentVerifyModel from './components/current/subcontents/VerifyModel.vue';
+import ContentRestartService from './components/current/subcontents/RestartService.vue';
 
-Vue.use(BootstrapVue);
 Vue.use(Router);
 
 const router = new Router({

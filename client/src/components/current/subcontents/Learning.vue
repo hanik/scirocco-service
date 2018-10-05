@@ -13,6 +13,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
+              <img :class="['spin']" src="../../../assets/img-processing-1.svg" />
               <div :class="statusIcon"></div>
             </div>
           </div>
@@ -34,9 +35,9 @@
 </template>
 
 <script>
-import StepContents from './StepContents.vue';
-import RButton from '../common/RButton.vue';
-import { CURRENT, COMMONS } from '../../strings';
+import StepContents from '../StepContents.vue';
+import RButton from '../../common/RButton.vue';
+import { CURRENT, COMMONS } from '../../../strings';
 
 const labels = {
   title: CURRENT.STEP_LEARNING,
@@ -98,7 +99,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/mixins.scss';
+@import '../../../assets/mixins';
 
 #content-learning {
   .container-body {
@@ -112,21 +113,29 @@ export default {
 
       .ic-status-wrap {
         @include current-container-body-icon-process;
-        background: url("../../assets/img-processing-1.svg") no-repeat center;
+
+        & > img {
+          @include size(100px);
+          position: absolute;
+
+          &.spin {
+            animation: spin 4s linear infinite;
+          }
+        }
 
         .ic-tran-en2ko {
           @include size(50px);
-          background: url("../../assets/ic-pi-trans-1.svg") no-repeat center;
+          background: url("../../../assets/ic-pi-trans-1.svg") no-repeat center;
         }
 
         .ic-tran-ko2en {
           @include size(50px);
-          background: url("../../assets/ic-pi-trans-2.svg") no-repeat center;
+          background: url("../../../assets/ic-pi-trans-2.svg") no-repeat center;
         }
 
         .ic-learning {
           @include size(50px);
-          background: url("../../assets/ic-process-study.svg") no-repeat center;
+          background: url("../../../assets/ic-process-study.svg") no-repeat center;
 
         }
       }
@@ -147,7 +156,7 @@ export default {
     }
     .error-icon {
       height: 100px;
-      background: url("../../assets/ic-processerror.svg") no-repeat center;
+      background: url("../../../assets/ic-processerror.svg") no-repeat center;
     }
   }
 }
