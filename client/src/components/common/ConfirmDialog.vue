@@ -8,8 +8,8 @@
         {{ message }}
       </div>
       <div class="buttons">
-        <RButton :title="'취소'" @button-clicked="closeDialog"/>
-        <RButton :title="'확인'" @button-clicked="confirm"/>
+        <r-button :title="'취소'" @button-clicked="closeDialog"/>
+        <r-button :title="'확인'" @button-clicked="confirm"/>
       </div>
     </div>
   </div>

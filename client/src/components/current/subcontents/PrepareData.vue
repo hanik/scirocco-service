@@ -33,11 +33,11 @@
 
       <template slot="buttons">
         <div v-if="status === 'preparing'" >
-          <RButton :title="'시작'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'시작'" :type="'primary'" @button-clicked="blahblah" />
         </div>
         <div v-if="status === 'checking'">
-          <RButton :title="'취소'" :type="'normal'" @button-clicked="blahblah2" />
-          <RButton :title="'재시작'" :type="'disabled'" @button-clicked="blahblah" />
+          <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah2" />
+          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="blahblah" />
         </div>
       </template>
     </step-contents>

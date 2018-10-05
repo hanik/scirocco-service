@@ -20,8 +20,8 @@
         </div>
       </div>
       <div class="buttons">
-        <RButton :title="'취소'" @button-clicked="closePopup"/>
-        <RButton :title="'생성'" @button-clicked="create"/>
+        <r-button :title="'취소'" @button-clicked="closePopup"/>
+        <r-button :title="'생성'" @button-clicked="create"/>
       </div>
     </div>
   </div>

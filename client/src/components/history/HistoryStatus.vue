@@ -6,8 +6,8 @@
       </div>
     </div>
     <div class="right-buttons">
-      <RButton :title="buttonMoveArchive" :width="140" />
-      <RButton :title="buttonChangeModel" :width="140" />
+      <r-button :title="buttonMoveArchive" :width="140" />
+      <r-button :title="buttonChangeModel" :width="140" />
     </div>
   </div>
 </template>

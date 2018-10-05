@@ -48,14 +48,14 @@
 
       <template slot="buttons">
         <div v-if="status === 'need'" >
-          <RButton :title="'시작'" :type="'primary'" @button-clicked="blahblah2" />
+          <r-button :title="'시작'" :type="'primary'" @button-clicked="blahblah2" />
         </div>
         <div v-if="status === 'restarting'">
-          <RButton :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
-          <RButton :title="'재시작'" :type="'normal'" @button-clicked="blahblah3" />
+          <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
+          <r-button :title="'재시작'" :type="'normal'" @button-clicked="blahblah3" />
         </div>
         <div v-if="status === 'complete'" >
-          <RButton :title="'시작'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'시작'" :type="'primary'" @button-clicked="blahblah" />
         </div>
       </template>
 

@@ -27,8 +27,8 @@
       </div>
 
       <template slot="buttons">
-        <RButton :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
-        <RButton :title="'재시작'" :type="'normal'" @button-clicked="blahblah2" />
+        <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
+        <r-button :title="'재시작'" :type="'normal'" @button-clicked="blahblah2" />
       </template>
     </step-contents>
   </div>
