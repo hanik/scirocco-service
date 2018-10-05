@@ -19,6 +19,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/mixins.scss';
+
 #step-contents {
   .header {
     & > :first-child {
@@ -42,8 +44,7 @@ export default {
     .single-border {
       & {
         display: block;
-        width: 505px;
-        height: 254px;
+        @include size(505px, 254px);
         border: 1px solid #d4d9dc;
         background-color: white;
         position: relative;
@@ -52,11 +53,10 @@ export default {
 
     .double-border {
       & {
+        @include size(511px, 260px);
         background-size: contain;
         background: url("../../assets/img-step-contents-body-bg.svg") no-repeat;
         display: block;
-        width: 511px;
-        height: 260px;
       }
     }
   }

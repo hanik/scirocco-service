@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import ConfirmDialog from '../../common/ConfirmDialog.vue';
-import CreateModelPopup from '../CreateModelPopup.vue';
+import ConfirmDialog from '@/components/common/ConfirmDialog.vue';
+import CreateModelPopup from '@/components/current/CreateModelPopup.vue';
 
 export default {
   name: 'GatherFeedback',

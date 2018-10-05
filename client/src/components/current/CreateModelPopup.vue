@@ -7,11 +7,17 @@
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label"></div>
-          <input type="text" />
+          <div class="label">모델명</div><input type="text" />
         </div>
-
-
+        <div class="input-group">
+          <div class="label">모델명</div><input type="text" />
+        </div>
+        <div class="input-group">
+          <div class="label">모델명</div><input type="text" />
+        </div>
+        <div class="input-group">
+          <div class="label">모델명</div><input type="text" />
+        </div>
       </div>
       <div class="buttons">
         <RButton :title="'취소'" @button-clicked="closePopup"/>
@@ -22,7 +28,7 @@
 </template>
 
 <script>
-import RButton from '../common/RButton.vue';
+import RButton from '@/components/common/RButton.vue';
 
 export default {
   name: 'CreateModelPopup',
@@ -41,27 +47,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/mixins.scss';
+
 #create-model-popup-area {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.3);
-  left: 0;
-  top: 0;
-  z-index: 100;
+  @include popup-background-wrap;
 
   .ic-close {
+    @include size(30px);
     background-image: url("../../assets/ic-close.svg");
-    width: 30px;
-    height: 30px;
     background-size: cover;
     cursor: pointer;
   }
 
   .popup {
+    @include size(564px, 405px);
     background-color: #fff;
-    width: 564px;
-    height: 405px;
     top: calc(50% - 202px);
     left: calc(50% - 282px);
     position: fixed;

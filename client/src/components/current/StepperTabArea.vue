@@ -9,9 +9,9 @@
 </template>
 
 <script>
-import Status from './CurrentStatus.vue';
-import StepperTabList from './StepperTabList.vue';
-import StepperTabContents from './StepperTabContents.vue';
+import Status from '@/components/current/CurrentStatus.vue';
+import StepperTabList from '@/components/current/StepperTabList.vue';
+import StepperTabContents from '@/components/current/StepperTabContents.vue';
 
 export default {
   name: 'StepperTabArea',
@@ -24,18 +24,18 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/mixins.scss';
 
-  #stepper-tab-area {
-    font-family: 'Lato', sans-serif;
-    margin: 0 auto;
-    display: contents;
+#stepper-tab-area {
+  font-family: 'Lato', sans-serif;
+  margin: 0 auto;
+  display: contents;
 
-    .stepper-container {
-      display: inline-table;
-      height: 400px;
-      width: 100%;
-      vertical-align: middle;
-    }
+  .stepper-container {
+    @include size(100%, 400px);
+    display: inline-table;
+    vertical-align: middle;
   }
+}
 
 </style>

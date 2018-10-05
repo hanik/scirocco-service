@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import { HISTORY } from '../../strings';
-import RButton from '../common/RButton.vue';
+import { HISTORY } from '@/strings';
+import RButton from '@/components/common/RButton.vue';
 
 export default {
   name: 'HistoryStatus',

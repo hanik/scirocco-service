@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import RButton from './RButton.vue';
+import RButton from '@/components/common/RButton.vue';
 
 export default {
   name: 'ConfirmDialog',
@@ -38,27 +38,21 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/assets/mixins.scss';
+
 #confirm-dialog-area {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.3);
-  left: 0;
-  top: 0;
-  z-index: 100;
+  @include popup-background-wrap;
 
   .ic-close {
+    @include size(30px);
     background-image: url("../../assets/ic-close.svg");
-    width: 30px;
-    height: 30px;
     background-size: cover;
     cursor: pointer;
   }
 
   .dialog {
+    @include size(430px, 240px);
     background-color: #fff;
-    width: 430px;
-    height: 240px;
     top: calc(50% - 120px);
     left: calc(50% - 215px);
     position: fixed;

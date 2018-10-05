@@ -5,7 +5,7 @@
   </div>
 </template>
 <script>
-import Navigator from './components/navi/Navigator.vue';
+import Navigator from '@/components/navi/Navigator.vue';
 
 export default {
   name: 'app',

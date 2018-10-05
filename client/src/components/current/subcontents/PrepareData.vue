@@ -45,9 +45,9 @@
 </template>
 
 <script>
-import StepContents from '../StepContents.vue';
-import RButton from '../../common/RButton.vue';
-import { CURRENT } from '../../../strings';
+import StepContents from '@/components/current/StepContents.vue';
+import RButton from '@/components/common/RButton.vue';
+import { CURRENT } from '@/strings';
 
 const labels = {
   title: CURRENT.STEP_PREPARE_DATA,

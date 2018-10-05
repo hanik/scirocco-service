@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import RButton from './common/RButton.vue';
+import RButton from '@/components/common/RButton.vue';
 
 export default {
   name: 'LoginPage',

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { CURRENT } from '../../strings';
+import { CURRENT } from '@/strings';
 
 const steps = {
   'step-feedback': CURRENT.STEP_FEEDBACK,
@@ -33,7 +33,6 @@ export default {
     };
   },
   mounted() {
-    console.log(this.current)
     // 현재 서버에서 돌아가고 있는 단계가 없을 경우
     if (this.current === '') {
       this.current = 'step-feedback';
@@ -46,7 +45,6 @@ export default {
     select(event) {
       const targetId = event.currentTarget.id;
       this.selected = targetId;
-      console.log(this.selected)
       this.$router.push({
         name: targetId,
       });
@@ -57,108 +55,106 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import '../../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
-  #stepper-tab-list {
+#stepper-tab-list {
+  min-width: 900px;
+  display: flex;
+  background-color: #dae4e6;
 
-    min-width: 1400px;
-    display: flex;
-    background-color: #dae4e6;
+  @mixin ic-check {
+    @include size(16px, 18px);
+    float: left;
+    margin-right: 8px;
+    background-size: contain;
+    background: no-repeat top;
+  }
 
-    @mixin ic-check {
-      float: left;
-      width: 16px;
-      height: 18px;
-      margin-right: 8px;
-      background-size: contain;
-      background: no-repeat top;
+  .ic-unchecked {
+    @include ic-check;
+    background-image: url('../../assets/ic-process-unchecked.svg');
+  }
+
+  .ic-checked {
+    @include ic-check;
+    background-image: url('../../assets/ic-process-checked.svg');
+  }
+
+  & .step {
+    flex: 1 1 180px;
+    height: 60px;
+    color: #444f57;
+    cursor: pointer;
+    margin: 0 1px;
+    float: left;
+    position: relative;
+    background-color: #f3f7f8;
+    border-bottom: solid 1px #dae4e6;
+    border-top: solid 1px #dae4e6;
+
+    &.current {
+      background-color: #129fc8;
     }
 
-    .ic-unchecked {
-      @include ic-check;
-      background-image: url('../../assets/ic-process-unchecked.svg');
+    &.selected {
+      background-color: #fff;
     }
 
-    .ic-checked {
-      @include ic-check;
-      background-image: url('../../assets/ic-process-checked.svg');
-    }
-
-    & .step {
-      flex: 1 1 276px;
-      height: 60px;
-      color: #444f57;
-      cursor: pointer;
-      margin: 0 1px;
-      float: left;
-      position: relative;
-      background-color: #f3f7f8;
-      border-bottom: solid 1px #dae4e6;
-      border-top: solid 1px #dae4e6;
-
-      &.current {
-        background-color: #129fc8;
-      }
+    & > div {
+      @include size(100%);
 
       &.selected {
-        background-color: #fff;
-      }
+        color: #444f57;
+        background-color: pink;
 
-      & > div {
-        @include size(100%);
-
-        &.selected {
-          color: #444f57;
-          background-color: pink;
-
-          &:after {
-            border-left: 17px solid pink;
-          }
-        }
-
-        &.current {
-          color: white;
-          background-color: #129fc8;
-
-          &:after{
-            border-left: 17px solid #129fc8;
-          }
-        }
-
-        &:after, &:before {
-          @include size(0);
-          content: " ";
-          position: absolute;
-          top: 0;
-          right: -17px;
-          /* stepper의 height크기 변경 시, border-top 및 border-bottom의 크기 조절 필요*/
-          border-top: 29px solid transparent;
-          border-bottom: 29px solid transparent;
-          border-left: 17px solid #f3f7f8;
-          z-index: 2;
-        }
-
-        &:before {
-          right: auto;
-          left: 0;
-          border-left: 17px solid #dae4e6;
-          z-index: 0;
-        }
-
-        .label {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          line-height: 58px;
-          font-size: 16px;
-          font-weight: bold;
-          text-align: center;
+        &:after {
+          border-left: 17px solid pink;
         }
       }
 
-      &:first-child > div:before, &:last-child > div:after {
-        border: none;
+      &.current {
+        color: white;
+        background-color: #129fc8;
+
+        &:after{
+          border-left: 17px solid #129fc8;
+        }
+      }
+
+      &:after, &:before {
+        @include size(0);
+        content: " ";
+        position: absolute;
+        top: 0;
+        right: -17px;
+        /* stepper의 height크기 변경 시, border-top 및 border-bottom의 크기 조절 필요*/
+        border-top: 29px solid transparent;
+        border-bottom: 29px solid transparent;
+        border-left: 17px solid #f3f7f8;
+        z-index: 2;
+      }
+
+      &:before {
+        right: auto;
+        left: 0;
+        border-left: 17px solid #dae4e6;
+        z-index: 0;
+      }
+
+      .label {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 58px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
       }
     }
+
+    &:first-child > div:before, &:last-child > div:after {
+      border: none;
+    }
   }
+}
 </style>

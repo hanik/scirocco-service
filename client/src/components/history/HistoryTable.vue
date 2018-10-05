@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { HISTORY } from '../../strings';
+import { HISTORY } from '@/strings';
 
 export default {
   name: 'HistoryTable',
@@ -53,63 +53,64 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .table-header {
-    width: 100%;
+@import '@/assets/mixins.scss';
+
+.table-header {
+  @include size(100%, 40px);
+  display: flex;
+  line-height: 40px;
+  background-color: rgba(243, 247, 248, 0.6);
+  border-top: solid 1px #d6dcde;
+}
+
+.table-body {
+  width: 100%;
+
+  .table-row {
     display: flex;
-    height: 40px;
-    line-height: 40px;
-    background-color: rgba(243, 247, 248, 0.6);
-    border-top: solid 1px #d6dcde;
-  }
+    height: 48px;
+    line-height: 48px;
+    border-bottom: solid 1px rgba(214, 220, 222, 0.4);
 
-  .table-body {
-    width: 100%;
-
-    .table-row {
-      display: flex;
-      height: 48px;
-      line-height: 48px;
-      border-bottom: solid 1px rgba(214, 220, 222, 0.4);
-
-      &:last-of-type {
-        border-bottom: solid 1px #d6dcde;
-      }
+    &:last-of-type {
+      border-bottom: solid 1px #d6dcde;
     }
   }
-  .table-row, .table-header {
-    & > div {
-      padding: 0 22px;
-    }
-
-    .checkbox {
-      flex: 1;
-    }
-    .modelName {
-      flex: 6;
-    }
-    .startDate {
-      flex: 5;
-    }
-    .endDate {
-      flex: 5;
-    }
-    .improve {
-      flex: 3;
-    }
-    .fix {
-      flex: 3;
-    }
-    .base {
-      flex: 3;
-    }
-    .admin {
-      flex: 7;
-    }
-    .volume {
-      flex: 3;
-    }
-    .history {
-      flex: 1;
-    }
+}
+.table-row, .table-header {
+  & > div {
+    padding: 0 22px;
   }
+
+  .checkbox {
+    flex: 1;
+  }
+  .modelName {
+    flex: 6;
+  }
+  .startDate {
+    flex: 5;
+  }
+  .endDate {
+    flex: 5;
+  }
+  .improve {
+    flex: 3;
+  }
+  .fix {
+    flex: 3;
+  }
+  .base {
+    flex: 3;
+  }
+  .admin {
+    flex: 7;
+  }
+  .volume {
+    flex: 3;
+  }
+  .history {
+    flex: 1;
+  }
+}
 </style>

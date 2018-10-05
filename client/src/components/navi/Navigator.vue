@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { COMMONS } from '../../strings';
+import { COMMONS } from '@/strings';
 
 const labels = {
   brand: COMMONS.LABEL_BRAND,
@@ -62,11 +62,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/mixins.scss';
+@import '@/assets/mixins.scss';
 
 #navigator {
   @include size(100%, 56px);
-  min-width: 1400px;
+  min-width: 900px;
   background-color: #24435b;
   color: white;
   display: flex;
@@ -129,10 +129,9 @@ export default {
   }
 
   .user-account {
-    width: auto;
+    @include size(auto, 100%);
     line-height: 56px;
     margin-right: 6px;
-    height: 100%;
   }
 
 }
