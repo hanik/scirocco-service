@@ -9,9 +9,9 @@
     </div>
 
     <div class="right-area">
-      <div class="ic-noti"></div>
+      <div :class="['ic-noti', {new: hasNewNoti}]"></div>
       <div class="user-account">icebar2002@gmail.com</div>
-      <div class="ic-dropdown" @click="toggleDropdown">
+      <div :class="['ic-dropdown', {up: dropdownVisibility}]" @click="toggleDropdown">
         <div class="dropdown-menus" v-show="dropdownVisibility">
           <div class="dropdown-items">Profile</div>
           <div class="dropdown-items" @click="signout">Sign out</div>
@@ -39,6 +39,7 @@ export default {
       labels,
       clickedMenu: '',
       dropdownVisibility: false,
+      hasNewNoti: true,
     };
   },
   methods: {
@@ -106,16 +107,24 @@ export default {
 
   .ic-noti {
     @include size(30px);
-    background: url("../../assets/ic-noti.svg");
+    background: url("../../assets/images/ic-noti.svg");
     margin-right: 40px;
     cursor: pointer;
+
+    &.new {
+      background: url("../../assets/images/ic-noti-new.svg");
+    }
   }
 
   .ic-dropdown {
     @include size(30px, 27px);
-    background-color: white;
+    background: url("../../assets/images/ic-header-arrow-down.svg") no-repeat center;
     margin-right: 10px;
     cursor: pointer;
+
+    &.up {
+      background: url("../../assets/images/ic-header-arrow-up.svg") no-repeat center;
+    }
 
     .dropdown-menus {
       @include size(100px);

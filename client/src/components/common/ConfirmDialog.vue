@@ -45,7 +45,7 @@ export default {
 
   .ic-close {
     @include size(30px);
-    background-image: url("../../assets/ic-close.svg");
+    background-image: url("../../assets/images/ic-close.svg");
     background-size: cover;
     cursor: pointer;
   }

@@ -72,12 +72,12 @@ export default {
 
   .ic-unchecked {
     @include ic-check;
-    background-image: url('../../assets/ic-process-unchecked.svg');
+    background-image: url('../../assets/images/ic-process-unchecked.svg');
   }
 
   .ic-checked {
     @include ic-check;
-    background-image: url('../../assets/ic-process-checked.svg');
+    background-image: url('../../assets/images/ic-process-checked.svg');
   }
 
   & .step {
