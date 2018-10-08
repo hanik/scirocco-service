@@ -7,16 +7,16 @@
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label">모델명</div><r-input type="text" />
+          <div class="label">모델명</div><input type="text" placeholder="입력해 보아요" />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><r-input type="text" />
+          <div class="label">모델명</div><input type="text" disabled />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><r-input type="text" />
+          <div class="label">모델명</div><input type="text" disabled />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><r-input type="text" />
+          <div class="label">모델명</div><input type="text" disabled />
         </div>
       </div>
       <div class="buttons">
@@ -29,13 +29,11 @@
 
 <script>
 import RButton from '@/components/common/RButton.vue';
-import RInput from '@/components/common/RInput.vue';
 
 export default {
   name: 'CreateModelPopup',
   components: {
     RButton,
-    RInput,
   },
   methods: {
     closePopup() {
@@ -63,6 +61,8 @@ export default {
 
   .popup {
     @include size(564px, 405px);
+    display: flex;
+    flex-direction: column;
     background-color: #fff;
     top: calc(50% - 202px);
     left: calc(50% - 282px);
@@ -70,25 +70,38 @@ export default {
 
     .header {
       @include flex-align-center-vertical;
-      height: 70px;
       justify-content: space-between;
+      height: 70px;
       padding-right: 20px;
 
       .header-title {
         font-size: 22px;
         color: #444f57;
         margin-left: 30px;
+        line-height: 33px;
       }
     }
 
     .body {
-      padding-top: 10px;
-      height: 50px;
-      font-size: 14px;
-      line-height: 20px;
+      padding: 7px 30px 0 30px;
+      height: 210px;
+
+      .input-group + .input-group {
+        margin-top: 16px;
+      }
 
       .input-group {
         @include flex-align-center-vertical;
+
+        .label {
+          width: 104px;
+          line-height: 20px;
+          text-align: left;
+          font-size: 14px;
+          font-weight: bold;
+          letter-spacing: -0.3px;
+          color: #444f57;
+        }
       }
     }
 
