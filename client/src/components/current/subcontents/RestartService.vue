@@ -130,21 +130,21 @@ export default {
 
       .ic-status-wrap-finish {
         @include current-container-body-icon-process;
-        background: url("../../../assets/img-processfin.svg") no-repeat center;
+        background: url("../../../assets/images/img-processfin.svg") no-repeat center;
 
         .ic-process-finish {
           @include size(50px);
-          background: url("../../../assets/ic-process-svup.svg") no-repeat center;
+          background: url("../../../assets/images/ic-process-svup.svg") no-repeat center;
         }
       }
 
       .ic-status-wrap-process {
         @include current-container-body-icon-process;
-        background: url("../../../assets/img-processing-1.svg") no-repeat center;
+        background: url("../../../assets/images/img-processing-1.svg") no-repeat center;
 
         .ic-process-progress {
           @include size(50px);
-          background: url("../../../assets/ic-process-svup.svg") no-repeat center;
+          background: url("../../../assets/images/ic-process-svup.svg") no-repeat center;
         }
       }
     }

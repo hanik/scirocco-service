@@ -13,7 +13,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
-              <img :class="['spin']" src="../../../assets/img-processing-1.svg" />
+              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
               <div :class="statusIcon"></div>
             </div>
           </div>
@@ -125,17 +125,17 @@ export default {
 
         .ic-tran-en2ko {
           @include size(50px);
-          background: url("../../../assets/ic-pi-trans-1.svg") no-repeat center;
+          background: url("../../../assets/images/ic-pi-trans-1.svg") no-repeat center;
         }
 
         .ic-tran-ko2en {
           @include size(50px);
-          background: url("../../../assets/ic-pi-trans-2.svg") no-repeat center;
+          background: url("../../../assets/images/ic-pi-trans-2.svg") no-repeat center;
         }
 
         .ic-learning {
           @include size(50px);
-          background: url("../../../assets/ic-process-study.svg") no-repeat center;
+          background: url("../../../assets/images/ic-process-study.svg") no-repeat center;
 
         }
       }
@@ -156,7 +156,7 @@ export default {
     }
     .error-icon {
       height: 100px;
-      background: url("../../../assets/ic-processerror.svg") no-repeat center;
+      background: url("../../../assets/images/ic-processerror.svg") no-repeat center;
     }
   }
 }

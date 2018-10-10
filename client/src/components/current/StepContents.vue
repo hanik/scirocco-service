@@ -54,7 +54,7 @@ export default {
       & {
         @include size(511px, 260px);
         background-size: contain;
-        background: url("../../assets/img-step-contents-body-bg.svg") no-repeat;
+        background: url("../../assets/images/img-step-contents-body-bg.svg") no-repeat;
         display: block;
       }
     }

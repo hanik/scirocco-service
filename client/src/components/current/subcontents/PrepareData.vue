@@ -105,16 +105,16 @@ export default {
         @include current-container-body-icon-process;
 
         // TODO 빙글빙글 돌리기
-        background: url("../../../assets/img-processing-1.svg") no-repeat center;
+        background: url("../../../assets/images/img-processing-1.svg") no-repeat center;
 
         .ic-process-datard {
           @include size(50px);
-          background: url("../../../assets/ic-process-datard.svg") no-repeat center;
+          background: url("../../../assets/images/ic-process-datard.svg") no-repeat center;
         }
 
         .ic-process-datachk {
           @include size(50px);
-          background: url("../../../assets/ic-process-datachk.svg") no-repeat center;
+          background: url("../../../assets/images/ic-process-datachk.svg") no-repeat center;
         }
       }
     }
