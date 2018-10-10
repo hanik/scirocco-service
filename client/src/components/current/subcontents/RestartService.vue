@@ -115,9 +115,7 @@ export default {
 
 #content-restartService {
   .container-body {
-
-    display: flex;
-    flex-direction: column;
+    @include current-container-body;
 
     .container-title {
       @include current-container-body-title;

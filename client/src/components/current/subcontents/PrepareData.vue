@@ -91,6 +91,7 @@ export default {
 
 #content-prepareData {
   .container-body {
+    @include current-container-body;
 
     .container-title {
       @include current-container-body-title;
