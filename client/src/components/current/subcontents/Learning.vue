@@ -99,7 +99,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../../assets/mixins';
+@import '@/assets/mixins.scss';
 
 #content-learning {
   .container-body {
@@ -113,15 +113,7 @@ export default {
 
       .ic-status-wrap {
         @include current-container-body-icon-process;
-
-        & > img {
-          @include size(100px);
-          position: absolute;
-
-          &.spin {
-            animation: spin 4s linear infinite;
-          }
-        }
+        @include background-spin-image;
 
         .ic-tran-en2ko {
           @include size(50px);

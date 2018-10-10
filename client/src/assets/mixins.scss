@@ -60,3 +60,14 @@
   font-weight: bold;
   color: #85b0e5;
 }
+
+@mixin background-spin-image {
+  & > img {
+    @include size(100px);
+    position: absolute;
+
+    &.spin {
+      animation: spin 4s linear infinite;
+    }
+  }
+}

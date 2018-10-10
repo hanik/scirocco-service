@@ -13,6 +13,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
+              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
               <div :class="[status === 'preparing' ? 'ic-process-datard' : '']"></div>
             </div>
           </div>
@@ -24,6 +25,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
+              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
               <div :class="[status === 'checking' ? 'ic-process-datachk' : '']"></div>
             </div>
           </div>
@@ -85,7 +87,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../../assets/mixins';
+@import '@/assets/mixins.scss';
 
 #content-prepareData {
   .container-body {
@@ -103,9 +105,7 @@ export default {
 
       .ic-status-wrap {
         @include current-container-body-icon-process;
-
-        // TODO 빙글빙글 돌리기
-        background: url("../../../assets/images/img-processing-1.svg") no-repeat center;
+        @include background-spin-image;
 
         .ic-process-datard {
           @include size(50px);

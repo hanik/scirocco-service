@@ -27,6 +27,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap-process">
+              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
               <div :class="[status === 'restarting' ? 'ic-process-progress' : '']"></div>
             </div>
           </div>
@@ -110,10 +111,13 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../../assets/mixins';
+@import '@/assets/mixins.scss';
 
 #content-restartService {
   .container-body {
+
+    display: flex;
+    flex-direction: column;
 
     .container-title {
       @include current-container-body-title;
@@ -140,7 +144,7 @@ export default {
 
       .ic-status-wrap-process {
         @include current-container-body-icon-process;
-        background: url("../../../assets/images/img-processing-1.svg") no-repeat center;
+        @include background-spin-image;
 
         .ic-process-progress {
           @include size(50px);
