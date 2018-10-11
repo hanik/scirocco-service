@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
+require('dotenv').config();
 
 var app = express();
 const cors = require('cors');
@@ -12,7 +13,7 @@ const jwt = require('./helpers/jwt');
 const errorHandler = require('./helpers/error-handler');
 
 app.use(cors());
-app.use(jwt());
+// app.use(jwt());
 app.use(errorHandler);
 
 // app.use(logger('dev'));
