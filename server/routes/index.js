@@ -7,4 +7,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/api/current/state', function(req, res, next) {
+    console.log('api.translate')
+    res.send('running...')
+});
+
+router.post('/api/current/prepare', function(req, res, next) {
+    console.log('api.translate')
+    res.send('running...')
+});
+
 module.exports = router;

@@ -4,7 +4,7 @@
       <!--Username: test<br />-->
       <!--Password: test-->
     <!--</div>-->
-    <h2 class="header-style">로그인이 필요합니다.</h2>
+    <div class="header-style">로그인이 필요합니다.</div>
     <form @submit.prevent="handleSubmit">
       <div class="input-container">
         <div class="form-group">
@@ -17,7 +17,7 @@
           <input type="password" v-model="password" name="password" class="form-control input-style" :class="{ 'is-invalid': submitted && !password }" placeholder="비밀번호를 입력하세요"/>
           <div v-show="submitted && !password" class="invalid-feedback">Password is required</div>
         </div>
-        <div class="form-group ">
+        <div class="form-group button-container">
           <r-button :title="'로그인'" :width="140" :type="'primary'" v-on:button-clicked="handleSubmit"></r-button>
           <img v-show="loggingIn" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
         </div>
@@ -66,6 +66,8 @@ export default {
 <style scoped lang="scss">
   .header-style {
     margin-top: 215px;
+    font-size: 40px;
+    color: #232b31;
   }
   .input-container {
     width: 400px;
@@ -75,6 +77,14 @@ export default {
 
     .input-style {
       min-width: 400px;
+    }
+
+    .button-container{
+      margin-top: 30px;
+    }
+
+    & > div{
+      margin-bottom: 16px;
     }
 
   }

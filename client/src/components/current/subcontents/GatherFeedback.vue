@@ -1,43 +1,60 @@
 <template>
   <div id="content-feedback">
-    <span>피드백 수집</span>
-    <button @click="openDialog()">Confirm Dialog Test</button>
-    <button @click="openPopup()">Create Popup Test</button>
-    <confirm-dialog v-show="dialogVisibility"
-                    :message="'다음 피드백 수집까지 기다리시겠습니까?'"
-                    @close="closeDialog"
-                    @confirm="confirm"></confirm-dialog>
+    <step-contents>
+      <template slot="info">
+        <div>{{ labels.title }}</div>
+        <div>{{ labels.description }}</div>
+      </template>
+
+      <div class="single-border">
+        <div class="container-body">
+          <div class="container-title">
+            {{ labels.total }}&nbsp;<span class="highlight">{{ totalCount }}</span>{{ labels.count }}
+            {{ labels.current }}&nbsp;<span class="highlight">{{ currentCount }}</span>{{ labels.count }}
+          </div>
+          <gauge-bar :percentage="percentage" />
+        </div>
+      </div>
+
+      <template slot="buttons">
+          <r-button :title="'피드백 적용'" :type="'primary'" @button-clicked="openPopup()" />
+      </template>
+    </step-contents>
     <create-model-popup v-show="popupVisibility"
-                    @close="closePopup"
-                    @create="create"></create-model-popup>
+                        @close="closePopup"
+                        @create="create"></create-model-popup>
   </div>
 </template>
 
 <script>
-import ConfirmDialog from '@/components/common/ConfirmDialog.vue';
+import StepContents from '@/components/current/StepContents.vue';
+import RButton from '@/components/common/RButton.vue';
+import GaugeBar from '@/components/common/GaugeBar.vue';
+import { CURRENT } from '@/strings';
 import CreateModelPopup from '@/components/current/CreateModelPopup.vue';
+
+const labels = {
+  title: CURRENT.STEP_FEEDBACK,
+  description: CURRENT.STEP_FEEDBACK_DESCRIPTION,
+  total: CURRENT.FEEDBACK_TOTAL,
+  current: CURRENT.FEEDBACK_CURRENT,
+  count: CURRENT.FEEDBACK_COUNT,
+};
 
 export default {
   name: 'GatherFeedback',
   components: {
-    ConfirmDialog,
+    StepContents,
+    RButton,
+    GaugeBar,
     CreateModelPopup,
   },
   methods: {
-    openDialog() {
-      this.dialogVisibility = true;
-    },
-    closeDialog() {
-      this.dialogVisibility = false;
-    },
     openPopup() {
       this.popupVisibility = true;
     },
     closePopup() {
       this.popupVisibility = false;
-    },
-    confirm() {
-      console.log('hi kate');
     },
     create() {
       console.log('how are you');
@@ -45,15 +62,38 @@ export default {
   },
   data() {
     return {
+      labels,
       dialogVisibility: false,
       popupVisibility: false,
+      totalCount: '29,300',
+      currentCount: '5,000',
+      percentage: 25,
     };
+  },
+  mounted() {
+    this.$store.dispatch('current/getFeedbackInfo');
   },
 };
 </script>
 
 <style scoped lang="scss">
-div {
-  background-color: grey;
+@import '@/assets/mixins.scss';
+
+#content-feedback {
+  .container-body {
+    @include current-container-body;
+
+    .container-title {
+      @include current-container-body-title;
+      white-space: pre-line;
+      display: inline;
+      line-height: 33px;
+      height: auto;
+
+      .highlight {
+        @include current-container-body-title-highlight;
+      }
+    }
+  }
 }
 </style>

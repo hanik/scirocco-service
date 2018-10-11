@@ -70,16 +70,6 @@ export default {
     background: no-repeat top;
   }
 
-  .ic-unchecked {
-    @include ic-check;
-    background-image: url('../../assets/images/ic-process-unchecked.svg');
-  }
-
-  .ic-checked {
-    @include ic-check;
-    background-image: url('../../assets/images/ic-process-checked.svg');
-  }
-
   & .step {
     flex: 1 1 180px;
     height: 60px;
@@ -103,24 +93,6 @@ export default {
     & > div {
       @include size(100%);
 
-      &.selected {
-        color: #444f57;
-        background-color: pink;
-
-        &:after {
-          border-left: 17px solid pink;
-        }
-      }
-
-      &.current {
-        color: white;
-        background-color: #129fc8;
-
-        &:after{
-          border-left: 17px solid #129fc8;
-        }
-      }
-
       &:after, &:before {
         @include size(0);
         content: " ";
@@ -139,6 +111,38 @@ export default {
         left: 0;
         border-left: 17px solid #dae4e6;
         z-index: 0;
+      }
+
+      &.selected {
+        color: #444f57;
+        background-color: #e7eff1;
+
+        &:after {
+          border-left: 17px solid #e7eff1;
+        }
+
+        .ic-unchecked {
+          background-image: url('../../assets/images/ic-process-unchecked-selected.svg');
+        }
+      }
+
+      &.current {
+        color: white;
+        background-color: #129fc8;
+
+        &:after{
+          border-left: 17px solid #129fc8;
+        }
+      }
+
+      .ic-unchecked {
+        @include ic-check;
+        background-image: url('../../assets/images/ic-process-unchecked.svg');
+      }
+
+      .ic-checked {
+        @include ic-check;
+        background-image: url('../../assets/images/ic-process-checked.svg');
       }
 
       .label {

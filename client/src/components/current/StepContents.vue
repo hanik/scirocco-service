@@ -41,22 +41,20 @@ export default {
     margin-bottom: 40px;
 
     .single-border {
-      & {
-        display: block;
-        @include size(505px, 254px);
-        border: 1px solid #d4d9dc;
-        background-color: white;
-        position: relative;
-      }
+      display: block;
+      @include size(505px, 224px);
+      border: 1px solid #d4d9dc;
+      background-color: white;
+      position: relative;
+      padding-bottom: 30px;
     }
 
     .double-border {
-      & {
-        @include size(511px, 260px);
-        background-size: contain;
-        background: url("../../assets/images/img-step-contents-body-bg.svg") no-repeat;
-        display: block;
-      }
+      @include size(511px, 210px);
+      background-size: contain;
+      background: url("../../assets/images/img-step-contents-body-bg.svg") no-repeat;
+      display: block;
+      padding-bottom: 50px;
     }
   }
 
