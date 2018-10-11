@@ -10,13 +10,13 @@
           <div class="label">모델명</div><input type="text" placeholder="입력해 보아요" />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" disabled />
+          <div class="label">생성일시</div><input type="text" disabled />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" disabled />
+          <div class="label">관리자(IT)</div><input type="text" disabled />
         </div>
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" disabled />
+          <div class="label">관리자(Legal)</div><input type="text" disabled />
         </div>
       </div>
       <div class="buttons">

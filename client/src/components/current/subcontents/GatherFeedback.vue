@@ -17,10 +17,12 @@
       </div>
 
       <template slot="buttons">
-          <r-button :title="'피드백 적용'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'피드백 적용'" :type="'primary'" @button-clicked="openPopup()" />
       </template>
     </step-contents>
-
+    <create-model-popup v-show="popupVisibility"
+                        @close="closePopup"
+                        @create="create"></create-model-popup>
   </div>
 </template>
 
@@ -29,6 +31,7 @@ import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import GaugeBar from '@/components/common/GaugeBar.vue';
 import { CURRENT } from '@/strings';
+import CreateModelPopup from '@/components/current/CreateModelPopup.vue';
 
 const labels = {
   title: CURRENT.STEP_FEEDBACK,
@@ -44,10 +47,17 @@ export default {
     StepContents,
     RButton,
     GaugeBar,
+    CreateModelPopup,
   },
   methods: {
-    blahblah() {
-
+    openPopup() {
+      this.popupVisibility = true;
+    },
+    closePopup() {
+      this.popupVisibility = false;
+    },
+    create() {
+      console.log('how are you');
     },
   },
   data() {

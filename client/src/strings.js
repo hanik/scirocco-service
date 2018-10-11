@@ -40,7 +40,15 @@ const CURRENT = {
   LEARNING_TRANSLATE_EN_KO: '영어 원문을 한국어로 번역중입니다.',
   LEARNING_TRANSLATING: '번역중…',
   LEARNING_DATA_LEARNING: '번역 data를 학습중입니다.',
+  VERIFY_MODEL_RESULT: '모델을 검증한 결과',
+  VERIFY_MODEL_WAITING_MESSAGE: '검증할 모델을 기다리고 있습니다.',
+  VERIFY_WAITING: '대기중',
+  VERIFY_USE_MODEL_QUEST: '모델이 저장되었습니다.\n' +
+    '현재 모델을 서비스에서 사용하시겠습니까?',
   LEARNING_LEARNING: '학습중…',
+  VERIFY_UPDATING_MESSAGE: '모델을 서비스에 사용할 수 있도록\n' +
+    '업데이트 중입니다.',
+  VERIFY_UPDATING: '업데이트중…',
   RESTART_LABEL_NEED: '서버 업데이트를 위해 재시작이 필요합니다.',
   RESTART_LABEL_RESTARTING: '서버 업데이트를 위해 재시작 중입니다.',
   RESTART_LABEL_COMPLETE: '재시작이 완료되었습니다.\n History 메뉴에서도 확인 가능합니다.',
