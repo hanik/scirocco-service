@@ -5,6 +5,7 @@ import alert from './alert.module';
 import authentication from './authentication.module';
 import users from './users.module';
 import gara from './gara.module';
+import current from './current.module';
 
 Vue.use(Vuex);
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     authentication,
     users,
     gara,
+    current,
   },
 });
 

@@ -70,6 +70,9 @@ export default {
       percentage: 25,
     };
   },
+  mounted() {
+    this.$store.dispatch('current/getFeedbackInfo');
+  },
 };
 </script>
 
