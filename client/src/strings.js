@@ -25,6 +25,12 @@ const CURRENT = {
   STEP_VERIFY_MODEL_DESCRIPTION: '학습과 적용이 완료된 모델을 검증하는 단계입니다.',
   STEP_RESTART_SERVICE_DESCRIPTION: '새로운 모델을 서버에 업데이트 하기 위해 서비스를 재시작합니다.\n' +
     '작업 완료 후에는 담당자에게 알림을 보냅니다.',
+  FEEDBACK_TOTAL: '누적 피드백',
+  FEEDBACK_CURRENT: '진행 중인 피드백',
+  FEEDBACK_COUNT: '건',
+  FEEDBACK_VALUE_ZERO: '0',
+  FEEDBACK_VALUE_FIVE_THOUSAND: '5000',
+  FEEDBACK_VALUE_TEN_THOUSAND: '10000',
   PREPARE_DATA_LABEL_FEEDBACK: '피드백',
   PREPARE_DATA_LABEL_PREPARING: '건을 준비중입니다.',
   PREPARE_DATA_LABEL_CHECKING: '준비된 피드백을 검증 중입니다.',
