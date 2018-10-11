@@ -18,4 +18,3 @@ router.post('/api/current/prepare', function(req, res, next) {
 });
 
 module.exports = router;
-˚
