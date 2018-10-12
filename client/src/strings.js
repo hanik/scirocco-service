@@ -8,6 +8,8 @@ const COMMONS = {
   LABEL_HISTORY: 'History',
   LABEL_PROFILE: 'Profile',
   LABEL_SINGOUT: 'Sign out',
+  LABEL_KOREAN: '한글',
+  LABEL_ENGLISH: '영문',
 };
 
 const CURRENT = {

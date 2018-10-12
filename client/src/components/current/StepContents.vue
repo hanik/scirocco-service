@@ -26,23 +26,28 @@ export default {
     & > :first-child {
       font-size: 26px;
       color: #232b31;
-      margin-bottom: 12px;
     }
     & > :last-child {
+      margin-top: 12px;
       white-space: pre;
       font-size: 16px;
       color: rgba(68,79,87,0.6);
-      margin-bottom: 30px;
+      line-height: 24px;
     }
   }
 
   .body {
     @include flex-align-center-horizontal;
-    margin-bottom: 40px;
+
+    @mixin bordered-area {
+      display: block;
+      margin-top: 30px;
+      margin-bottom: 40px;
+    }
 
     .single-border {
-      display: block;
       @include size(505px, 224px);
+      @include bordered-area;
       border: 1px solid #d4d9dc;
       background-color: white;
       position: relative;
@@ -51,9 +56,9 @@ export default {
 
     .double-border {
       @include size(511px, 210px);
+      @include bordered-area;
       background-size: contain;
       background: url("../../assets/images/img-step-contents-body-bg.svg") no-repeat;
-      display: block;
       padding-bottom: 50px;
     }
   }
