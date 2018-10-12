@@ -50,7 +50,7 @@ export default {
     },
     create() {
       this.$emit('create');
-      this.$store.dispatch('current/createModel');
+      this.$store.dispatch('current/createModelAsync');
     },
   },
   data() {

@@ -71,7 +71,7 @@ export default {
     };
   },
   mounted() {
-    this.$store.dispatch('current/getFeedbackInfo');
+    this.$store.dispatch('current/fetchFeedbackInfoAsync');
   },
 };
 </script>

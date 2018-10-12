@@ -14,8 +14,16 @@ const login = async () => {
   return res;
 };
 
-const getFeedbackInfo = async () => {
-  const res = await axios.post('/api/current/feedback/info');
+const fetchFeedbackInfo = async () => {
+  const res = await axios.post('/api/current/feedback/info')
+    .then((response) => {
+      // console.log('response: ', response);
+      return response.data;
+    })
+    .catch((error) => {
+      console.log(error.message);
+      return error;
+    });
   // TODO
   /*
   보낼거
@@ -41,6 +49,6 @@ const createModel = async () => {
 
 
 export default {
-  getFeedbackInfo,
+  fetchFeedbackInfo,
   createModel,
 };
