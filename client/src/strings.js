@@ -57,6 +57,11 @@ const CURRENT = {
   RESTART_WAITING: '대기중',
   RESTART_RESTARTING: '재시작중…',
   RESTART_COMPLETE: '완료',
+  POPUP_MODEL_CREATE: '모델 생성',
+  POPUP_MODEL_NAME: '모델명',
+  POPUP_MODEL_CREATE_DATE: '생성일시',
+  POPUP_ADMIN_IT: '관리자(IT)',
+  POPUP_ADMIN_LEGAL: '관리자(Legal)',
 };
 
 const HISTORY = {

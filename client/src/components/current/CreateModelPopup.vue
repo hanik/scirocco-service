@@ -2,21 +2,21 @@
   <div id="create-model-popup-area">
     <div class="popup">
       <div class="header">
-        <div class="header-title">모델 생성</div>
+        <div class="header-title">{{ labels.modelCreate }}</div>
         <div class="ic-close" @click="closePopup"/>
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label">모델명</div><input type="text" placeholder="입력해 보아요" />
+          <div class="label">{{ labels.modelName }}</div><input type="text" placeholder="입력해 보아요" />
         </div>
         <div class="input-group">
-          <div class="label">생성일시</div><input type="text" disabled />
+          <div class="label">{{ labels.createDate }}</div><input type="text" disabled />
         </div>
         <div class="input-group">
-          <div class="label">관리자(IT)</div><input type="text" disabled />
+          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled />
         </div>
         <div class="input-group">
-          <div class="label">관리자(Legal)</div><input type="text" disabled />
+          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled />
         </div>
       </div>
       <div class="buttons">
@@ -29,6 +29,15 @@
 
 <script>
 import RButton from '@/components/common/RButton.vue';
+import { CURRENT } from '@/strings';
+
+const labels = {
+  modelCreate: CURRENT.POPUP_MODEL_CREATE,
+  modelName: CURRENT.POPUP_MODEL_NAME,
+  createDate: CURRENT.POPUP_MODEL_CREATE_DATE,
+  itAdmin: CURRENT.POPUP_ADMIN_IT,
+  legalAdmin: CURRENT.POPUP_ADMIN_LEGAL,
+};
 
 export default {
   name: 'CreateModelPopup',
@@ -43,6 +52,11 @@ export default {
       this.$emit('create');
       this.$store.dispatch('current/createModel');
     },
+  },
+  data() {
+    return {
+      labels,
+    };
   },
 };
 </script>

@@ -17,6 +17,7 @@ const authentication = {
         .then(
           (user) => {
             commit('loginSuccess', user);
+            dispatch('status/setITAdmin', user, { root: true });
             router.push('/');
           },
           (error) => {
