@@ -51,7 +51,7 @@ const status = {
     },
     setCurrentStepMutation(state, message) {
       state.currentStep = message;
-    }
+    },
   },
   getters: {
     getITAdmin: state => state.itAdmin,
@@ -59,7 +59,7 @@ const status = {
     getModelName: state => state.modelName,
     getCreateDate: state => state.createDate,
     getEndDate: state => state.endDate,
-  }
+  },
 };
 
 export default status;
