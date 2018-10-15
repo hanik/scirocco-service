@@ -2,19 +2,19 @@
   <div class="status-container" v-if="loggingIn">
     <div class="status-content">
       <label>{{ labels.modelName }}</label>
-      <span :class="['content-span',  {'no-data': dateNullCheckOnSpan(processingModel)}]" id="model-name">
+      <span :class="['content-span',  {'no-data': dateNullCheckForCSS(processingModel)}]" id="model-name">
         {{ modelNameNullCheck(processingModel) }}
       </span>
     </div>
     <div class="status-content">
       <label>{{ labels.createDate }}</label>
-      <span :class="['content-span',  {'no-data': dateNullCheckOnSpan(createDate)}]" id="model-create-date">
+      <span :class="['content-span',  {'no-data': dateNullCheckForCSS(createDate)}]" id="model-create-date">
         {{ dateNullCheck(createDate) }}
       </span>
     </div>
     <div class="status-content">
       <label>{{ labels.endDate }}</label>
-      <span :class="['content-span',  {'no-data': dateNullCheckOnSpan(endDate)}]" id="model-finished-date">
+      <span :class="['content-span',  {'no-data': dateNullCheckForCSS(endDate)}]" id="model-finished-date">
         {{ dateNullCheck(endDate) }}
       </span>
     </div>
@@ -61,7 +61,7 @@ export default {
     modelNameNullCheck(modelName) {
       return !modelName ? '새 모델을 생성하세요': modelName
     },
-    dateNullCheckOnSpan(date) {
+    dateNullCheckForCSS(date) {
       return date == null ? true : false
     },
   }
