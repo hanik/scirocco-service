@@ -31,7 +31,7 @@ const rl = readline.createInterface({
   crlfDelay: Infinity,
 });
 
-rl.on('line', (line) => {
+rl.on('line', (line) => { 
   // console.log('===line===')
   // console.log(`Line from file: ${line}`);
   const lineobj = JSON.parse(line);

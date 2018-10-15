@@ -9,8 +9,8 @@
       <div class="single-border">
         <div class="container-body">
           <div class="container-title">
-            {{ labels.total }}&nbsp;<span class="highlight">{{ totalCount }}</span>{{ labels.count }}
-            {{ labels.current }}&nbsp;<span class="highlight">{{ currentCount }}</span>{{ labels.count }}
+            {{ labels.total }}&nbsp;<span class="highlight">{{ feedbackInfo.totalCount }}</span>{{ labels.count }}
+            {{ labels.current }}&nbsp;<span class="highlight">{{ feedbackInfo.progressCount }}</span>{{ labels.count }}
           </div>
           <gauge-bar :percentage="percentage" />
         </div>
@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import GaugeBar from '@/components/common/GaugeBar.vue';
@@ -65,10 +66,13 @@ export default {
       labels,
       dialogVisibility: false,
       popupVisibility: false,
-      totalCount: '29,300',
-      currentCount: '5,000',
       percentage: 25,
     };
+  },
+  computed: {
+    ...mapGetters({
+      feedbackInfo: 'current/getFeedbackInfo',
+    }),
   },
   mounted() {
     this.$store.dispatch('current/fetchFeedbackInfoAsync');

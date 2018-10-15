@@ -30,7 +30,7 @@ const fetchFeedbackInfo = async () => {
     token
   받을거
       totalCount: '29,300',
-      currentCount: '5,000',
+      progressCount: '5,000',
    */
   return res;
 };

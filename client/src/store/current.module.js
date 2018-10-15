@@ -44,6 +44,9 @@ const current = {
       state.message = '';
     },
   },
+  getters: {
+    getFeedbackInfo: state => state.feedbackInfo,
+  },
 };
 
 export default current;

@@ -1,4 +1,5 @@
 const express = require('express');
+const current = require('../services/current/feedback');
 
 const router = express.Router();
 
@@ -9,16 +10,11 @@ router.get('/', (req, res, next) => {
 });
 
 router.post('/api/current/feedback/info', (req, res, next) => {
-  console.log('/api/current/feedback/info');
-  // TODO
-  // 1. 현재 진행중인 녀석 : /rawdata/TRAINING - rawdata/DEFAULT
-  // 2. 총 개수는 /feedback + 현재 진행중인 녀석
-  res.send('running...');
+  res.send(current.info());
 });
 
 router.post('/api/current/feedback/create', (req, res, next) => {
-  console.log('/api/current/feedback/create');
-  res.send('running...');
+  res.send(current.create());
 });
 
 
