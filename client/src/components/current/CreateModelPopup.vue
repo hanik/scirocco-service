@@ -7,16 +7,16 @@
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label">{{ labels.modelName }}</div><input type="text" placeholder="입력해 보아요" />
+          <div class="label">{{ labels.modelName }}</div><input type="text" placeholder="입력해 보아요" v-model="modelName"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.createDate }}</div><input type="text" disabled />
+          <div class="label">{{ labels.createDate }}</div><input type="text" disabled :value="createDate"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled />
+          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled :value="itAdmin"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled />
+          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled :value="legalAdmin"/>
         </div>
       </div>
       <div class="buttons">
@@ -30,6 +30,7 @@
 <script>
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
+import { mapGetters } from 'vuex';
 
 const labels = {
   modelCreate: CURRENT.POPUP_MODEL_CREATE,
@@ -49,14 +50,30 @@ export default {
       this.$emit('close');
     },
     create() {
+      const createInfo = {
+        modelName: this.modelName,
+        createDate: this.createDate,
+        itAdmin: this.itAdmin,
+        legalAdmin: this.legalAdmin,
+      };
+
       this.$emit('create');
-      this.$store.dispatch('current/createModelAsync');
+      this.$store.dispatch('status/setModelCreateInfo', createInfo);
+      this.$store.dispatch('current/createModelAsync', createInfo);
     },
   },
   data() {
     return {
       labels,
+      modelName: '',
+      createDate: '2016-10-15 15:20',
     };
+  },
+  computed: {
+    ...mapGetters({
+      itAdmin: 'status/getITAdmin',
+      legalAdmin: 'status/getLegalAdmin',
+    }),
   },
 };
 </script>

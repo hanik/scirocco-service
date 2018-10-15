@@ -57,7 +57,6 @@ export default {
       this.popupVisibility = false;
     },
     create() {
-      console.log('how are you');
     },
   },
   data() {
