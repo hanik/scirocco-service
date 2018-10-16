@@ -31,6 +31,8 @@ const CURRENT = {
   STATUS_CREATE_DATE: '생성 일시',
   STATUS_END_DATE: '종료 일시',
   STATUS_MANAGER: '관리자',
+  STATUS_DEFAULT_DATE: '0000-00-00 00:00',
+  STATUS_DEFAULT_MODEL_MESSAGE: '새 모델을 생성하세요',
   FEEDBACK_TOTAL: '누적 피드백',
   FEEDBACK_CURRENT: '진행 중인 피드백',
   FEEDBACK_COUNT: '건',
