@@ -37,6 +37,6 @@ dresult.on('data', (data) => {
   console.log(dresult);
 });
 
-// kill -kill $(lsof -t -i :6060)
+// kill -kill $(lsof -t -i :10801)
 // vocabulary size: source = 7743; target = 8802
 //

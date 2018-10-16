@@ -50,6 +50,7 @@ export default {
     },
     create() {
       this.$emit('create');
+      // TODO Create 이후 'Data 준비/검증' 화면으로 넘어가기
       this.$store.dispatch('current/createModelAsync');
     },
   },

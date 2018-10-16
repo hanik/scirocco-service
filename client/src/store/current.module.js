@@ -19,6 +19,10 @@ const current = {
       await api.createModel(modelInfo);
       commit('success', '');
     },
+    async prepareDataStartAsync({ commit }) {
+      await api.prepareDataStart();
+      commit('success', '');
+    },
     error({ commit }, message) {
       commit('error', message);
     },

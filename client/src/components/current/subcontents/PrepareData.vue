@@ -35,11 +35,11 @@
 
       <template slot="buttons">
         <div v-if="status === 'preparing'" >
-          <r-button :title="'시작'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'시작'" :type="'primary'" @button-clicked="start" />
         </div>
         <div v-if="status === 'checking'">
-          <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah2" />
-          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="blahblah" />
+          <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
+          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="restart" />
         </div>
       </template>
     </step-contents>
@@ -76,10 +76,15 @@ export default {
     };
   },
   methods: {
-    blahblah() {
-      this.status = 'checking';
+    start() {
+      // this.status = 'checking';
+
+      this.$store.dispatch('current/prepareDataStartAsync');
     },
-    blahblah2() {
+    restart() {
+      console.log('restart');
+    },
+    cancel() {
       this.status = 'preparing';
     },
   },

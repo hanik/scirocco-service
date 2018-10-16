@@ -8,8 +8,8 @@ const logFile = 'review_2018-08-12.log';
 const congifDir = `${baseDir}config-train/`;
 const modelDir = `${baseDir}models/`;
 const preprocessDir = `${baseDir}preprocess/`;
-const dataDefaultDir = `${baseDir}rawdata/DEFAULT/`;
-const dataTrainingDir = `${baseDir}rawdata/TRAINING/`;
+const dataDefaultDir = `${baseDir}rawdata/default/`;
+const dataTrainingDir = `${baseDir}rawdata/training/`;
 
 const today = luxon.DateTime.local().toFormat('yyyyMMdd_HHmmss');
 const date = today.substring(0, 8);
@@ -19,8 +19,8 @@ console.log(`today date : ${date}`);
 console.log(`today time : ${time}`);
 fs.mkdirpSync(date);
 
-const srcStream = fs.createWriteStream(`./${date}/output_src.txt`, { flags: 'w' });
-const tgtStream = fs.createWriteStream(`./${date}/output_tgt.txt`, { flags: 'w' });
+const srcStream = fs.createWriteStream(`./${date}/output_src.txt`, { flags: 'a' });
+const tgtStream = fs.createWriteStream(`./${date}/output_tgt.txt`, { flags: 'a' });
 
 const rl = readline.createInterface({
   input: fs.createReadStream(feedbackDir + logFile),

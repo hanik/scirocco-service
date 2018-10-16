@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
 require('dotenv').config();
 
 const app = express();
@@ -22,11 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/users', require('./users/user.controller'));
-// app.use('/users', usersRouter);
+app.use('/api/current', require('./routes/current'));
 
 module.exports = app;
-
 
 // https://github.com/cornflourblue/node-jwt-authentication-api
