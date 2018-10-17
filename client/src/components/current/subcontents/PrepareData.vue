@@ -9,7 +9,7 @@
       <div class="double-border">
         <div class="container-body" v-if="status === 'preparing'" >
           <div class="container-title">
-            {{ labels.feedback }}<span class="highlight">&nbsp;{{ feedbackCount }}</span>{{ labels.preparing }}
+            {{ labels.feedback }}<span class="highlight">&nbsp;{{ prepareInfo.totalCount }}</span>{{ labels.preparing }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
@@ -47,6 +47,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
@@ -70,15 +71,21 @@ export default {
   data() {
     return {
       status: 'preparing',
-      feedbackCount: '29,800',
       remainTime: '(5분)',
       labels,
     };
   },
+  mounted() {
+    this.$store.dispatch('current/fetchPrepareInfoAsync');
+  },
+  computed: {
+    ...mapGetters({
+      prepareInfo: 'current/getPrepareInfo',
+    }),
+  },
   methods: {
     start() {
       // this.status = 'checking';
-
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     restart() {

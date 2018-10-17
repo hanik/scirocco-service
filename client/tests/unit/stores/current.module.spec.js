@@ -9,6 +9,22 @@ import api from '@/services/api.service';
 */
 
 describe('current module', () => {
+  describe('getters', () => {
+    it('get feedbackInfo when call getFeedbackInfo', () => {
+      const { getFeedbackInfo } = current.getters;
+      const state = { feedbackInfo: 'last feedback info' };
+
+      expect(getFeedbackInfo(state)).toBe('last feedback info');
+    });
+
+    it('get prepareInfo when call getPrepareInfo', () => {
+      const { getPrepareInfo } = current.getters;
+      const state = { prepareInfo: 'last prepare info' };
+
+      expect(getPrepareInfo(state)).toBe('last prepare info');
+    });
+  });
+
   describe('mutations', () => {
     it('set message state when called success', () => {
       const { success } = current.mutations;
@@ -18,30 +34,32 @@ describe('current module', () => {
 
       expect(state.message).toBe('new message');
     });
+    it('set feedbackInfo state when called fetchFeedbackInfoSuccess', () => {
+      const { fetchFeedbackInfoSuccess } = current.mutations;
+      const state = { feedbackInfo: '' };
+
+      fetchFeedbackInfoSuccess(state, 'new feedbackInfo');
+
+      expect(state.feedbackInfo).toBe('new feedbackInfo');
+    });
+    it('set prepareInfo state when called fetchPrepareInfoSuccess', () => {
+      const { fetchPrepareInfoSuccess } = current.mutations;
+      const state = { prepareInfo: '' };
+
+      fetchPrepareInfoSuccess(state, 'new prepareInfo');
+
+      expect(state.prepareInfo).toBe('new prepareInfo');
+    });
   });
 
   describe('actions', () => {
-    // jest.fn 으로 작성할 때
-    it('commit success when call fetchFeedbackInfoAsync action', async () => {
-      const commitSpy = jest.fn();
-      api.fetchFeedbackInfo = jest.fn();
+    let commitSpy;
 
-      const { fetchFeedbackInfoAsync } = current.actions;
-      api.fetchFeedbackInfo.mockReturnValueOnce({ id: 11, name: 'unknown object' });
-
-      expect.assertions(2);
-
-      await fetchFeedbackInfoAsync({ commit: commitSpy });
-
-      expect(api.fetchFeedbackInfo).toHaveBeenCalled();
-      expect(commitSpy).toBeCalledWith('fetchFeedbackSuccess', { id: 11, name: 'unknown object' });
-
-      api.fetchFeedbackInfo.mockRestore();
+    beforeEach(() => {
+      commitSpy = jest.fn();
     });
 
-    // jest.spyOn 으로 작성할 때
-    it('commit success when call fetchFeedbackInfoAsync action', async () => {
-      const commitSpy = jest.fn();
+    it('commit fetchFeedbackInfoSuccess when call fetchFeedbackInfoAsync action', async () => {
       const spyFetchFeedbackInfo = jest.spyOn(api, 'fetchFeedbackInfo');
 
       const { fetchFeedbackInfoAsync } = current.actions;
@@ -52,9 +70,25 @@ describe('current module', () => {
       await fetchFeedbackInfoAsync({ commit: commitSpy });
 
       expect(spyFetchFeedbackInfo).toHaveBeenCalled();
-      expect(commitSpy).toBeCalledWith('fetchFeedbackSuccess', { id: 11, name: 'unknown object' });
+      expect(commitSpy).toBeCalledWith('fetchFeedbackInfoSuccess', { id: 11, name: 'unknown object' });
 
       spyFetchFeedbackInfo.mockRestore();
+    });
+
+    it('commit fetchPrepareInfoSuccess when call fetchPrepareInfoAsync action', async () => {
+      const spyFetchPrepareInfo = jest.spyOn(api, 'fetchPrepareInfo');
+
+      const { fetchPrepareInfoAsync } = current.actions;
+      spyFetchPrepareInfo.mockReturnValueOnce({ id: 11, name: 'unknown object' });
+
+      expect.assertions(2);
+
+      await fetchPrepareInfoAsync({ commit: commitSpy });
+
+      expect(spyFetchPrepareInfo).toHaveBeenCalled();
+      expect(commitSpy).toBeCalledWith('fetchPrepareInfoSuccess', { id: 11, name: 'unknown object' });
+
+      spyFetchPrepareInfo.mockRestore();
     });
   });
 });

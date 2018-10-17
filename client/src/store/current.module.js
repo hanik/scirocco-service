@@ -8,16 +8,20 @@ const current = {
     feedbackTotal: -1,
     feedbackCurrent: -1,
     feedbackInfo: {},
+    prepareInfo: {},
   },
   actions: {
     async fetchFeedbackInfoAsync({ commit }) {
       const feedbackInfo = await api.fetchFeedbackInfo();
-      console.log(feedbackInfo);
-      commit('fetchFeedbackSuccess', feedbackInfo);
+      commit('fetchFeedbackInfoSuccess', feedbackInfo);
     },
     async createModelAsync({ commit }, modelInfo) {
       await api.createModel(modelInfo);
       commit('success', '');
+    },
+    async fetchPrepareInfoAsync({ commit }) {
+      const prepareInfo = await api.fetchPrepareInfo();
+      commit('fetchPrepareInfoSuccess', prepareInfo);
     },
     async prepareDataStartAsync({ commit }) {
       await api.prepareDataStart();
@@ -31,9 +35,13 @@ const current = {
     },
   },
   mutations: {
-    fetchFeedbackSuccess(state, feedbackInfo) {
-      state.type = 'fetch-feedback-success';
+    fetchFeedbackInfoSuccess(state, feedbackInfo) {
+      state.type = 'fetch-feedback-info-success';
       state.feedbackInfo = feedbackInfo;
+    },
+    fetchPrepareInfoSuccess(state, prepareInfo) {
+      state.type = 'fetch-prepare-info-success';
+      state.prepareInfo = prepareInfo;
     },
     success(state, message) {
       state.type = 'current-success';
@@ -50,6 +58,7 @@ const current = {
   },
   getters: {
     getFeedbackInfo: state => state.feedbackInfo,
+    getPrepareInfo: state => state.prepareInfo,
   },
 };
 

@@ -24,4 +24,9 @@ router.post('/prepare/state', async (req, res) => {
   res.send(state);
 });
 
+router.post('/prepare/info', async (req, res) => {
+  const info = await prepare.info();
+  res.send(info);
+});
+
 module.exports = router;

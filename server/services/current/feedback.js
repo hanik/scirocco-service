@@ -12,7 +12,7 @@ const info = async () => {
   let trainingCount;
   let defaultCount;
   try {
-    feedbackLogCount = await fileHelper.maxLineCountInDir(FEEDBACK_DIR);
+    feedbackLogCount = await fileHelper.sumOfLineCountInDir(FEEDBACK_DIR);
     trainingCount = await fileHelper.maxLineCountInDir(TRAINING_DIR);
     defaultCount = await fileHelper.maxLineCountInDir(DEFAULT_DIR);
   } catch (e) {

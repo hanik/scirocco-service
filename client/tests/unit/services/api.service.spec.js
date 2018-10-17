@@ -15,14 +15,9 @@ describe('api services', () => {
   describe('success', () => {
     beforeEach(() => {
       mock.onPost('/api/current/feedback/info').reply(200, data);
-    });
-
-    // TODO. 같은 내용이지만 조금 다르게 작성된 두개의 테스트 이므로... 정리 하시오
-    it('returns data when fetchFeedbackInfo is called', (done) => {
-      api.fetchFeedbackInfo().then((res) => {
-        expect(res).toEqual(data);
-        done();
-      });
+      mock.onPost('/api/current/feedback/create').reply(200, data);
+      mock.onPost('/api/current/prepare/info').reply(200, data);
+      mock.onPost('/api/current/prepare/start').reply(200, data);
     });
 
     it('returns data when fetchFeedbackInfo is called and success', async (done) => {
@@ -31,29 +26,42 @@ describe('api services', () => {
       expect(res).toEqual(data);
       done();
     });
-  });
 
-  describe('errors', () => {
-    let spyConsoleLog;
+    it('returns data when createModel is called and success', async (done) => {
+      const res = await api.createModel();
 
-    beforeEach(() => {
-      spyConsoleLog = jest.spyOn(console, 'log');
-      mock.onPost('/api/current/feedback/info').networkError();
-    });
-
-    // TODO. 같은 내용이지만 조금 다르게 작성된 두개의 테스트 이므로... 정리 하시오
-    it('error when fetchFeedbackInfo is called', async (done) => {
-      await api.fetchFeedbackInfo();
-
-      expect(spyConsoleLog).toHaveBeenCalled();
+      expect(res).toEqual(data);
       done();
     });
 
-    it('error when fetchFeedbackInfo is called and fail', async (done) => {
-      api.fetchFeedbackInfo().then((res) => {
-        expect(spyConsoleLog).toHaveBeenCalledWith(res.message);
-        done();
-      });
+    it('returns data when fetchPrepareInfo is called and success', async (done) => {
+      const res = await api.fetchPrepareInfo();
+
+      expect(res).toEqual(data);
+      done();
     });
+
+    it('returns data when prepareDataStart is called and success', async (done) => {
+      const res = await api.prepareDataStart();
+
+      expect(res).toEqual(data);
+      done();
+    });
+  });
+
+  describe('errors', () => {
+    // let spyConsoleLog;
+    //
+    // beforeEach(() => {
+    //   spyConsoleLog = jest.spyOn(console, 'log');
+    //   mock.onPost('/api/current/feedback/info').networkError();
+    // });
+    //
+    // it('error when fetchFeedbackInfo is called and fail', async (done) => {
+    //   api.fetchFeedbackInfo().then((res) => {
+    //     expect(spyConsoleLog).toHaveBeenCalledWith(res.message);
+    //     done();
+    //   });
+    // });
   });
 });

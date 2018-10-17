@@ -16,31 +16,36 @@ const login = async () => {
 
 const fetchFeedbackInfo = async () => {
   const res = await axios.post('/api/current/feedback/info')
-    .then((response) => {
-      // console.log('response: ', response);
-      return response.data;
-    })
-    .catch((error) => {
-      console.log(error.message);
-      return error;
-    });
+    .then(response => response.data)
+    .catch(error => error);
   return res;
 };
 
 const createModel = async () => {
-  //TODO modelInfo 를 실제 정보와 동일하게 보내도록 정리하기
+  // TODO modelInfo 를 실제 정보와 동일하게 보내도록 정리하기
   const modelInfo = {
     modelName: 'Sirocco-YC-v3',
     createDate: new Date(),
     itAdmin: 'icebar2002@gmail.com(service)',
     legalAdmin: 'yclaw01@gmail.com',
   };
-  const res = await axios.post('/api/current/feedback/create', modelInfo);
+  const res = await axios.post('/api/current/feedback/create', modelInfo)
+    .then(response => response.data)
+    .catch(error => error);
+  return res;
+};
+
+const fetchPrepareInfo = async () => {
+  const res = await axios.post('/api/current/prepare/info')
+    .then(response => response.data)
+    .catch(error => error);
   return res;
 };
 
 const prepareDataStart = async () => {
-  const res = await axios.post('/api/current/prepare/start');
+  const res = await axios.post('/api/current/prepare/start')
+    .then(response => response.data)
+    .catch(error => error);
   return res;
 };
 
@@ -48,4 +53,5 @@ export default {
   fetchFeedbackInfo,
   createModel,
   prepareDataStart,
+  fetchPrepareInfo,
 };

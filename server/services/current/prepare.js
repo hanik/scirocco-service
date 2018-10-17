@@ -79,8 +79,16 @@ const state = async () => {
   return 'NOTYET';
 };
 
+const info = async () => {
+  const totalCount = await fileHelper.maxLineCountInDir(TRAINING_DIR);
+  return {
+    totalCount,
+  };
+};
+
 module.exports = {
   start,
   state,
+  info,
 };
 
