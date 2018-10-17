@@ -1,7 +1,7 @@
 <template>
   <div id="stepper-tab-list">
-    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: current === key}]">
-      <div :class="[{selected: selected === key}, {current: current === key}]" :id="key" @click="select($event)">
+    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: currentStep === key}]">
+      <div :class="[{selected: selected === key}, {current: currentStep === key}]" :id="key" @click="select($event)">
         <div class="label">
           <span class="ic-unchecked"></span>
           <span> {{ value }} </span>
@@ -13,6 +13,7 @@
 
 <script>
 import { CURRENT } from '@/strings';
+import { mapGetters } from 'vuex';
 
 const steps = {
   'step-feedback': CURRENT.STEP_FEEDBACK,
@@ -40,6 +41,11 @@ export default {
     } else {
       this.selected = this.current;
     }
+  },
+  computed: {
+    ...mapGetters({
+      currentStep: 'current/getCurrentStep',
+    })
   },
   methods: {
     select(event) {

@@ -41,7 +41,7 @@
         </div>
         <div v-if="status === 'updating'">
           <r-button :title="'취소'" :type="'normal'" @button-clicked="cancelUpdateCurrentModel" />
-          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="moveRestartService" />
+          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="restart" />
         </div>
       </template>
     </step-contents>
@@ -94,9 +94,8 @@ export default {
     cancelUpdateCurrentModel() {
       // TODO request cancel update model
     },
-    moveRestartService() {
-      this.$router.push('restartService');
-      // TODO change current step to Restart Service
+    restart() {
+      console.log('restart')
     },
     updateCurrentModel() {
       this.status = 'updating';

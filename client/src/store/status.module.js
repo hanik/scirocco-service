@@ -7,7 +7,6 @@ const status = {
     // TODO change value from hardcoding
     itAdmin: 'icebar2002@gmail.com',
     legalAdmin: 'yclaw01@gmail.com',
-    currentStep: null,
   },
   actions: {
     success({ commit }, message) {
