@@ -9,10 +9,10 @@
       <div class="single-border">
         <div class="container-body">
           <div class="container-title">
-            {{ labels.total }}&nbsp;<span class="highlight">{{ feedbackInfo.totalCount }}</span>{{ labels.count }}
-            {{ labels.current }}&nbsp;<span class="highlight">{{ feedbackInfo.progressCount }}</span>{{ labels.count }}
+            {{ labels.total }}&nbsp;<span class="highlight">{{ totalCount }}</span>{{ labels.count }}
+            {{ labels.current }}&nbsp;<span class="highlight">{{ currentCount }}</span>{{ labels.count }}
           </div>
-          <gauge-bar :percentage="percentage" />
+          <gauge-bar :percentage="displayFeedbackInfo" />
         </div>
       </div>
 
@@ -58,7 +58,6 @@ export default {
       this.popupVisibility = false;
     },
     create() {
-      console.log('how are you');
     },
   },
   data() {
@@ -66,16 +65,30 @@ export default {
       labels,
       dialogVisibility: false,
       popupVisibility: false,
-      percentage: 25,
+      totalCount: 0,
+      currentCount: 0,
     };
+  },
+  mounted() {
+    this.$store.dispatch('current/fetchFeedbackInfoAsync');
   },
   computed: {
     ...mapGetters({
       feedbackInfo: 'current/getFeedbackInfo',
     }),
-  },
-  mounted() {
-    this.$store.dispatch('current/fetchFeedbackInfoAsync');
+    displayFeedbackInfo() {
+      if (Object.keys(this.feedbackInfo).length !== 0
+        && this.feedbackInfo.totalCount !== undefined
+        && this.feedbackInfo.currentCount !== undefined) {
+        this.totalCount = this.feedbackInfo.totalCount;
+        this.currentCount = this.feedbackInfo.currentCount;
+        const totalCnt = this.feedbackInfo.totalCount.replace(/,/gi, '');
+        const currentCnt = this.feedbackInfo.currentCount.replace(/,/gi, '');
+        const percentage = (currentCnt / totalCnt) * 100;
+        return percentage;
+      }
+      return 0;
+    },
   },
 };
 </script>
