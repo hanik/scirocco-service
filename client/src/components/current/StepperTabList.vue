@@ -30,17 +30,19 @@ export default {
     return {
       steps,
       selected: '', // 사용자가 확인을 위해 클릭한 탭
-      current: '', // 현재 서버에서 돌아가고 있는 단계
+      // current: '', // 현재 서버에서 돌아가고 있는 단계
     };
   },
   mounted() {
     // 현재 서버에서 돌아가고 있는 단계가 없을 경우
-    if (this.current === '') {
-      this.current = 'step-feedback';
-      this.selected = 'step-feedback';
-    } else {
-      this.selected = this.current;
-    }
+    // if (this.current === '') {
+    //   this.current = 'step-feedback';
+    //   this.selected = 'step-feedback';
+    // } else {
+    //   this.selected = this.current;
+    // }
+    // this.selected = this.current;
+
   },
   computed: {
     ...mapGetters({

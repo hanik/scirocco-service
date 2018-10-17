@@ -50,6 +50,8 @@
                     :message="labels.waitingFeedback"
                     @close="closeDialog"
                     @confirm="confirm"></confirm-dialog>
+    <!-- 삭제 예정 -->
+    <button v-on:click="moveNext">다음 화면</button>
   </div>
 </template>
 
@@ -108,8 +110,15 @@ export default {
     },
     confirm() {
       this.$router.push('feedback');
-      // TODO change current step to gather feedback
+      this.$store.dispatch('current/setCurrentStep', 'step-feedback');
     },
+    // 삭제 예정
+    moveNext() {
+      this.$router.push('restartService');
+      //current.module의 해당 api로 이동필요
+      this.$store.dispatch('current/setCurrentStep', 'step-restartService');
+    },
+
   },
 };
 </script>

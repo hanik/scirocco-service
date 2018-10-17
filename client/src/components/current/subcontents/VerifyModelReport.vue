@@ -33,13 +33,37 @@
         </div>
       </div>
     </div>
+    <div class="result-task-set">
+      <div class="ic-something"></div>
+      <div class="result-table">
+        <div class="table-header">
+          <div>{{ labels.korean }}</div>
+          <div>{{ labels.english }}</div>
+        </div>
+        <div class="table-body">
+          <div class="table-row" v-for="(item, index) in verifiedBasicSetItems" :key="index">
+            <div :class="['table-item', {new: item.isNew}]">{{ item.ko }}</div>
+            <div :class="['table-item', {new: item.isNew}]">{{ item.en }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="result-task-set"></div>
+    <step-contents>
+      <template slot="buttons">
+        <div>
+          <r-button :title="'저장'" :type="'primary'" @button-clicked="saveCurrentModel" />
+        </div>
+      </template>
+    </step-contents>
+    <!-- 삭제 예정 -->
+    <button v-on:click="saveCurrentModel">다음 화면</button>
   </div>
 </template>
 
 <script>
 import StepContents from '@/components/current/StepContents.vue';
+import RButton from '@/components/common/RButton.vue';
 import { CURRENT, COMMONS } from '@/strings';
 
 const labels = {
@@ -52,34 +76,25 @@ const labels = {
   reportWaiting: CURRENT.VERIFY_MODEL_WAITING_MESSAGE,
 };
 
-const datas = [
-  { ko: '한글 원본 구문이 여기있고', en: 'English something writing' },
-  { ko: '매칭 되는 영어 번역 구문이 우측에 보입니다', en: 'English something writing' },
-  { ko: '단어', en: 'Word' },
-  { ko: '문장이 길어져서 여러줄이 되는 경우는 이렇게 적용 될 것 같습니다. 문장이 길어져서 여러줄이 되는 경우는 이렇게 적용 될 것 같습니다', en: 'Sentence Sentence Sentence Sentence Sentence Sentence. Sentence Sentence Sentence Sentence Sentence Sentence' },
-  { ko: '**기본 Set에 대해 내용을 주시면 제가 여기에다가 써놓도록 할게요!', en: '**English something writing' },
-  { ko: '**이전 결과에 대비해 새롭게 바뀐 번역은 이렇게 별도로 표시해주면 어떨까요?', en: '**English something writing. English something writing?', isNew: true },
-  { ko: '**기본 Set에 대해 내용을 주시면 제가 여기에다가 써놓도록 할게요!', en: '**English something writing' },
-];
-const summaries = [
-  { categoryName: '이전 모델 대비\n개선도', percentage: 30 },
-  { categoryName: '이전 모델 대비\n오류 감소', percentage: 30 },
-  { categoryName: '이전 모델 대비\n개선도', percentage: 30 },
-  { categoryName: '이전 모델 대비\n오류 감소', percentage: 30 },
-];
-
-
 export default {
   name: 'VerifyModelReport',
   components: {
     StepContents,
+    RButton,
+  },
+  props: ['reportDatas', 'reportSummaries'],
+  methods: {
+    saveCurrentModel() {
+      //https://forum.vuejs.org/t/emit-data-between-separate-components/6556
+      this.$emit('content');
+    },
   },
   data() {
     return {
       labels,
-      verifiedBasicSetItems: datas,
-      verifiedTaskSetItems: datas,
-      summaries,
+      verifiedBasicSetItems: this.reportDatas,
+      verifiedTaskSetItems: this.reportDatas,
+      summaries: this.reportSummaries,
     };
   },
 };
