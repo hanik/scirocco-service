@@ -7,8 +7,13 @@ const current = {
     message: null,
     feedbackTotal: -1,
     feedbackCurrent: -1,
-    feedbackInfo: {},
-    prepareInfo: {},
+    feedbackInfo: {
+      progressCount: 0,
+      totalCount: 0,
+    },
+    prepareInfo: {
+      totalCount: 0,
+    },
   },
   actions: {
     async fetchFeedbackInfoAsync({ commit }) {

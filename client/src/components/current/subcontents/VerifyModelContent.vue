@@ -92,13 +92,13 @@ export default {
   },
   methods: {
     cancelUpdateCurrentModel() {
-      //TODO request cancel update model
+      // TODO request cancel update model
     },
     moveRestartService() {
       this.$router.push('restartService');
       // TODO change current step to Restart Service
     },
-    updateCurrentModel(){
+    updateCurrentModel() {
       this.status = 'updating';
     },
     openDialog() {
@@ -112,7 +112,7 @@ export default {
       // TODO change current step to gather feedback
     },
   },
-}
+};
 </script>
 
 <style scoped lang="scss">
