@@ -7,7 +7,7 @@
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label">{{ labels.modelName }}</div><input type="text" placeholder="입력해 보아요" v-model="modelName"/>
+          <div class="label">{{ labels.modelName }}</div><input type="text" :placeholder="labels.defaultModelMessage" v-model="modelName"/>
         </div>
         <div class="input-group">
           <div class="label">{{ labels.createDate }}</div><input type="text" disabled :value="createDate"/>
@@ -31,6 +31,7 @@
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
 import { mapGetters } from 'vuex';
+import moment from 'moment';
 
 const labels = {
   modelCreate: CURRENT.POPUP_MODEL_CREATE,
@@ -38,6 +39,7 @@ const labels = {
   createDate: CURRENT.POPUP_MODEL_CREATE_DATE,
   itAdmin: CURRENT.POPUP_ADMIN_IT,
   legalAdmin: CURRENT.POPUP_ADMIN_LEGAL,
+  defaultModelMessage: CURRENT.STATUS_DEFAULT_MODEL_MESSAGE,
 };
 
 export default {
@@ -49,7 +51,7 @@ export default {
     closePopup() {
       this.$emit('close');
     },
-    create() {
+    async create() {
       const createInfo = {
         modelName: this.modelName,
         createDate: this.createDate,
@@ -66,7 +68,7 @@ export default {
     return {
       labels,
       modelName: '',
-      createDate: '2016-10-15 15:20',
+      createDate: moment(new Date()).format('YYYY-MM-DD hh:mm'),
     };
   },
   computed: {

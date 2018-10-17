@@ -12,7 +12,6 @@ const current = {
   actions: {
     async fetchFeedbackInfoAsync({ commit }) {
       const feedbackInfo = await api.fetchFeedbackInfo();
-      console.log(feedbackInfo);
       commit('fetchFeedbackSuccess', feedbackInfo);
     },
     async createModelAsync({ commit }, modelInfo) {
@@ -43,6 +42,9 @@ const current = {
       state.type = '';
       state.message = '';
     },
+  },
+  getters: {
+    getFeedbackInfo: state => state.feedbackInfo,
   },
 };
 

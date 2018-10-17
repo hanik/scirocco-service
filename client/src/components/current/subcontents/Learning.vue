@@ -61,7 +61,7 @@ export default {
     return {
       error: false,
       status: 'en2ko', // en2ko, ko2en, dataLearning
-      remainTime: '(5시)',
+      remainTime: '(5시간)',
       labels,
     };
   },

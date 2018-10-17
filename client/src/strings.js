@@ -10,6 +10,7 @@ const COMMONS = {
   LABEL_SINGOUT: 'Sign out',
   LABEL_KOREAN: '한글',
   LABEL_ENGLISH: '영문',
+  MESSAGE_WAITING_FEEDBACK: '다음 피드백 수집까지 기다리시겠습니까?',
 };
 
 const CURRENT = {
@@ -24,7 +25,8 @@ const CURRENT = {
     '작업 완료 후에는 자동으로 다음 프로세스를 진행합니다.',
   STEP_LEARNING_DESCRIPTION: '검증된 데이터를 엔진에 학습하고 적용하는 단계입니다.\n' +
     '작업 완료 후에는 담당자에게 알림 메일을 보냅니다.',
-  STEP_VERIFY_MODEL_DESCRIPTION: '학습과 적용이 완료된 모델을 검증하는 단계입니다.',
+  STEP_VERIFY_MODEL_DESCRIPTION: '학습과 적용이 완료된 모델을 ' +
+  '검증하는 단계입니다.',
   STEP_RESTART_SERVICE_DESCRIPTION: '새로운 모델을 서버에 업데이트 하기 위해 서비스를 재시작합니다.\n' +
     '작업 완료 후에는 담당자에게 알림을 보냅니다.',
   STATUS_PROCESS_NAME: '프로세싱 모델',
