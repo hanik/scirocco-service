@@ -6,7 +6,7 @@ const current = {
     currentStep: 'step-feedback',
     /*
       현재 진행중인 스탭, default는 step-feedback
-      step-feedback, step-prepareData, step-prepareData, step-verifyModel,step-restartService
+      step-feedback, step-prepareData, step-learning, step-verifyModel,step-restartService
      */
     type: null, // TODO 이것은 무슨 용도?
     message: null,
@@ -26,7 +26,7 @@ const current = {
       commit('fetchFeedbackInfoSuccess', feedbackInfo);
     },
     async createModelAsync({ dispatch, commit }, modelInfo) {
-      dispatch('setCurrentStep', 'step-prepareData')
+      dispatch('setCurrentStep', 'step-prepareData');
 
       // TODO 주석 해제
       // const response = await api.createModel(modelInfo);
@@ -67,7 +67,6 @@ const current = {
     },
     setCurrentStepMutation(state, step) {
       state.currentStep = step;
-
     },
     success(state, message) {
       state.type = 'current-success';

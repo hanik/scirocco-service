@@ -43,6 +43,9 @@
         </div>
       </template>
     </step-contents>
+    <!-- 삭제 예정 -->
+    <button v-on:click="moveNext">다음 화면</button>
+
   </div>
 </template>
 
@@ -70,7 +73,7 @@ export default {
   },
   data() {
     return {
-      status: 'preparing',
+      status: 'preparing',  // preparing / checking
       remainTime: '(5분)',
       labels,
     };
@@ -85,14 +88,26 @@ export default {
   },
   methods: {
     start() {
-      // this.status = 'checking';
+      // TODO 주석(원복)
+      this.status = 'checking';
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     restart() {
+      // TODO 재시작 할 수 있도록 api 호출하면 될 것 같음
+      // this.$store.dispatch('current/prepareDataStartAsync');
       console.log('restart');
     },
     cancel() {
+      // TODO 현재 프로세스를 중지 할 수 있도록 api 호출하면 될 것 같음
+      // this.$store.dispatch('current/cancelPrepareDataStartAsync');
       this.status = 'preparing';
+      console.log('cancel')
+    },
+    // 삭제 예정
+    moveNext() {
+      this.$router.push('learning');
+      //current.module의 해당 api로 이동필요
+      this.$store.dispatch('current/setCurrentStep', 'step-learning');
     },
   },
 };

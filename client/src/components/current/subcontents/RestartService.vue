@@ -56,11 +56,12 @@
           <r-button :title="'재시작'" :type="'disabled'" @button-clicked="serviceRestart" />
         </div>
         <div v-if="status === 'complete'" >
-          <r-button :title="'확인'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'확인'" :type="'primary'" @button-clicked="complete" />
         </div>
       </template>
-
     </step-contents>
+    <!-- 삭제 예정 -->
+    <button v-on:click="completeRestartingService">완료 화면</button>
   </div>
 </template>
 
@@ -106,6 +107,9 @@ export default {
       // 현재 서비스를 재 시작함
       this.status = 'restarting';
       //request server for restarting service
+    },
+    complete() {
+      console.log('complete')
     },
     completeRestartingService() {
       // 서버에서 상태를 풀링해와서 상태 값으로 변경 필요함
