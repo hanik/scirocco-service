@@ -12,7 +12,7 @@
             {{ labels.total }}&nbsp;<span class="highlight">{{ totalCount }}</span>{{ labels.count }}
             {{ labels.current }}&nbsp;<span class="highlight">{{ currentCount }}</span>{{ labels.count }}
           </div>
-          <gauge-bar :percentage="percentage" />
+          <gauge-bar :percentage="displayFeedbackInfo" />
         </div>
       </div>
 
@@ -32,6 +32,7 @@ import RButton from '@/components/common/RButton.vue';
 import GaugeBar from '@/components/common/GaugeBar.vue';
 import { CURRENT } from '@/strings';
 import CreateModelPopup from '@/components/current/CreateModelPopup.vue';
+import { mapGetters } from 'vuex';
 
 const labels = {
   title: CURRENT.STEP_FEEDBACK,
@@ -57,7 +58,6 @@ export default {
       this.popupVisibility = false;
     },
     create() {
-      console.log('how are you');
     },
   },
   data() {
@@ -65,13 +65,30 @@ export default {
       labels,
       dialogVisibility: false,
       popupVisibility: false,
-      totalCount: '29,300',
-      currentCount: '5,000',
-      percentage: 25,
+      totalCount: 0,
+      currentCount: 0,
     };
   },
   mounted() {
     this.$store.dispatch('current/fetchFeedbackInfoAsync');
+  },
+  computed: {
+    ...mapGetters({
+      feedbackInfo: 'current/getFeedbackInfo',
+    }),
+    displayFeedbackInfo() {
+      if (Object.keys(this.feedbackInfo).length !== 0
+        && this.feedbackInfo.totalCount !== undefined
+        && this.feedbackInfo.currentCount !== undefined) {
+        this.totalCount = this.feedbackInfo.totalCount;
+        this.currentCount = this.feedbackInfo.currentCount;
+        const totalCnt = this.feedbackInfo.totalCount.replace(/,/gi, '');
+        const currentCnt = this.feedbackInfo.currentCount.replace(/,/gi, '');
+        const percentage = (currentCnt / totalCnt) * 100;
+        return percentage;
+      }
+      return 0;
+    },
   },
 };
 </script>

@@ -53,10 +53,10 @@
         </div>
         <div v-if="status === 'restarting'">
           <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
-          <r-button :title="'재시작'" :type="'normal'" @button-clicked="blahblah3" />
+          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="blahblah3" />
         </div>
         <div v-if="status === 'complete'" >
-          <r-button :title="'시작'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'확인'" :type="'primary'" @button-clicked="blahblah" />
         </div>
       </template>
 
@@ -90,7 +90,7 @@ export default {
   },
   data() {
     return {
-      status: 'need', // need, restarting, complete
+      status: 'complete', // need, restarting, complete
       modelName: 'Sirocco-YC-v3',
       remainTime: '(5분)',
       labels,

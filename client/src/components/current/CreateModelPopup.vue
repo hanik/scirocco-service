@@ -7,16 +7,16 @@
       </div>
       <div class="body">
         <div class="input-group">
-          <div class="label">{{ labels.modelName }}</div><input type="text" placeholder="입력해 보아요" />
+          <div class="label">{{ labels.modelName }}</div><input type="text" :placeholder="labels.defaultModelMessage" v-model="modelName"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.createDate }}</div><input type="text" disabled />
+          <div class="label">{{ labels.createDate }}</div><input type="text" disabled :value="createDate"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled />
+          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled :value="itAdmin"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled />
+          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled :value="legalAdmin"/>
         </div>
       </div>
       <div class="buttons">
@@ -30,6 +30,8 @@
 <script>
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
+import { mapGetters } from 'vuex';
+import moment from 'moment';
 
 const labels = {
   modelCreate: CURRENT.POPUP_MODEL_CREATE,
@@ -37,6 +39,7 @@ const labels = {
   createDate: CURRENT.POPUP_MODEL_CREATE_DATE,
   itAdmin: CURRENT.POPUP_ADMIN_IT,
   legalAdmin: CURRENT.POPUP_ADMIN_LEGAL,
+  defaultModelMessage: CURRENT.STATUS_DEFAULT_MODEL_MESSAGE,
 };
 
 export default {
@@ -48,15 +51,31 @@ export default {
     closePopup() {
       this.$emit('close');
     },
-    create() {
+    async create() {
+      const createInfo = {
+        modelName: this.modelName,
+        createDate: this.createDate,
+        itAdmin: this.itAdmin,
+        legalAdmin: this.legalAdmin,
+      };
+
       this.$emit('create');
-      this.$store.dispatch('current/createModelAsync');
+      this.$store.dispatch('status/setModelCreateInfo', createInfo);
+      this.$store.dispatch('current/createModelAsync', createInfo);
     },
   },
   data() {
     return {
       labels,
+      modelName: '',
+      createDate: moment(new Date()).format('YYYY-MM-DD hh:mm'),
     };
+  },
+  computed: {
+    ...mapGetters({
+      itAdmin: 'status/getITAdmin',
+      legalAdmin: 'status/getLegalAdmin',
+    }),
   },
 };
 </script>
