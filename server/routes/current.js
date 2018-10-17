@@ -1,6 +1,7 @@
 const express = require('express');
 const feedback = require('../services/current/feedback');
 const prepare = require('../services/current/prepare');
+const training = require('../services/current/training');
 
 const router = express.Router();
 
@@ -27,6 +28,11 @@ router.post('/prepare/state', async (req, res) => {
 router.post('/prepare/info', async (req, res) => {
   const info = await prepare.info();
   res.send(info);
+});
+
+router.post('/training/start', async (req, res) => {
+  const start = await training.start();
+  res.send(start);
 });
 
 module.exports = router;
