@@ -2,6 +2,7 @@
 const fs = require('fs-extra');
 const readline = require('readline');
 const fileHelper = require('../../helpers/file');
+const db = require('../../helpers/db');
 const luxon = require('luxon');
 const { parsed } = require('dotenv').config();
 
@@ -20,7 +21,7 @@ const _backupOldTrainingRaws = () => {
   });
 };
 
-const _moveAndAddDefaultToTrainingDir = () => {
+const _moveDefaultToTrainingDir = () => {
   const sequence = luxon.DateTime.local().toFormat('yyyyMMdd_HHmmss');
   const files = fs.readdirSync(DEFAULT_DIR);
   files.forEach((fileName) => {
@@ -31,8 +32,7 @@ const _moveAndAddDefaultToTrainingDir = () => {
   return sequence;
 };
 
-const _moveFeedBackToTrainingDir = (sequence) => {
-  // TODO 현재 ENKO 라고 고정하고 사용함
+const _moveAndAddFeedBackToTrainingDir = (sequence) => {
   const enFileName = `${TRAINING_DIR}/DATA_EN_${sequence}_TRAIN.txt`;
   const koFileName = `${TRAINING_DIR}/DATA_KO_${sequence}_TRAIN.txt`;
   const enStream = fs.createWriteStream(enFileName, { flags: 'a' });
@@ -61,8 +61,8 @@ const _moveFeedBackToTrainingDir = (sequence) => {
 const start = () => {
   try {
     _backupOldTrainingRaws();
-    const sequence = _moveAndAddDefaultToTrainingDir();
-    _moveFeedBackToTrainingDir(sequence);
+    const sequence = _moveDefaultToTrainingDir();
+    _moveAndAddFeedBackToTrainingDir(sequence);
   } catch (e) {
     console.log(e);
   }
@@ -74,6 +74,7 @@ const state = async () => {
   const longDefault = await fileHelper.maxLineCountInDir(DEFAULT_DIR);
   const sumLog = await fileHelper.sumOfLineCountInDir(FEEDBACK_DIR);
   if (longTraining <= longDefault + sumLog) {
+    db.setCurrentState(30);
     return 'DONE';
   }
   return 'NOTYET';

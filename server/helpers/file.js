@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle,no-restricted-syntax,no-cond-assign */
+/* eslint-disable no-underscore-dangle,no-restricted-syntax,no-cond-assign,consistent-return */
 const fs = require('fs-extra');
 
 async function* _chunksToLines(chunksAsync) {
@@ -7,7 +7,6 @@ async function* _chunksToLines(chunksAsync) {
     previous += chunk;
     let eolIndex;
     while ((eolIndex = previous.indexOf('\n')) >= 0) {
-      // line includes the EOL
       const line = previous.slice(0, eolIndex + 1);
       yield line;
       previous = previous.slice(eolIndex + 1);
@@ -38,7 +37,6 @@ const _getLineCount = async (filePath) => {
 const maxLineCountInDir = async (dir) => {
   const files = fs.readdirSync(dir);
   let max = 0;
-  // eslint-disable-next-line no-restricted-syntax
   for await (const fileName of files) {
     if (!fileName) return;
     if (fileName.endsWith('.log') || (fileName.endsWith('.txt') && !fileName.endsWith('.tok.txt'))) {
@@ -48,14 +46,12 @@ const maxLineCountInDir = async (dir) => {
       }
     }
   }
-  // eslint-disable-next-line consistent-return
   return max - 1;
 };
 
 const sumOfLineCountInDir = async (dir) => {
   const files = fs.readdirSync(dir);
   let sum = 0;
-  // eslint-disable-next-line no-restricted-syntax
   for await (const fileName of files) {
     if (!fileName) return;
     if (fileName.endsWith('.log') || (fileName.endsWith('.txt') && !fileName.endsWith('.tok.txt'))) {
@@ -63,11 +59,28 @@ const sumOfLineCountInDir = async (dir) => {
       sum += line - 1;
     }
   }
-  // eslint-disable-next-line consistent-return
   return sum;
+};
+
+const minLineCountInDirWithPattern = async (pattern, dir) => {
+  const regex = new RegExp(pattern);
+  const files = fs.readdirSync(dir);
+  let min = 0;
+  for await (const fileName of files) {
+    if (!fileName) return;
+    if (regex.test(fileName)) {
+      const count = await _getLineCount(`${dir}/${fileName}`);
+      if (min === 0 || min > count) {
+        min = count;
+      }
+    }
+    regex.lastIndex = 0;
+  }
+  return min - 1;
 };
 
 module.exports = {
   maxLineCountInDir,
   sumOfLineCountInDir,
+  minLineCountInDirWithPattern,
 };

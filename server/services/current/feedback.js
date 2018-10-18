@@ -1,5 +1,6 @@
 const fs = require('fs-extra');
 const fileHelper = require('../../helpers/file');
+const db = require('../../helpers/db');
 const { parsed } = require('dotenv').config();
 
 const { BASE_PATH } = parsed;
@@ -27,12 +28,8 @@ const info = async () => {
 };
 
 const create = async (model) => {
-  const logPath = `${process.env.PWD}/logs/model-create.log`;
-  try {
-    await fs.outputFile(logPath, `${JSON.stringify(model)}\n`, { flag: 'a' });
-  } catch (e) {
-    console.log(e);
-  }
+  db.setCurrentModel(model);
+  db.setCurrentState(20);
   return 'OK';
 };
 

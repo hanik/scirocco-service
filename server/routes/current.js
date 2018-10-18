@@ -2,6 +2,7 @@ const express = require('express');
 const feedback = require('../services/current/feedback');
 const prepare = require('../services/current/prepare');
 const training = require('../services/current/training');
+const current = require('../services/current');
 
 const router = express.Router();
 
@@ -33,6 +34,11 @@ router.post('/prepare/info', async (req, res) => {
 router.post('/training/start', async (req, res) => {
   const start = await training.start();
   res.send(start);
+});
+
+router.post('/state', (req, res) => {
+  const state = current.state();
+  res.send(state.toString());
 });
 
 module.exports = router;

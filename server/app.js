@@ -25,5 +25,4 @@ app.use('/users', require('./users/user.controller'));
 app.use('/api/current', require('./routes/current'));
 
 module.exports = app;
-
 // https://github.com/cornflourblue/node-jwt-authentication-api
