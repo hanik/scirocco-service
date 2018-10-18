@@ -27,10 +27,15 @@
       </div>
 
       <template slot="buttons">
-        <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
-        <r-button :title="'재시작'" :type="'disabled'" @button-clicked="blahblah2" />
+        <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
+        <r-button :title="'재시작'" :type="'disabled'" @button-clicked="restart" />
       </template>
     </step-contents>
+    <!-- 임시 버튼 -->
+    <button v-on:click="ko2en">한영</button>
+    <button v-on:click="en2ko">영한</button>
+    <button v-on:click="learning">학습중</button>
+    <button v-on:click="moveNext">다음 화면</button>
   </div>
 </template>
 
@@ -42,8 +47,8 @@ import { CURRENT, COMMONS } from '@/strings';
 const labels = {
   title: CURRENT.STEP_LEARNING,
   description: CURRENT.STEP_LEARNING_DESCRIPTION,
-  transEn2Ko: CURRENT.LEARNING_TRANSLATE_KO_EN,
-  transKo2En: CURRENT.LEARNING_TRANSLATE_EN_KO,
+  transKo2En: CURRENT.LEARNING_TRANSLATE_KO_EN,
+  transEn2Ko: CURRENT.LEARNING_TRANSLATE_EN_KO,
   dataLearning: CURRENT.LEARNING_DATA_LEARNING,
   learning: CURRENT.LEARNING_LEARNING,
   translating: CURRENT.LEARNING_TRANSLATING,
@@ -88,12 +93,31 @@ export default {
     },
   },
   methods: {
-    blahblah() {
+    restart() {
+      // TODO 재시작 할 수 있도록 api 호출하면 될 것 같음
+      // this.$store.dispatch('current/prepareDataStartAsync');
+      console.log('restart');
+    },
+    cancel() {
+      // TODO 현재 프로세스를 중지 할 수 있도록 api 호출
+      // this.$store.dispatch('current/cancelLearningAsync');
+      console.log('cancel')
+    },
+    //삭제 예정
+    en2ko() {
+      this.status = 'en2ko';
+    },
+    ko2en() {
       this.status = 'ko2en';
     },
-    blahblah2() {
+    learning() {
       this.status = 'dataLearning';
     },
+    moveNext() {
+      this.$router.push('verifyModel');
+      //current.module의 해당 api로 이동필요
+      this.$store.dispatch('current/setCurrentStep', 'step-verifyModel');
+    }
   },
 };
 </script>

@@ -7,14 +7,14 @@
       </template>
 
       <div class="single-border">
-        <div class="container-body" v-if="status === 'need'" >
+        <div class="container-body" v-if="status === 'waiting'" >
           <div class="container-title">
             {{ labels.msgNeed }}
             {{ labels.msgInfoBefore }}<span class="highlight">&nbsp;{{ modelName }}</span>&nbsp;{{ labels.msgInfoAfter }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap-finish">
-              <div :class="[status === 'need' ? 'ic-process-finish' : '']"></div>
+              <div :class="[status === 'waiting' ? 'ic-process-finish' : '']"></div>
             </div>
           </div>
           <div class="label-status">{{ labels.waiting }}</div>
@@ -48,19 +48,20 @@
       </div>
 
       <template slot="buttons">
-        <div v-if="status === 'need'" >
-          <r-button :title="'시작'" :type="'primary'" @button-clicked="blahblah2" />
+        <div v-if="status === 'waiting'" >
+          <r-button :title="'재시작'" :type="'primary'" @button-clicked="serviceRestart" />
         </div>
         <div v-if="status === 'restarting'">
-          <r-button :title="'취소'" :type="'normal'" @button-clicked="blahblah" />
-          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="blahblah3" />
+          <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
+          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="serviceRestart" />
         </div>
         <div v-if="status === 'complete'" >
-          <r-button :title="'확인'" :type="'primary'" @button-clicked="blahblah" />
+          <r-button :title="'확인'" :type="'primary'" @button-clicked="complete" />
         </div>
       </template>
-
     </step-contents>
+    <!-- 삭제 예정 -->
+    <button v-on:click="completeRestartingService">완료 화면</button>
   </div>
 </template>
 
@@ -90,20 +91,28 @@ export default {
   },
   data() {
     return {
-      status: 'complete', // need, restarting, complete
+      status: 'waiting', // waiting, restarting, complete
       modelName: 'Sirocco-YC-v3',
       remainTime: '(5분)',
       labels,
     };
   },
   methods: {
-    blahblah() {
-      this.status = 'need';
+    cancel() {
+      // 재 시작 중인 서비스 올리는거 중지
+      this.status = 'waiting';
+      //request server for stop restarting service
     },
-    blahblah2() {
+    serviceRestart() {
+      // 현재 서비스를 재 시작함
       this.status = 'restarting';
+      //request server for restarting service
     },
-    blahblah3() {
+    complete() {
+      console.log('complete')
+    },
+    completeRestartingService() {
+      // 서버에서 상태를 풀링해와서 상태 값으로 변경 필요함
       this.status = 'complete';
     },
   },

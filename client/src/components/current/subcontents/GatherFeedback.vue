@@ -77,7 +77,8 @@ export default {
     displayFeedbackInfo() {
       if (Object.keys(this.feedbackInfo).length !== 0) {
         const { totalCount, progressCount } = this.feedbackInfo;
-        return (progressCount / totalCount) * 100;
+        const percentage = (progressCount / totalCount) * 100;
+        return Number.isNaN(percentage) ? 0 : percentage;
       }
       return 0;
     },

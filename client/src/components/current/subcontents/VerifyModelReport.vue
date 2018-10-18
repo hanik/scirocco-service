@@ -19,7 +19,13 @@
     </div>
 
     <div class="result-basic-set">
-      <div class="ic-something"></div>
+      <div class="container-icon">
+        <div class="ic-status-wrap">
+          <img src="../../../assets/images/img-processfin.svg" />
+          <div class="ic-process-datachk"></div>
+        </div>
+        <div class="label-subtitle">{{ labels.basicSet }}</div>
+      </div>
       <div class="result-table">
         <div class="table-header">
           <div>{{ labels.korean }}</div>
@@ -31,15 +37,47 @@
             <div :class="['table-item', {new: item.isNew}]">{{ item.en }}</div>
           </div>
         </div>
+        <div class="report-info">{{ labels.reportInfo }}</div>
+      </div>
+    </div>
+    <div class="result-task-set">
+      <div class="container-icon">
+        <div class="ic-status-wrap">
+          <img src="../../../assets/images/img-processfin.svg" />
+          <div class="ic-process-datachk"></div>
+        </div>
+        <div class="label-subtitle">{{ labels.taskSet }}</div>
+      </div>
+      <div class="result-table">
+        <div class="table-header">
+          <div>{{ labels.korean }}</div>
+          <div>{{ labels.english }}</div>
+        </div>
+        <div class="table-body">
+          <div class="table-row" v-for="(item, index) in verifiedBasicSetItems" :key="index">
+            <div :class="['table-item', {new: item.isNew}]">{{ item.ko }}</div>
+            <div :class="['table-item', {new: item.isNew}]">{{ item.en }}</div>
+          </div>
+        </div>
+        <div class="report-info">{{ labels.reportInfo }}</div>
       </div>
     </div>
 
-    <div class="result-task-set"></div>
+    <step-contents>
+      <template slot="buttons">
+        <div>
+          <r-button :title="'저장'" :type="'primary'" @button-clicked="saveCurrentModel" />
+        </div>
+      </template>
+    </step-contents>
+    <!-- 삭제 예정 -->
+    <button v-on:click="saveCurrentModel">다음 화면</button>
   </div>
 </template>
 
 <script>
 import StepContents from '@/components/current/StepContents.vue';
+import RButton from '@/components/common/RButton.vue';
 import { CURRENT, COMMONS } from '@/strings';
 
 const labels = {
@@ -47,39 +85,33 @@ const labels = {
   description: CURRENT.STEP_VERIFY_MODEL_DESCRIPTION,
   korean: COMMONS.LABEL_KOREAN,
   english: COMMONS.LABEL_ENGLISH,
+  basicSet: CURRENT.VERITY_REPORT_BASIC,
+  taskSet: CURRENT.VERITY_REPORT_TASK,
+  reportInfo: CURRENT.VERIFY_REPORT_INFO_TEXT,
   useModelQuest: CURRENT.VERIFY_USE_MODEL_QUEST,
   waiting: CURRENT.VERIFY_WAITING,
   reportWaiting: CURRENT.VERIFY_MODEL_WAITING_MESSAGE,
 };
 
-const datas = [
-  { ko: '한글 원본 구문이 여기있고', en: 'English something writing' },
-  { ko: '매칭 되는 영어 번역 구문이 우측에 보입니다', en: 'English something writing' },
-  { ko: '단어', en: 'Word' },
-  { ko: '문장이 길어져서 여러줄이 되는 경우는 이렇게 적용 될 것 같습니다. 문장이 길어져서 여러줄이 되는 경우는 이렇게 적용 될 것 같습니다', en: 'Sentence Sentence Sentence Sentence Sentence Sentence. Sentence Sentence Sentence Sentence Sentence Sentence' },
-  { ko: '**기본 Set에 대해 내용을 주시면 제가 여기에다가 써놓도록 할게요!', en: '**English something writing' },
-  { ko: '**이전 결과에 대비해 새롭게 바뀐 번역은 이렇게 별도로 표시해주면 어떨까요?', en: '**English something writing. English something writing?', isNew: true },
-  { ko: '**기본 Set에 대해 내용을 주시면 제가 여기에다가 써놓도록 할게요!', en: '**English something writing' },
-];
-const summaries = [
-  { categoryName: '이전 모델 대비\n개선도', percentage: 30 },
-  { categoryName: '이전 모델 대비\n오류 감소', percentage: 30 },
-  { categoryName: '이전 모델 대비\n개선도', percentage: 30 },
-  { categoryName: '이전 모델 대비\n오류 감소', percentage: 30 },
-];
-
-
 export default {
   name: 'VerifyModelReport',
   components: {
     StepContents,
+    RButton,
+  },
+  props: ['reportDatas', 'reportSummaries'],
+  methods: {
+    saveCurrentModel() {
+      //https://forum.vuejs.org/t/emit-data-between-separate-components/6556
+      this.$emit('content');
+    },
   },
   data() {
     return {
       labels,
-      verifiedBasicSetItems: datas,
-      verifiedTaskSetItems: datas,
-      summaries,
+      verifiedBasicSetItems: this.reportDatas,
+      verifiedTaskSetItems: this.reportDatas,
+      summaries: this.reportSummaries,
     };
   },
 };
@@ -134,17 +166,38 @@ export default {
   }
 
   @mixin set-area {
-    margin-top: 50px;
+    margin-top: 20px;
   }
 
-  .result-basic-set {
+  .result-basic-set, .result-task-set {
     @include set-area;
-  }
 
-  .result-task-set {
-    @include set-area;
-  }
+    .container-icon {
+      @include current-container-body-icon;
 
+      .ic-status-wrap {
+        @include current-container-body-icon-process;
+        @include background-spin-image;
+        height: 70px;
+
+        & > img {
+          @include size(60px);
+        }
+
+        .ic-process-datachk {
+          @include size(40px);
+          background: url("../../../assets/images/ic-process-datachk.svg") round;
+        }
+      }
+    }
+
+    .label-subtitle {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1c75b9;
+      margin-bottom: 21px;
+    }
+  }
 
   .result-table {
 
@@ -195,6 +248,17 @@ export default {
           }
         }
       }
+    }
+
+    .report-info {
+      font-size: 12px;
+      color: #444f57;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    &:last-child {
+      margin-bottom: 50px;
     }
   }
 }
