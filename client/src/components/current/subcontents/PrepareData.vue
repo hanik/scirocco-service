@@ -98,7 +98,7 @@ export default {
       console.log('restart');
     },
     cancel() {
-      // TODO 현재 프로세스를 중지 할 수 있도록 api 호출하면 될 것 같음
+      // TODO 현재 프로세스를 중지 할 수 있도록 api 호출
       // this.$store.dispatch('current/cancelPrepareDataStartAsync');
       this.status = 'preparing';
       console.log('cancel')

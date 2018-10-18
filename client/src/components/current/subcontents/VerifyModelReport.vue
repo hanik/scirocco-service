@@ -19,7 +19,13 @@
     </div>
 
     <div class="result-basic-set">
-      <div class="ic-something"></div>
+      <div class="container-icon">
+        <div class="ic-status-wrap">
+          <img src="../../../assets/images/img-processfin.svg" />
+          <div class="ic-process-datachk"></div>
+        </div>
+        <div class="label-subtitle">{{ labels.basicSet }}</div>
+      </div>
       <div class="result-table">
         <div class="table-header">
           <div>{{ labels.korean }}</div>
@@ -31,10 +37,17 @@
             <div :class="['table-item', {new: item.isNew}]">{{ item.en }}</div>
           </div>
         </div>
+        <div class="report-info">{{ labels.reportInfo }}</div>
       </div>
     </div>
     <div class="result-task-set">
-      <div class="ic-something"></div>
+      <div class="container-icon">
+        <div class="ic-status-wrap">
+          <img src="../../../assets/images/img-processfin.svg" />
+          <div class="ic-process-datachk"></div>
+        </div>
+        <div class="label-subtitle">{{ labels.taskSet }}</div>
+      </div>
       <div class="result-table">
         <div class="table-header">
           <div>{{ labels.korean }}</div>
@@ -46,6 +59,7 @@
             <div :class="['table-item', {new: item.isNew}]">{{ item.en }}</div>
           </div>
         </div>
+        <div class="report-info">{{ labels.reportInfo }}</div>
       </div>
     </div>
 
@@ -71,6 +85,9 @@ const labels = {
   description: CURRENT.STEP_VERIFY_MODEL_DESCRIPTION,
   korean: COMMONS.LABEL_KOREAN,
   english: COMMONS.LABEL_ENGLISH,
+  basicSet: CURRENT.VERITY_REPORT_BASIC,
+  taskSet: CURRENT.VERITY_REPORT_TASK,
+  reportInfo: CURRENT.VERIFY_REPORT_INFO_TEXT,
   useModelQuest: CURRENT.VERIFY_USE_MODEL_QUEST,
   waiting: CURRENT.VERIFY_WAITING,
   reportWaiting: CURRENT.VERIFY_MODEL_WAITING_MESSAGE,
@@ -149,17 +166,38 @@ export default {
   }
 
   @mixin set-area {
-    margin-top: 50px;
+    margin-top: 20px;
   }
 
-  .result-basic-set {
+  .result-basic-set, .result-task-set {
     @include set-area;
-  }
 
-  .result-task-set {
-    @include set-area;
-  }
+    .container-icon {
+      @include current-container-body-icon;
 
+      .ic-status-wrap {
+        @include current-container-body-icon-process;
+        @include background-spin-image;
+        height: 70px;
+
+        & > img {
+          @include size(60px);
+        }
+
+        .ic-process-datachk {
+          @include size(40px);
+          background: url("../../../assets/images/ic-process-datachk.svg") round;
+        }
+      }
+    }
+
+    .label-subtitle {
+      font-size: 16px;
+      font-weight: bold;
+      color: #1c75b9;
+      margin-bottom: 21px;
+    }
+  }
 
   .result-table {
 
@@ -210,6 +248,17 @@ export default {
           }
         }
       }
+    }
+
+    .report-info {
+      font-size: 12px;
+      color: #444f57;
+      text-align: right;
+      margin-top: 10px;
+    }
+
+    &:last-child {
+      margin-bottom: 50px;
     }
   }
 }
