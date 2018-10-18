@@ -17,7 +17,12 @@
       </div>
 
       <template slot="buttons">
+        <div v-if="status === 'screenPrevent'">
+          <r-button :title="'피드백 적용'" :type="'disabled'" @button-clicked="openPopup()" />
+        </div>
+        <div v-else>
           <r-button :title="'피드백 적용'" :type="'primary'" @button-clicked="openPopup()" />
+        </div>
       </template>
     </step-contents>
     <create-model-popup v-show="popupVisibility"
@@ -65,14 +70,17 @@ export default {
       labels,
       dialogVisibility: false,
       popupVisibility: false,
+      status: '', // screenPrevent
     };
   },
   mounted() {
     this.$store.dispatch('current/fetchFeedbackInfoAsync');
+    this.status = (this.currentStep === 'step-feedback') ? '' : 'screenPrevent';
   },
   computed: {
     ...mapGetters({
       feedbackInfo: 'current/getFeedbackInfo',
+      currentStep: 'current/getCurrentStep',
     }),
     displayFeedbackInfo() {
       if (Object.keys(this.feedbackInfo).length !== 0) {

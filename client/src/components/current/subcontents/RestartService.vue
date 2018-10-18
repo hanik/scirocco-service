@@ -45,10 +45,22 @@
           </div>
           <div class="label-status">{{ labels.complete}}</div>
         </div>
+
+        <div class="container-body" v-if="status === 'screenPrevent'" >
+          <div class="container-title">
+            {{ labels.msgServiceRestarting }}
+          </div>
+          <div class="container-icon">
+            <div class="ic-status-wrap-finish">
+              <div class="ic-process-finish"></div>
+            </div>
+          </div>
+          <div class="label-status">{{ labels.waiting }}</div>
+        </div>
       </div>
 
       <template slot="buttons">
-        <div v-if="status === 'waiting'" >
+        <div v-if="status === 'waiting' || status === 'screenPrevent' " >
           <r-button :title="'재시작'" :type="'primary'" @button-clicked="serviceRestart" />
         </div>
         <div v-if="status === 'restarting'">
@@ -69,6 +81,7 @@
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
+import { mapGetters } from 'vuex';
 
 const labels = {
   title: CURRENT.STEP_RESTART_SERVICE,
@@ -78,6 +91,7 @@ const labels = {
   msgComplete: CURRENT.RESTART_LABEL_COMPLETE,
   msgInfoBefore: CURRENT.RESTART_LABEL_INFO_BEFORE,
   msgInfoAfter: CURRENT.RESTART_LABEL_INFO_AFTER,
+  msgServiceRestarting: CURRENT.RESTART_SERVICE_MESSAGE,
   waiting: CURRENT.RESTART_WAITING,
   restarting: CURRENT.RESTART_RESTARTING,
   complete: CURRENT.RESTART_COMPLETE,
@@ -91,11 +105,21 @@ export default {
   },
   data() {
     return {
-      status: 'waiting', // waiting, restarting, complete
+      status: 'waiting', // waiting, restarting, complete, screenPrevent
       modelName: 'Sirocco-YC-v3',
       remainTime: '(5분)',
       labels,
     };
+  },
+  mounted() {
+    if(this.currentStep !== 'step-restartService') {
+      this.status = 'screenPrevent';
+    }
+  },
+  computed: {
+    ...mapGetters({
+      currentStep: 'current/getCurrentStep',
+    }),
   },
   methods: {
     cancel() {
