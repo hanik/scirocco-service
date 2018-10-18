@@ -59,6 +59,9 @@ const CURRENT = {
   VERIFY_UPDATING_MESSAGE: '모델을 서비스에 사용할 수 있도록\n' +
     '업데이트 중입니다.',
   VERIFY_UPDATING: '업데이트중…',
+  VERIFY_REPORT_INFO_TEXT: '*이전 결과에 대비해 새롭게 바뀐 번역은 이렇게 별도로 표시됩니다, 라는 안내 텍스트',
+  VERITY_REPORT_TASK: 'Task set 검증',
+  VERITY_REPORT_BASIC: 'Basic set 검증',
   RESTART_LABEL_NEED: '서버 업데이트를 위해 재시작이 필요합니다.',
   RESTART_LABEL_RESTARTING: '서버 업데이트를 위해 재시작 중입니다.',
   RESTART_LABEL_COMPLETE: '재시작이 완료되었습니다.\n History 메뉴에서도 확인 가능합니다.',
