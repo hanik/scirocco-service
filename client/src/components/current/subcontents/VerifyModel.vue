@@ -18,12 +18,11 @@ export default {
   },
   data() {
     return {
-      status: 'report', // report / content
+      status: 'report', // report, content, screenPrevent
     };
   },
   methods: {
     buttonClicked() {
-      console.log("???")
     },
   },
   computed: {

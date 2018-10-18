@@ -88,7 +88,7 @@ export default {
     return {
       labels,
       dialogVisibility: false,
-      status: 'waiting', // updating/waiting
+      status: 'waiting', // updating, waiting, screenPrevent
       remainTime: '(6시간)',
     };
   },

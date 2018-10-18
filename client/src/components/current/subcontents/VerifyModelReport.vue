@@ -102,7 +102,6 @@ export default {
   props: ['reportDatas', 'reportSummaries'],
   methods: {
     saveCurrentModel() {
-      //https://forum.vuejs.org/t/emit-data-between-separate-components/6556
       this.$emit('content');
     },
   },

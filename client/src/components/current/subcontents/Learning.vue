@@ -9,15 +9,15 @@
       <div class="double-border">
         <div class="container-body" v-if="!error">
           <div class="container-title">
-            {{ statusLabel }}
+            {{ statusMessage }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
-              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
+              <img :class="['spin']" src="../../../assets/images/img-processfin.svg" />
               <div :class="statusIcon"></div>
             </div>
           </div>
-          <div class="label-status">{{ status === 'dataLearning' ? labels.learning : labels.translating }}{{ remainTime }}</div>
+          <div class="label-status">{{ statusLabel }}</div>
         </div>
 
         <div class="container-body-error" v-else>
@@ -43,6 +43,7 @@
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT, COMMONS } from '@/strings';
+import { mapGetters } from 'vuex';
 
 const labels = {
   title: CURRENT.STEP_LEARNING,
@@ -51,6 +52,8 @@ const labels = {
   transEn2Ko: CURRENT.LEARNING_TRANSLATE_EN_KO,
   dataLearning: CURRENT.LEARNING_DATA_LEARNING,
   learning: CURRENT.LEARNING_LEARNING,
+  dataWaiting: CURRENT.LEARNING_WAIT_DATA,
+  waiting: CURRENT.LEARNING_WAITING,
   translating: CURRENT.LEARNING_TRANSLATING,
   memoryError: COMMONS.ERROR_MESSAGE_MEMORY,
   generalError: COMMONS.ERROR_MESSAGE_GENERAL,
@@ -65,12 +68,15 @@ export default {
   data() {
     return {
       error: false,
-      status: 'en2ko', // en2ko, ko2en, dataLearning
+      status: 'en2ko', // en2ko, ko2en, dataLearning, screenPrevent
       remainTime: '(5시간)',
       labels,
     };
   },
   computed: {
+    ...mapGetters({
+      currentStep: 'current/getCurrentStep',
+    }),
     statusIcon() {
       if (this.status === 'en2ko') {
         return 'ic-tran-en2ko';
@@ -78,20 +84,45 @@ export default {
         return 'ic-tran-ko2en';
       } else if (this.status === 'dataLearning') {
         return 'ic-learning';
+      } else if (this.status === 'screenPrevent') {
+        return 'ic-learning';
       }
       return '';
     },
-    statusLabel() {
+    statusMessage() {
       if (this.status === 'en2ko') {
         return this.labels.transEn2Ko;
       } else if (this.status === 'ko2en') {
         return this.labels.transKo2En;
       } else if (this.status === 'dataLearning') {
         return this.labels.dataLearning;
+      } else if (this.status === 'screenPrevent') {
+        return this.labels.dataWaiting;
       }
       return '';
     },
+    statusLabel() {
+      if (this.status === 'dataLearning') {
+        return this.labels.learning;
+      } else if (this.status === 'ko2en' || this.status === 'en2ko') {
+        return this.labels.translating + ' ' + this.remainTime;
+      } else if (this.status === 'screenPrevent') {
+        return this.labels.waiting;
+      }
+      return '';
+    },
+    statusCircle(){
+      if (this.status === 'dataLearning') {
+        return '../../../assets/images/img-processfin.svg';
+      } else {
+        return '../../../assets/images/img-processing-1.svg';
+      }
+    }
   },
+  mounted() {
+    if(this.currentStep !== 'step-learning') {
+      this.status = 'screenPrevent'
+    }  },
   methods: {
     restart() {
       // TODO 재시작 할 수 있도록 api 호출하면 될 것 같음

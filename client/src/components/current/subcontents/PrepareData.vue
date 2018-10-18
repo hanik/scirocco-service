@@ -31,6 +31,18 @@
           </div>
           <div class="label-status">{{ labels.dataChecking }}{{ remainTime }}</div>
         </div>
+        <div class="container-body" v-if="status === 'screenPrevent'" >
+          <div class="container-title">
+            {{ labels.waitingFeedback }}
+          </div>
+          <div class="container-icon">
+            <div class="ic-status-wrap">
+              <img src="../../../assets/images/img-processfin.svg" />
+              <div class="ic-process-datard"></div>
+            </div>
+          </div>
+          <div class="label-status">{{ labels.waiting }}</div>
+        </div>
       </div>
 
       <template slot="buttons">
@@ -40,6 +52,9 @@
         <div v-if="status === 'checking'">
           <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
           <r-button :title="'재시작'" :type="'disabled'" @button-clicked="restart" />
+        </div>
+        <div v-if="status === 'screenPrevent'" >
+          <r-button :title="'시작'" :type="'disabled'" @button-clicked="start" />
         </div>
       </template>
     </step-contents>
@@ -63,6 +78,8 @@ const labels = {
   checking: CURRENT.PREPARE_DATA_LABEL_CHECKING,
   dataPreparing: CURRENT.PREPARE_DATA_LABEL_DATA_PREPARE,
   dataChecking: CURRENT.PREPARE_DATA_LABEL_DATA_CHECKING,
+  waiting: CURRENT.PREPARE_DATA_WAITING,
+  waitingFeedback: CURRENT.PREPARE_DATA_WAITING_FEEDBACK,
 };
 
 export default {
@@ -73,17 +90,21 @@ export default {
   },
   data() {
     return {
-      status: 'preparing',  // preparing / checking
+      status: 'preparing',  // preparing, checking, screenPrevent
       remainTime: '(5분)',
       labels,
     };
   },
   mounted() {
     this.$store.dispatch('current/fetchPrepareInfoAsync');
+    if(this.currentStep !== 'step-prepareData') {
+      this.status = 'screenPrevent'
+    }
   },
   computed: {
     ...mapGetters({
       prepareInfo: 'current/getPrepareInfo',
+      currentStep: 'current/getCurrentStep',
     }),
   },
   methods: {

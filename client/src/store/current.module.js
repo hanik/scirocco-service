@@ -3,7 +3,7 @@ import api from '@/services/api.service';
 const current = {
   namespaced: true,
   state: {
-    currentStep: 'step-feedback',
+    currentStep: 'step-learning',
     /*
       현재 진행중인 스탭, default는 step-feedback
       step-feedback, step-prepareData, step-learning, step-verifyModel,step-restartService
