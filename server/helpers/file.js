@@ -79,8 +79,23 @@ const minLineCountInDirWithPattern = async (pattern, dir) => {
   return min - 1;
 };
 
+const getLastModifiedFileNameInDir = (dir) => {
+  const files = fs.readdirSync(dir);
+  let time = 0;
+  let latest = '';
+  files.forEach((file) => {
+    const date = fs.statSync(`${dir}/${file}`).mtime;
+    if (time < date.getTime()) {
+      time = date.getTime();
+      latest = file;
+    }
+  });
+  return latest;
+};
+
 module.exports = {
   maxLineCountInDir,
   sumOfLineCountInDir,
   minLineCountInDirWithPattern,
+  getLastModifiedFileNameInDir,
 };

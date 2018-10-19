@@ -36,6 +36,11 @@ router.post('/training/start', async (req, res) => {
   res.send(start);
 });
 
+router.post('/training/state', async (req, res) => {
+  const state = training.state();
+  res.send(state);
+});
+
 router.post('/state', (req, res) => {
   const state = current.state();
   res.send(state.toString());
