@@ -46,13 +46,13 @@ const start = async () => {
 
     // 4. 실행후 트레이닝 실행
     const trainingCommand = `export FILE_SEQUENCE=${sequence};
-      docker-compose -f dev.train.yml up;`;
+      docker-compose -f dev.train.enko.yml up;`;
 
     console.log('======== TRAINGING START ========');
     const training = shell.exec(trainingCommand, { async: true });
     training.stdout.on('end', () => {
       console.log('======== TRAINING END ========');
-      db.setCurrentState(40);
+      db.setCurrentState(40); // ERROR!
     });
   });
 
