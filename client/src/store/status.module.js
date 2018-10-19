@@ -4,7 +4,7 @@ const status = {
     modelName: null,
     createDate: null,
     endDate: null,
-    // TODO change value from hardcoding
+    // TODO change value from hard coding
     itAdmin: 'icebar2002@gmail.com',
     legalAdmin: 'yclaw01@gmail.com',
   },

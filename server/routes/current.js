@@ -12,7 +12,7 @@ router.post('/feedback/info', async (req, res) => {
 });
 
 router.post('/feedback/create', async (req, res) => {
-  const create = await feedback.create(req.body);
+  const create = await feedback.create(req.body.modelInfo);
   res.send(create);
 });
 

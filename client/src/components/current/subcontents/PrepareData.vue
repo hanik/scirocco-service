@@ -97,6 +97,8 @@ export default {
   },
   mounted() {
     this.$store.dispatch('current/fetchPrepareInfoAsync');
+    console.log(this.currentStep)
+
     if(this.currentStep !== 'step-prepareData') {
       this.status = 'screenPrevent'
     }

@@ -21,17 +21,17 @@ const fetchFeedbackInfo = async () => {
   return res;
 };
 
-const createModel = async () => {
+const createModel = async (info) => {
   // TODO modelInfo 를 실제 정보와 동일하게 보내도록 정리하기
-  const modelInfo = {
-    modelName: 'Sirocco-YC-v3',
-    createDate: new Date(),
-    itAdmin: 'icebar2002@gmail.com(service)',
-    legalAdmin: 'yclaw01@gmail.com',
-  };
-  const res = await axios.post('/api/current/feedback/create', modelInfo)
-    .then(response => response.data)
+  // const  modelInfo = {
+  //   modelName: 'Sirocco-YC-v3',
+  //   createDate: new Date(),
+  // };
+  info.modelInfo.createDate = new Date();
+  const res = await axios.post('/api/current/feedback/create', info)
+    .then(response => response)
     .catch(error => error);
+  console.log(res)
   return res;
 };
 
@@ -44,7 +44,7 @@ const fetchPrepareInfo = async () => {
 
 const prepareDataStart = async () => {
   const res = await axios.post('/api/current/prepare/start')
-    .then(response => response.data)
+    .then(response => response)
     .catch(error => error);
   return res;
 };

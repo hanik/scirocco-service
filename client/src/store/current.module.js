@@ -3,7 +3,7 @@ import api from '@/services/api.service';
 const current = {
   namespaced: true,
   state: {
-    currentStep: 'step-learning',
+    currentStep: 'step-feedback',
     /*
       현재 진행중인 스탭, default는 step-feedback
       step-feedback, step-prepareData, step-learning, step-verifyModel,step-restartService
@@ -41,18 +41,15 @@ const current = {
       const feedbackInfo = await api.fetchFeedbackInfo();
       commit('fetchFeedbackInfoSuccess', feedbackInfo);
     },
-    async createModelAsync({ dispatch, commit }, modelInfo) {
-      dispatch('setCurrentStep', 'step-prepareData');
-
-      // TODO 주석 해제
-      // const response = await api.createModel(modelInfo);
-      // if(response.data == 'success') {
-      //   commit('success', '');
-      //   // 모델 생성 버튼 클릭 후, 서버에서 모델 생성이 되었다는 success표시가 온 경우
-      //   dispatch('setCurrentStep', 'step-prepareData')
-      // } else {
-      //   commit('error', '')
-      // }
+    async createModelAsync({ dispatch, commit }, info) {
+      const response = await api.createModel(info);
+      if(response.status == 200) {
+        commit('success', '');
+        console.log('44')
+        dispatch('setCurrentStep', 'step-prepareData')
+      } else {
+        commit('error', '')
+      }
     },
     async fetchPrepareInfoAsync({ commit }) {
       const prepareInfo = await api.fetchPrepareInfo();
@@ -63,6 +60,7 @@ const current = {
       commit('success', '');
     },
     setCurrentStep({ commit }, step) {
+      //코드 > string 변환 하나 추가 enum 같은거 - https://code.i-harness.com/ko-kr/q/4649f
       commit('setCurrentStepMutation', step);
     },
     error({ commit }, message) {

@@ -47,7 +47,10 @@ export default {
   computed: {
     ...mapGetters({
       currentStep: 'current/getCurrentStep',
-    })
+    }),
+    test() {
+      console.log(this.currentStep)
+    }
   },
   methods: {
     select(event) {
