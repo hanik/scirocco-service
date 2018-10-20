@@ -4,11 +4,11 @@
     <div class="left-area">
       <div class="logo">{{ labels.brand }}</div>
 
-      <div :class="[{active: clickedMenu === labels.current.toLowerCase()}, 'menu']" @click="menuClicked($event)">{{ labels.current }}</div>
-      <div :class="[{active: clickedMenu === labels.history.toLowerCase()}, 'menu']" @click="menuClicked($event)">{{ labels.history }}</div>
+      <div :class="[{active: clickedMenu === labels.current.toLowerCase()}, {displayNone: !this.isLogin}, 'menu']" @click="menuClicked($event)">{{ labels.current }}</div>
+      <div :class="[{active: clickedMenu === labels.history.toLowerCase()}, {displayNone: !this.isLogin}, 'menu']" @click="menuClicked($event)">{{ labels.history }}</div>
     </div>
 
-    <div class="right-area">
+    <div :class="['right-area', {displayNone: !this.isLogin}]">
       <div :class="['ic-noti', {new: hasNewNoti}]"></div>
       <div class="user-account">icebar2002@gmail.com</div>
       <div :class="['ic-dropdown', {up: dropdownVisibility}]" @click="toggleDropdown">
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { COMMONS } from '@/strings';
 
 const labels = {
@@ -40,7 +41,13 @@ export default {
       clickedMenu: '',
       dropdownVisibility: false,
       hasNewNoti: true,
+      // isLogin: false,
     };
+  },
+  computed: {
+    ...mapGetters({
+      isLogin: 'authentication/isLogin',
+    })
   },
   methods: {
     menuClicked(event) {
@@ -83,6 +90,10 @@ export default {
 
   .right-area {
     justify-content: flex-end;
+
+    &.displayNone {
+      display: none;
+    }
   }
 
   .logo {
@@ -102,6 +113,10 @@ export default {
 
     &.active {
       background-color: #123047;
+    }
+    
+    &.displayNone {
+      display: none;
     }
   }
 
