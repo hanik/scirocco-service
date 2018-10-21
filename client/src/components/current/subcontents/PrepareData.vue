@@ -110,6 +110,7 @@ export default {
       currentStepCode: 'current/getCurrentStepCode',
     }),
   },
+  // TODO polling 하는 부분 필요!s
   methods: {
     start() {
       // TODO 주석(원복)
@@ -118,13 +119,13 @@ export default {
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     restart() {
-      this.$store.dispatch('current/prepareDataStartAsync');
       console.log('restart');
+      this.$store.dispatch('current/prepareDataStartAsync');
     },
     cancel() {
+      console.log('cancel')
       this.$store.dispatch('current/prepareDataCancelAsync');
       this.status = 'preparing';
-      console.log('cancel')
     },
     // 삭제 예정
     moveNext() {

@@ -66,9 +66,6 @@ export default {
       this.$store.dispatch('status/setModelCreateInfo', modelInfo);
       this.$store.dispatch('current/createModelAsync', { user, modelInfo });
       this.$emit('close');
-      //TODO delete (추후 삭제 필요)
-      // this.$router.push('prepareData');
-
     },
   },
   data() {

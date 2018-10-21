@@ -120,6 +120,7 @@ export default {
     }
   },
   mounted() {
+    this.$store.dispatch('current/fetchLearningInfoAsync');
     if(this.currentStep !== 'step-learning') {
       this.status = 'screenPrevent'
     }  },
