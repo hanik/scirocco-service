@@ -66,6 +66,7 @@ const start = () => {
   } catch (e) {
     console.log(e);
   }
+  // TODO 끝났을 때 코드가 필요합니다.(21)
   return 'OK';
 };
 
@@ -87,9 +88,15 @@ const info = async () => {
   };
 };
 
+const cancel = async () => {
+  // TODO 취소하는 로직이 필요할 것 같습니다
+  return 'OK';
+};
+
 module.exports = {
   start,
   state,
   info,
+  cancel,
 };
 

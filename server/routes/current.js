@@ -41,4 +41,9 @@ router.post('/state', (req, res) => {
   res.send(state.toString());
 });
 
+router.post('/prepare/cancel', async (req, res) => {
+  const cancel = await prepare.cancel();
+  res.send(cancel);
+});
+
 module.exports = router;

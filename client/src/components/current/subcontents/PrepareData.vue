@@ -107,22 +107,22 @@ export default {
     ...mapGetters({
       prepareInfo: 'current/getPrepareInfo',
       currentStep: 'current/getCurrentStep',
+      currentStepCode: 'current/getCurrentStepCode',
     }),
   },
   methods: {
     start() {
       // TODO 주석(원복)
+      // TODO 여기서 status를 바꾸면 안될거가틈...
       this.status = 'checking';
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     restart() {
-      // TODO 재시작 할 수 있도록 api 호출하면 될 것 같음
-      // this.$store.dispatch('current/prepareDataStartAsync');
+      this.$store.dispatch('current/prepareDataStartAsync');
       console.log('restart');
     },
     cancel() {
-      // TODO 현재 프로세스를 중지 할 수 있도록 api 호출
-      // this.$store.dispatch('current/cancelPrepareDataStartAsync');
+      this.$store.dispatch('current/prepareDataCancelAsync');
       this.status = 'preparing';
       console.log('cancel')
     },

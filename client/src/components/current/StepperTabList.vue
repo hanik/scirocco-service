@@ -1,7 +1,7 @@
 <template>
   <div id="stepper-tab-list">
-    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: currentStep === key}]">
-      <div :class="[{selected: selected === key}, {current: currentStep === key}]" :id="key" @click="select($event)">
+    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: getCurrentStep === key}]">
+      <div :class="[{selected: selected === key}, {current: getCurrentStep === key}]" :id="key" @click="select($event)">
         <div class="label">
           <span class="ic-unchecked"></span>
           <span> {{ value }} </span>
@@ -48,8 +48,12 @@ export default {
     ...mapGetters({
       currentStep: 'current/getCurrentStep',
     }),
-    test() {
-      console.log(this.currentStep)
+    getCurrentStep() {
+      // this.selected = this.currentStep;
+      // this.$router.push({
+      //   name: this.selected,
+      // })      
+      return this.currentStep;
     }
   },
   methods: {

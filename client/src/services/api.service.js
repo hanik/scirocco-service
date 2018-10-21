@@ -22,16 +22,10 @@ const fetchFeedbackInfo = async () => {
 };
 
 const createModel = async (info) => {
-  // TODO modelInfo 를 실제 정보와 동일하게 보내도록 정리하기
-  // const  modelInfo = {
-  //   modelName: 'Sirocco-YC-v3',
-  //   createDate: new Date(),
-  // };
   info.modelInfo.createDate = new Date();
   const res = await axios.post('/api/current/feedback/create', info)
     .then(response => response)
     .catch(error => error);
-  console.log(res)
   return res;
 };
 
@@ -49,9 +43,17 @@ const prepareDataStart = async () => {
   return res;
 };
 
+const prepareDataCancel = async () => {
+  const res = await axios.post('/api/current/prepare/cancel')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
 export default {
   fetchFeedbackInfo,
   createModel,
   prepareDataStart,
   fetchPrepareInfo,
+  prepareDataCancel,
 };
