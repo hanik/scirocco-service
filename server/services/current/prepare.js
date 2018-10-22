@@ -66,7 +66,6 @@ const start = () => {
   } catch (e) {
     console.log(e);
   }
-  // TODO 끝났을 때 코드가 필요합니다.(21)
   return 'OK';
 };
 

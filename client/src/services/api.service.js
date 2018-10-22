@@ -14,6 +14,13 @@ const login = async () => {
   return res;
 };
 
+const fetchCurrentStatus = async () => {
+  const res = await axios.post('/api/current/state')
+    .then(response => response.data)
+    .catch(error => error);
+  return res;
+}
+
 const fetchFeedbackInfo = async () => {
   const res = await axios.post('/api/current/feedback/info')
     .then(response => response.data)
@@ -51,6 +58,7 @@ const prepareDataCancel = async () => {
 };
 
 export default {
+  fetchCurrentStatus,
   fetchFeedbackInfo,
   createModel,
   prepareDataStart,

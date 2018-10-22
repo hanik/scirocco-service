@@ -3,12 +3,7 @@ import api from '@/services/api.service';
 const current = {
   namespaced: true,
   state: {
-    currentStep: 'step-feedback',
-    currentStepCode: '10',
-    /*
-      현재 진행중인 스탭, default는 step-feedback
-      step-feedback, step-prepareData, step-learning, step-verifyModel,step-restartService
-     */
+    currentStatusCode: -1,
     type: null, // TODO 이것은 무슨 용도?
     message: null,
     feedbackTotal: -1,
@@ -38,6 +33,11 @@ const current = {
     ],
   },
   actions: {
+    // 서버에서 현재 돌아가고 있는 상태가 있는지에 대한 코드를 받아옴
+    async fetchCurrentStatusAsync({ dispatch }) {
+      const currentStatus = await api.fetchCurrentStatus();
+      dispatch('setCurrentStatusCode', currentStatus);
+    },
     async fetchFeedbackInfoAsync({ commit }) {
       const feedbackInfo = await api.fetchFeedbackInfo();
       commit('fetchFeedbackInfoSuccess', feedbackInfo);
@@ -46,26 +46,23 @@ const current = {
       const response = await api.createModel(info);
       if (response.status === 200) {
         commit('success', '');
-        console.log('44');
-        dispatch('setCurrentStep', 'step-prepareData');
+        dispatch('setCurrentStatusCode', 20);
       } else {
         commit('error', '');
       }
     },
     async fetchPrepareInfoAsync({ dispatch, commit }) {
       const prepareInfo = await api.fetchPrepareInfo();
-      dispatch('setCurrentStepCode', '20');
       commit('fetchPrepareInfoSuccess', prepareInfo);
     },
     async prepareDataStartAsync({ dispatch, commit }) {
+      dispatch('setCurrentStatusCode', 21);
       const response = await api.prepareDataStart();
       if (response.status === 200) {
         commit('success', '');
-        console.log('20');
-        dispatch('setCurrentStepCode', '21');
-        //TODO change to code
-        dispatch('setCurrentStep', 'step-prepareData');
       } else {
+        // 에러나기 전 status code를 넣어주기
+        dispatch('setCurrentStatusCode', 20);
         commit('error', '');
       }
     },
@@ -73,20 +70,13 @@ const current = {
       const response = await api.prepareDataCancel();
       if (response.status === 200) {
         commit('success', '');
-        console.log('20');
-        dispatch('setCurrentStepCode', '20');
-        dispatch('setCurrentStep', 'step-prepareData');
+        dispatch('setCurrentStatusCode', 20);
       } else {
         commit('error', '');
       }
     },
-    setCurrentStep({ commit }, step) {
-      //코드 > string 변환 하나 추가 enum 같은거 - https://code.i-harness.com/ko-kr/q/4649f
-      commit('setCurrentStepMutation', step);
-    },
-    
-    setCurrentStepCode({ commit }, stepCode) {
-      commit('setCurrentStepCodeMutation', stepCode);
+    setCurrentStatusCode({ commit }, stepCode) {
+      commit('setCurrentStatusCodeMutation', stepCode);
     },
     error({ commit }, message) {
       commit('error', message);
@@ -104,14 +94,9 @@ const current = {
       state.type = 'fetch-prepare-info-success';
       state.prepareInfo = prepareInfo;
     },
-    setCurrentStepMutation(state, step) {
-      state.currentStep = step;
+    setCurrentStatusCodeMutation(state, stepCode) {
+      state.currentStatusCode = stepCode;
     },
-
-    setCurrentStepCodeMutation(state, stepCode) {
-      state.currentStepCode = stepCode;
-    },
-
     success(state, message) {
       state.type = 'current-success';
       state.message = message;
@@ -126,11 +111,9 @@ const current = {
     },
   },
   getters: {
-    getCurrentStep: state => state.currentStep,
+    getCurrentStatusCode: state => state.currentStatusCode,
     getFeedbackInfo: state => state.feedbackInfo,
     getPrepareInfo: state => state.prepareInfo,
-    // 삭제 예정
-    getCurrentStepCode: state => state.currentStepCode,
     getVerityModelReportDatas: state => state.reportDatas,
     getVerityModelReportSummaries: state => state.reportSummaries,
   },

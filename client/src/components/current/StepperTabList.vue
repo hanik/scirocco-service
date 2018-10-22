@@ -14,6 +14,7 @@
 <script>
 import { CURRENT } from '@/strings';
 import { mapGetters } from 'vuex';
+import StatusCode from '@/StatusCode.js';
 
 const steps = {
   'step-feedback': CURRENT.STEP_FEEDBACK,
@@ -24,36 +25,22 @@ const steps = {
 };
 
 export default {
-
   name: 'StepperTabList',
   data() {
     return {
       steps,
       selected: '', // 사용자가 확인을 위해 클릭한 탭
-      // current: '', // 현재 서버에서 돌아가고 있는 단계
     };
   },
   mounted() {
-    // 현재 서버에서 돌아가고 있는 단계가 없을 경우
-    // if (this.current === '') {
-    //   this.current = 'step-feedback';
-    //   this.selected = 'step-feedback';
-    // } else {
-    //   this.selected = this.current;
-    // }
-    // this.selected = this.current;
-
+    this.$store.dispatch('current/fetchCurrentStatusAsync');
   },
   computed: {
     ...mapGetters({
-      currentStep: 'current/getCurrentStep',
+      currentStatusCode: 'current/getCurrentStatusCode',
     }),
     getCurrentStep() {
-      // this.selected = this.currentStep;
-      // this.$router.push({
-      //   name: this.selected,
-      // })      
-      return this.currentStep;
+      return this.currentStatusCode > 0 ? StatusCode.getCodeStep(this.currentStatusCode) : 'step-feedback';
     }
   },
   methods: {

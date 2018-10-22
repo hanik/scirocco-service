@@ -1,69 +1,113 @@
-const StatusCode = {
-  FinishGatherFeedback: {
+const StatusCode = [
+  {
+    code: 10,
+    name: 'GatherFeedback',
+    step: 'step-feedback',
+    value: 'feedback',
+  },
+  {
+    code: 11,
+    name: 'FinishGatherFeedback',
+    step: 'step-feedback',
+    value: 'feedback',
+  },
+  {
     code: 20,
-    step: 'step-prepateData',
+    name: 'PrepareData',
+    step: 'step-prepareData',
     value: 'prepareData',
   },
-  FinishPrepareData: {
+  {
     code: 21,
+    name: 'StartPrepareData',
     step: 'step-prepareData',
     value: 'prepareData',
   },
-  StartVerifyData: {
+  {
     code: 22,
+    name: 'FinishPrepareData',
     step: 'step-prepareData',
     value: 'prepareData',
   },
-  FinishVerifyData: {
+  {
     code: 30,
+    name: 'Learning',
     step: 'step-learning',
     value: 'learning',
   },
-  StartPreprocessing: {
+  {
     code: 31,
+    name: 'StartPreprocessing',
     step: 'step-learning',
     value: 'learning',
   },
-  FinishPreprocessing: {
+  {
     code: 32,
+    name: 'FinishPreprocessing',
     step: 'step-learning',
     value: 'learning',
   },
-  StartTraining: {
+  {
     code: 33,
+    name: 'StartTraining',
     step: 'step-learning',
     value: 'learning',
   },
-  FinishTraning: {
+  {
+    code: 34,
+    name: 'FinishTraining',
+    step: 'step-learning',
+    value: 'learning',
+  },
+  {
     code: 40,
+    name: 'VerifyModelReport',
     step: 'step-verifyModel',
     value: 'verifyModel',
   },
-  SaveVerifyModel: {
+  {
     code: 41,
-    step: '',
-    value: '',
+    name: 'SavedVerifyModelReport',
+    step: 'step-verifyModel',
+    value: 'verifyModel',
   },
-  StartUpdateVerifiedModel: {
+  {
     code: 42,
-    step: '',
-    value: '',
+    name: 'StartUpdateVerifyModel',
+    step: 'step-verifyModel',
+    value: 'verifyModel',
   },
-  FinishUpdateVerifiedModel: {
+  {
+    code: 43,
+    name: 'FinishUpdateVerifyModel',
+    step: 'step-verifyModel',
+    value: 'verifyModel',
+  },
+  {
     code: 50,
-    step: '',
-    value: '',
+    name: 'RestartService',
+    step: 'step-restartService',
+    value: 'restartService',
   },
-  StartRestartService: {
+  {
     code: 51,
-    step: '',
-    value: '',
+    name: 'StartRestartService',
+    step: 'step-restartService',
+    value: 'restartService',
   },
-  FinishRestartService: {
+  {
     code: 52,
-    step: '',
-    value: '',
+    name: 'FinishRestartService',
+    step: 'step-restartService',
+    value: 'restartService',
   },
+];
+
+const getCodeStep = (code) => {
+  return StatusCode.find(item => item.code === code).step;
 };
 
-export default StatusCode;
+export default {
+  StatusCode,
+  getCodeStep,
+};
