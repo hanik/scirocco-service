@@ -1,7 +1,7 @@
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
 
-const adapter = new FileSync(`${process.env.PWD}/helpers/database/db.json`);
+const adapter = new FileSync(`${process.env.DB_PATH}db.json`);
 // const adapter = new FileSync(`/Users/actmember/workspace/scirocco-service/server/helpers/database/db.json`);
 const db = low(adapter);
 
