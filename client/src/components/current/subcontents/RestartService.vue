@@ -118,7 +118,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      currentStep: 'current/getCurrentStep',
+      currentStep: 'current/getCurrentStatusCode',
     }),
   },
   methods: {

@@ -1,7 +1,7 @@
 <template>
   <div id="stepper-tab-list">
-    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: currentStep === key}]">
-      <div :class="[{selected: selected === key}, {current: currentStep === key}]" :id="key" @click="select($event)">
+    <div v-for="(value, key) in steps" class="step" :key="key" :class="[{selected: selected === key}, {current: getCurrentStep === key}]">
+      <div :class="[{selected: selected === key}, {current: getCurrentStep === key}]" :id="key" @click="select($event)">
         <div class="label">
           <span class="ic-unchecked"></span>
           <span> {{ value }} </span>
@@ -14,40 +14,34 @@
 <script>
 import { CURRENT } from '@/strings';
 import { mapGetters } from 'vuex';
+import StatusCode from '@/StatusCode.js';
 
 const steps = {
   'step-feedback': CURRENT.STEP_FEEDBACK,
   'step-prepareData': CURRENT.STEP_PREPARE_DATA,
-  'step-learning': CURRENT.STEP_LEARNING,
+  'step-training': CURRENT.STEP_TRAINING,
   'step-verifyModel': CURRENT.STEP_VERIFY_MODEL,
   'step-restartService': CURRENT.STEP_RESTART_SERVICE,
 };
 
 export default {
-
   name: 'StepperTabList',
   data() {
     return {
       steps,
       selected: '', // 사용자가 확인을 위해 클릭한 탭
-      // current: '', // 현재 서버에서 돌아가고 있는 단계
     };
   },
   mounted() {
-    // 현재 서버에서 돌아가고 있는 단계가 없을 경우
-    // if (this.current === '') {
-    //   this.current = 'step-feedback';
-    //   this.selected = 'step-feedback';
-    // } else {
-    //   this.selected = this.current;
-    // }
-    // this.selected = this.current;
-
+    this.$store.dispatch('current/fetchCurrentStatusAsync');
   },
   computed: {
     ...mapGetters({
-      currentStep: 'current/getCurrentStep',
-    })
+      currentStatusCode: 'current/getCurrentStatusCode',
+    }),
+    getCurrentStep() {
+      return this.currentStatusCode > 0 ? StatusCode.getCodeStep(this.currentStatusCode) : 'step-feedback';
+    }
   },
   methods: {
     select(event) {

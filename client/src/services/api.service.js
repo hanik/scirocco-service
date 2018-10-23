@@ -14,6 +14,13 @@ const login = async () => {
   return res;
 };
 
+const fetchCurrentStatus = async () => {
+  const res = await axios.post('/api/current/state')
+    .then(response => response.data)
+    .catch(error => error);
+  return res;
+}
+
 const fetchFeedbackInfo = async () => {
   const res = await axios.post('/api/current/feedback/info')
     .then(response => response.data)
@@ -21,16 +28,10 @@ const fetchFeedbackInfo = async () => {
   return res;
 };
 
-const createModel = async () => {
-  // TODO modelInfo 를 실제 정보와 동일하게 보내도록 정리하기
-  const modelInfo = {
-    modelName: 'Sirocco-YC-v3',
-    createDate: new Date(),
-    itAdmin: 'icebar2002@gmail.com(service)',
-    legalAdmin: 'yclaw01@gmail.com',
-  };
-  const res = await axios.post('/api/current/feedback/create', modelInfo)
-    .then(response => response.data)
+const createModel = async (info) => {
+  info.modelInfo.createDate = new Date();
+  const res = await axios.post('/api/current/feedback/create', info)
+    .then(response => response)
     .catch(error => error);
   return res;
 };
@@ -44,14 +45,55 @@ const fetchPrepareInfo = async () => {
 
 const prepareDataStart = async () => {
   const res = await axios.post('/api/current/prepare/start')
-    .then(response => response.data)
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const fetchPrepareDataStatus = async () => {
+  const res = await axios.post('/api/current/prepare/state')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+}
+
+const prepareDataCancel = async () => {
+  const res = await axios.post('/api/current/prepare/cancel')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const trainingStart = async () => {
+  const res = await axios.post('/api/current/training/start')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const trainingCancel = async () => {
+  const res = await axios.post('/api/current/training/cancel')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const fetchTrainingStatus = async () => {
+  const res = await axios.post('/api/current/training/state')
+    .then(response => response)
     .catch(error => error);
   return res;
 };
 
 export default {
+  fetchCurrentStatus,
   fetchFeedbackInfo,
   createModel,
   prepareDataStart,
   fetchPrepareInfo,
+  prepareDataCancel,
+  fetchPrepareDataStatus,
+  trainingStart,
+  trainingCancel,
+  fetchTrainingStatus,
 };

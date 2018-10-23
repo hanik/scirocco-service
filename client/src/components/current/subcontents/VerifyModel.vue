@@ -18,7 +18,7 @@ export default {
   },
   data() {
     return {
-      status: 'report', // report, content, screenPrevent
+      status: 'content', // report, content, screenPrevent
     };
   },
   methods: {

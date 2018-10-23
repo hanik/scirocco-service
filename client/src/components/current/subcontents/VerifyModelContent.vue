@@ -8,9 +8,9 @@
       </template>
 
       <div class="single-border">
-        <div class="container-body"  v-if="status === 'waiting'">
+        <div class="container-body">
           <div class="container-title">
-            {{ labels.useModelQuest }}
+            {{ statusMessage }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
@@ -18,19 +18,7 @@
               <div :class="'ic-inner-item'"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.waiting }}</div>
-        </div>
-        <div class="container-body" v-if="status === 'updating'">
-          <div class="container-title">
-            {{ labels.updateMessage }}
-          </div>
-          <div class="container-icon">
-            <div class="ic-status-wrap">
-              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
-              <div :class="'ic-inner-item'"></div>
-            </div>
-          </div>
-          <div class="label-status">{{ labels.updating }}{{ remainTime }}</div>
+          <div class="label-status">{{ statusLabel }}</div>
         </div>
       </div>
 
@@ -91,6 +79,36 @@ export default {
       status: 'waiting', // updating, waiting, screenPrevent
       remainTime: '(6시간)',
     };
+  },
+  computed: {
+    statusMessage() {
+      if (this.status === 'waiting'){
+        return this.labels.useModelQuest;
+      } else if (this.status === 'updating') {
+        return this.labels.updateMessage;
+      } else if (this.status === 'screenPrevent') {
+        return 'Screen Prevent';
+      }
+    },
+    statusLabel() {
+      if (this.status === 'waiting'){
+        return this.labels.waiting;
+      } else if (this.status === 'updating') {
+        return this.labels.updating + ' ' + this.remainTime;
+      } else if (this.status === 'screenPrevent') {
+        return 'Screen Prevent';
+      }
+    },
+    statusCircle() {
+      if (this.status === 'waiting'){
+        return '../../../assets/images/img-processfin.svg';
+      } else if (this.status === 'updating') {
+        return '../../../assets/images/img-processing-1.svg';
+      } else if (this.status === 'screenPrevent') {
+        return '../../../assets/images/img-processfin.svg';
+      }
+      
+    }
   },
   methods: {
     cancelUpdateCurrentModel() {

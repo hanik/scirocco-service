@@ -13,7 +13,7 @@ router.post('/feedback/info', async (req, res) => {
 });
 
 router.post('/feedback/create', async (req, res) => {
-  const create = await feedback.create(req.body);
+  const create = await feedback.create(req.body.modelInfo);
   res.send(create);
 });
 
@@ -55,6 +55,16 @@ router.post('/state', (req, res) => {
 router.post('/translation/restart', (req, res) => {
   const restart = translation.restart();
   res.send(restart);
+});
+
+router.post('/training/cancel', async (req, res) => {
+  const cancel = await training.cancel();
+  res.send(cancel);
+});
+
+router.post('/prepare/cancel', async (req, res) => {
+  const cancel = await prepare.cancel();
+  res.send(cancel);
 });
 
 module.exports = router;

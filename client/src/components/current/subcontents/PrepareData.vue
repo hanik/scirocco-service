@@ -7,31 +7,31 @@
       </template>
 
       <div class="double-border">
-        <div class="container-body" v-if="status === 'preparing'" >
+        <div class="container-body" v-if="getStepStatus === 'preparing'" >
           <div class="container-title">
             {{ labels.feedback }}<span class="highlight">&nbsp;{{ prepareInfo.totalCount }}</span>{{ labels.preparing }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
               <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
-              <div :class="[status === 'preparing' ? 'ic-process-datard' : '']"></div>
+              <div :class="[getStepStatus === 'preparing' ? 'ic-process-datard' : '']"></div>
             </div>
           </div>
           <div class="label-status">{{ labels.dataPreparing }}{{ remainTime }}</div>
         </div>
-        <div class="container-body" v-if="status === 'checking'">
+        <div class="container-body" v-if="getStepStatus === 'checking'">
           <div class="container-title">
             {{ labels.checking }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
               <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
-              <div :class="[status === 'checking' ? 'ic-process-datachk' : '']"></div>
+              <div :class="[getStepStatus === 'checking' ? 'ic-process-datachk' : '']"></div>
             </div>
           </div>
           <div class="label-status">{{ labels.dataChecking }}{{ remainTime }}</div>
         </div>
-        <div class="container-body" v-if="status === 'screenPrevent'" >
+        <div class="container-body" v-if="getStepStatus === 'screenPrevent'" >
           <div class="container-title">
             {{ labels.waitingFeedback }}
           </div>
@@ -46,29 +46,31 @@
       </div>
 
       <template slot="buttons">
-        <div v-if="status === 'preparing'" >
+        <div v-if="getStepStatus === 'preparing'" >
           <r-button :title="'시작'" :type="'primary'" @button-clicked="start" />
         </div>
-        <div v-if="status === 'checking'">
+        <div v-if="getStepStatus === 'checking'">
           <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
           <r-button :title="'재시작'" :type="'disabled'" @button-clicked="restart" />
         </div>
-        <div v-if="status === 'screenPrevent'" >
+        <div v-if="getStepStatus === 'screenPrevent'" >
           <r-button :title="'시작'" :type="'disabled'" @button-clicked="start" />
         </div>
       </template>
     </step-contents>
     <!-- 삭제 예정 -->
-    <button v-on:click="moveNext">다음 화면</button>
+    <button v-on:click="finishPrepareData">다음 화면</button>
 
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import { CURRENT } from '@/strings';
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
-import { CURRENT } from '@/strings';
+import api from '@/services/api.service';
+
 
 const labels = {
   title: CURRENT.STEP_PREPARE_DATA,
@@ -90,45 +92,63 @@ export default {
   },
   data() {
     return {
-      status: 'preparing',  // preparing, checking, screenPrevent
       remainTime: '(5분)',
+      polling: null,
       labels,
     };
   },
   mounted() {
     this.$store.dispatch('current/fetchPrepareInfoAsync');
-    if(this.currentStep !== 'step-prepareData') {
-      this.status = 'screenPrevent'
-    }
   },
   computed: {
     ...mapGetters({
       prepareInfo: 'current/getPrepareInfo',
-      currentStep: 'current/getCurrentStep',
+      currentStatusCode: 'current/getCurrentStatusCode',
     }),
+    getStepStatus() {
+      // preparing(2-1), checking(2-2), screenPrevent(2-3)
+      if (this.currentStatusCode === 20) {
+        return 'preparing';
+      } else if (this.currentStatusCode === 21) {
+        this.pollingServer();
+        return 'checking';
+      } else if (this.currentStatusCode === 22) {
+        this.finishPrepareData();
+        return 'screenPrevent';
+      } else {
+        return 'preparing';
+      }
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   methods: {
+    pollingServer() {
+      this.polling = setInterval(async() => {
+        const result = await api.fetchPrepareDataStatus();
+        if(result.data === 'DONE') {
+          clearInterval(this.polling);
+          this.$store.dispatch('current/setCurrentStatusCode', 22);
+        }
+      }, 15000);
+    },
     start() {
-      // TODO 주석(원복)
-      this.status = 'checking';
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     restart() {
-      // TODO 재시작 할 수 있도록 api 호출하면 될 것 같음
-      // this.$store.dispatch('current/prepareDataStartAsync');
-      console.log('restart');
+      this.$store.dispatch('current/prepareDataStartAsync');
     },
     cancel() {
-      // TODO 현재 프로세스를 중지 할 수 있도록 api 호출
-      // this.$store.dispatch('current/cancelPrepareDataStartAsync');
-      this.status = 'preparing';
-      console.log('cancel')
+      clearInterval(this.polling);
+      this.$store.dispatch('current/prepareDataCancelAsync');
     },
-    // 삭제 예정
-    moveNext() {
-      this.$router.push('learning');
-      //current.module의 해당 api로 이동필요
-      this.$store.dispatch('current/setCurrentStep', 'step-learning');
+    finishPrepareData() {
+      this.$store.dispatch('current/setCurrentStatusCode', 30);
+      this.$router.push({
+        path: 'training',
+      });
+
     },
   },
 };

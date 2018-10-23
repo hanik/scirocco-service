@@ -74,7 +74,7 @@ const state = async () => {
   const longDefault = await fileHelper.maxLineCountInDir(DEFAULT_DIR);
   const sumLog = await fileHelper.sumOfLineCountInDir(FEEDBACK_DIR);
   if (longTraining <= longDefault + sumLog) {
-    db.setCurrentState(30);
+    db.setCurrentState(22);
     return 'DONE';
   }
   return 'NOTYET';
@@ -87,9 +87,15 @@ const info = async () => {
   };
 };
 
+const cancel = async () => {
+  // TODO 취소하는 로직이 필요할 것 같습니다
+  return 'OK';
+};
+
 module.exports = {
   start,
   state,
   info,
+  cancel,
 };
 

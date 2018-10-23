@@ -3,11 +3,7 @@ import api from '@/services/api.service';
 const current = {
   namespaced: true,
   state: {
-    currentStep: 'step-learning',
-    /*
-      현재 진행중인 스탭, default는 step-feedback
-      step-feedback, step-prepareData, step-learning, step-verifyModel,step-restartService
-     */
+    currentStatusCode: -1,
     type: null, // TODO 이것은 무슨 용도?
     message: null,
     feedbackTotal: -1,
@@ -37,33 +33,68 @@ const current = {
     ],
   },
   actions: {
+    // 서버에서 현재 돌아가고 있는 상태가 있는지에 대한 코드를 받아옴
+    async fetchCurrentStatusAsync({ dispatch }) {
+      const currentStatus = await api.fetchCurrentStatus();
+      dispatch('setCurrentStatusCode', currentStatus);
+    },
     async fetchFeedbackInfoAsync({ commit }) {
       const feedbackInfo = await api.fetchFeedbackInfo();
       commit('fetchFeedbackInfoSuccess', feedbackInfo);
     },
-    async createModelAsync({ dispatch, commit }, modelInfo) {
-      dispatch('setCurrentStep', 'step-prepareData');
-
-      // TODO 주석 해제
-      // const response = await api.createModel(modelInfo);
-      // if(response.data == 'success') {
-      //   commit('success', '');
-      //   // 모델 생성 버튼 클릭 후, 서버에서 모델 생성이 되었다는 success표시가 온 경우
-      //   dispatch('setCurrentStep', 'step-prepareData')
-      // } else {
-      //   commit('error', '')
-      // }
+    async createModelAsync({ dispatch, commit }, info) {
+      const response = await api.createModel(info);
+      if (response.status === 200) {
+        commit('success', '');
+        dispatch('setCurrentStatusCode', 20);
+      } else {
+        commit('error', '');
+      }
     },
-    async fetchPrepareInfoAsync({ commit }) {
+    async fetchPrepareInfoAsync({ dispatch, commit }) {
       const prepareInfo = await api.fetchPrepareInfo();
       commit('fetchPrepareInfoSuccess', prepareInfo);
     },
-    async prepareDataStartAsync({ commit }) {
-      await api.prepareDataStart();
-      commit('success', '');
+    async prepareDataStartAsync({ dispatch, commit }) {
+      dispatch('setCurrentStatusCode', 21);
+      const response = await api.prepareDataStart();
+      if (response.status === 200) {
+        commit('success', '');
+      } else {
+        dispatch('setCurrentStatusCode', 20);
+        commit('error', '');
+      }
     },
-    setCurrentStep({ commit }, step) {
-      commit('setCurrentStepMutation', step);
+    async prepareDataCancelAsync({ dispatch, commit }) {
+      const response = await api.prepareDataCancel();
+      if (response.status === 200) {
+        commit('success', '');
+        dispatch('setCurrentStatusCode', 20);
+      } else {
+        commit('error', '');
+      }
+    },
+    async trainingStartAsync({ dispatch, commit }) {
+      dispatch('setCurrentStatusCode', 31);
+      const response = await api.trainingStart();
+      if (response.status === 200) {
+        commit('success', '');
+      } else {
+        dispatch('setCurrentStatusCode', 30);
+        commit('error', '');
+      }
+    },
+    async trainingCancelAsync({ dispatch, commit }) {
+      const response = await api.trainingCancel();
+      if (response.status === 200) {
+        commit('success', '');
+        dispatch('setCurrentStatusCode', 31);
+      } else {
+        commit('error', '');
+      }
+    },
+    setCurrentStatusCode({ commit }, stepCode) {
+      commit('setCurrentStatusCodeMutation', stepCode);
     },
     error({ commit }, message) {
       commit('error', message);
@@ -81,8 +112,8 @@ const current = {
       state.type = 'fetch-prepare-info-success';
       state.prepareInfo = prepareInfo;
     },
-    setCurrentStepMutation(state, step) {
-      state.currentStep = step;
+    setCurrentStatusCodeMutation(state, stepCode) {
+      state.currentStatusCode = stepCode;
     },
     success(state, message) {
       state.type = 'current-success';
@@ -98,10 +129,9 @@ const current = {
     },
   },
   getters: {
-    getCurrentStep: state => state.currentStep,
+    getCurrentStatusCode: state => state.currentStatusCode,
     getFeedbackInfo: state => state.feedbackInfo,
     getPrepareInfo: state => state.prepareInfo,
-    // 삭제 예정
     getVerityModelReportDatas: state => state.reportDatas,
     getVerityModelReportSummaries: state => state.reportSummaries,
   },

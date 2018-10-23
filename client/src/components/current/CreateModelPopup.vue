@@ -31,7 +31,7 @@
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
 import { mapGetters } from 'vuex';
-import moment from 'moment';
+import { DateTime } from 'luxon';
 
 const labels = {
   modelCreate: CURRENT.POPUP_MODEL_CREATE,
@@ -52,19 +52,21 @@ export default {
       this.$emit('close');
     },
     async create() {
-      const createInfo = {
+      // TODO
+      const user = {
+        userId: 'test',
+        userName: 'test',
+      };
+
+      const modelInfo = {
         modelName: this.modelName,
-        createDate: this.createDate,
-        itAdmin: this.itAdmin,
-        legalAdmin: this.legalAdmin,
       };
 
       this.$emit('create');
-      // TODO Create 이후 'Data 준비/검증' 화면으로 넘어가기
-      this.$store.dispatch('status/setModelCreateInfo', createInfo);
-      this.$store.dispatch('current/createModelAsync', createInfo);
+      this.$store.dispatch('status/setModelCreateInfo', modelInfo);
+      this.$store.dispatch('current/createModelAsync', { user, modelInfo });
       this.$emit('close');
-      //TODO delete (추후 삭제 필요)
+
       this.$router.push('prepareData');
 
     },
@@ -73,7 +75,7 @@ export default {
     return {
       labels,
       modelName: '',
-      createDate: moment(new Date()).format('YYYY-MM-DD hh:mm'),
+      createDate: DateTime.local().toFormat('yyyy-MM-dd HH:mm'),
     };
   },
   computed: {

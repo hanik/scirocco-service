@@ -7,7 +7,7 @@ import Current from './components/current/StepperTabArea.vue';
 import History from './components/history/HistoryContainer.vue';
 
 import ContentGatherFeedback from './components/current/subcontents/GatherFeedback.vue';
-import ContentLearning from './components/current/subcontents/Learning.vue';
+import ContentTraining from './components/current/subcontents/Training.vue';
 import ContentPrepareData from './components/current/subcontents/PrepareData.vue';
 import ContentVerifyModel from './components/current/subcontents/VerifyModel.vue';
 import ContentRestartService from './components/current/subcontents/RestartService.vue';
@@ -39,9 +39,9 @@ const router = new Router({
           component: ContentPrepareData,
         },
         {
-          path: 'learning',
-          name: 'step-learning',
-          component: ContentLearning,
+          path: 'training',
+          name: 'step-training',
+          component: ContentTraining,
         },
         {
           path: 'verifyModel',

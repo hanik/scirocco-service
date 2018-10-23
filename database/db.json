@@ -1,6 +1,9 @@
 {
   "history": [],
   "user": {},
-  "currentState": 40,
-  "currentModel": {}
+  "currentState": 22,
+  "currentModel": {
+    "modelName": "111111",
+    "createDate": "2018-10-23T07:28:15.911Z"
+  }
 }

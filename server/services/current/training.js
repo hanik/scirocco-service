@@ -103,8 +103,13 @@ const restart = () => {
   _training(sequence);
 };
 
+const cancel = async () => {
+  return 'OK';
+};
+
 module.exports = {
   start,
   state,
   restart,
+  cancel,
 };
