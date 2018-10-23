@@ -5,28 +5,16 @@ const fileHelper = require('../../helpers/file');
 const db = require('../../helpers/db');
 const { parsed } = require('dotenv').config();
 
-const { BASE_PATH } = parsed;
+const { BASE_PATH, ENV } = parsed;
 const TRAINING_DIR = BASE_PATH + parsed.DATA_TRAINING_DIR;
 const PREPROCESS_DIR = BASE_PATH + parsed.PREPROCESS_DIR;
 const MODEL_DIR = BASE_PATH + parsed.MODEL_DIR;
 const DOCKER_DIR = BASE_PATH + parsed.DOCKER_DIR;
 
-const _getTrainingSequence = () => {
-  const files = fs.readdirSync(TRAINING_DIR);
-  let sequence = '';
-  const reg = new RegExp(/DATA_(EN|KO)_[\d]{8}_[\d]{6}_TRAIN.txt/g);
-  files.forEach((fileName) => {
-    if (reg.test(fileName)) {
-      sequence = fileName.match(/[\d]{8}_[\d]{6}/g);
-    }
-  });
-  return sequence;
-};
-
 const _training = (sequence) => {
   shell.cd(DOCKER_DIR);
   const trainingDownCommand = `export FILE_SEQUENCE=${sequence};
-      docker-compose -f dev.train.enko.yml down;`;
+      docker-compose -f ${ENV}.train.enko.yml down;`;
 
   console.log('======== TRAINING DOWN ========');
   const trainingDown = shell.exec(trainingDownCommand, { async: true });
@@ -38,7 +26,7 @@ const _training = (sequence) => {
     console.log('======== TRAINING START ========');
     shell.cd(DOCKER_DIR);
     const trainingUpCommand = `export FILE_SEQUENCE=${sequence}; 
-      docker-compose -f dev.train.enko.yml up;`;
+      docker-compose -f ${ENV}.train.enko.yml up;`;
     const trainingUp = shell.exec(trainingUpCommand, { async: true });
     trainingUp.stdout.on('end', () => {
       console.log('======== TRAINING END ========');
@@ -53,8 +41,8 @@ const start = async () => {
   // 2. 실행후 프리프로세스 실행
   shell.cd(DOCKER_DIR);
   const command = `export FILE_SEQUENCE=${sequence};
-    docker-compose -f dev.tokenize.yml up;
-    docker-compose -f dev.preprocess.yml up;`;
+    docker-compose -f ${ENV}.tokenize.yml up;
+    docker-compose -f ${ENV}.preprocess.yml up;`;
   const child = shell.exec(command, { async: true });
 
   child.stdout.on('end', async () => {
@@ -65,7 +53,7 @@ const start = async () => {
 
     const changeVocabCommand = `export FILE_SEQUENCE=${sequence};
       export VOCAB_SIZE=${vocabSize};
-      docker-compose -f dev.preprocess.yml up;`;
+      docker-compose -f ${ENV}.preprocess.yml up;`;
     shell.exec(changeVocabCommand);
 
     // 4. 실행후 트레이닝 실행
@@ -85,7 +73,7 @@ const _getCurrentTrainingLanguage = () => {
   if (files.length >= 2) {
     // TODO 두가지다인경우는 아직 감안하지 않음
     lang = enko;
-  } if (files.length === 1) {
+  } else if (files.length === 1) {
     if (files.includes(enko)) lang = enko;
     else if (files.includes(koen)) lang = koen;
   }

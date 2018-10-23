@@ -1,4 +1,3 @@
-const fs = require('fs-extra');
 const fileHelper = require('../../helpers/file');
 const db = require('../../helpers/db');
 const { parsed } = require('dotenv').config();
