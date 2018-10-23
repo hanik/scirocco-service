@@ -21,16 +21,25 @@ const exportData = 'export VOCAB_SIZE=7743; export FILE_SEQUENCE=20181018_104653
 const variable = 'echo ${VOCAB_SIZE};';
 const preprocessShell = 'docker-compose -f dev.preprocess.yml up';
 
-const exportShell = shell.exec(exportData + preprocessShell, { async: true });
+const dbUtil = require('./testDb');
+// const exportShell = shell.exec(exportData + preprocessShell, { async: true });
+// const exportShell = shell.exec('pwd', { async: true });
 
-exportShell.stdout.on('data', (data) => {
-  console.log(data);
-});
-
-exportShell.stdout.on('end', (data) => {
-  console.log(`ENDENDLLLL ::: ${data}`);
-});
+// exportShell.stdout.on('data', (data) => {
+//   console.log(data);
+// });
 
 // let variableShell = shell.exec(variable);
-
 // console.log(variableShell)
+
+
+/* test */
+// exportShell.stdout.on('end', () => {
+//   dbUtil.setName('BBAM!');
+//   console.log('-------------bbam!--------------');
+// });
+
+dbUtil.setName('BBAM!');
+// const db = require('../helpers/db');
+//
+// db.setCurrentState(40);

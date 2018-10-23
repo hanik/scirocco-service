@@ -1,42 +1,32 @@
 const shell = require('shelljs');
+const fs = require('fs-extra');
 
 const lsResult = shell.ls('-AL', './', './');
 console.log(lsResult);
 
-// let changeDirectory = '/Users/actmember/workspace/OpenNMT'
-// shell.cd(changeDirectory)
-// let serverShell = 'th tools/rest_translation_server.lua \\\n' +
-//     '-model /Users/actmember/workspace/scirocco-base/models/20180521/en2ko/_epoch26_4.23_release.t7 \\\n' +
-//     '-gpuid 0 \\\n' +
-//     '-host 0.0.0.0 \\\n' +
-//     '-port 6060 \\\n' +
-//     '-case_feature true \\\n' +
-//     '-segment_case true \\\n' +
-//     '-segment_numbers true \\\n' +
-//     '-joiner_annotate true \\\n' +
-//     '-mode aggressive \\\n' +
-//     '-replace_unk_tagged true \\\n' +
-//     '-length_norm 1 \\\n' +
-//     '-beam_size 10 \\\n' +
-//     '-batch_size 128 \\\n'
-//
-// let result = shell.exec(serverShell).stdout;
-//
-// result.on('data', function(data) {
-//     console.log(result)
-// });
+const baseDir = '/Users/actmember/workspace/scirocco-base/';
+const feedbackDir = `${baseDir}feedback/`;
+const logFile = 'review_2018-08-12.log';
+const congifDir = `${baseDir}config-train/`;
+const modelDir = `${baseDir}models/20181018_182435/EnKo`;
+const preprocessDir = `${baseDir}preprocess/`;
+const dataDefaultDir = `${baseDir}rawdata/DEFAULT/`;
+const dataTrainingDir = `${baseDir}rawdata/TRAINING/`;
 
-const dockerDir = '/Users/actmember/workspace/scirocco-base/docker-opennmt/';
-shell.cd(dockerDir);
-
-const dockerShell = 'docker-compose -f dev.docker-compose.en2ko.yml up';
-
-const dresult = shell.exec(dockerShell).stdout;
-
-dresult.on('data', (data) => {
-  console.log(dresult);
+const files = fs.readdirSync(modelDir);
+let time = 0;
+let latest = '';
+files.forEach((file) => {
+  const date = fs.statSync(modelDir + '/' + file).mtime;
+  console.log(modelDir + '/' + file);
+  console.log(date.getTime());
+  if (time < date.getTime()) {
+    time = date.getTime();
+    latest = file;
+  }
 });
-
+console.log(time)
+console.log(latest)
 // kill -kill $(lsof -t -i :10801)
 // vocabulary size: source = 7743; target = 8802
 //

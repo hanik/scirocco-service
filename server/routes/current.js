@@ -2,6 +2,7 @@ const express = require('express');
 const feedback = require('../services/current/feedback');
 const prepare = require('../services/current/prepare');
 const training = require('../services/current/training');
+const translation = require('../services/current/translation');
 const current = require('../services/current');
 
 const router = express.Router();
@@ -36,19 +37,29 @@ router.post('/training/start', async (req, res) => {
   res.send(start);
 });
 
-router.post('/training/cancel', async (req, res) => {
-  const cancel = await training.cancel();
-  res.send(cancel);
+router.post('/training/state', async (req, res) => {
+  const state = training.state();
+  res.send(state);
 });
 
-router.post('/training/state', async (req, res) => {
-  const state = await training.state();
-  res.send(state);
+router.post('/training/restart', (req, res) => {
+  const restart = training.restart();
+  res.send(restart);
 });
 
 router.post('/state', (req, res) => {
   const state = current.state();
   res.send(state.toString());
+});
+
+router.post('/translation/restart', (req, res) => {
+  const restart = translation.restart();
+  res.send(restart);
+});
+
+router.post('/training/cancel', async (req, res) => {
+  const cancel = await training.cancel();
+  res.send(cancel);
 });
 
 router.post('/prepare/cancel', async (req, res) => {
