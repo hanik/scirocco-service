@@ -66,6 +66,9 @@ export default {
       this.$store.dispatch('status/setModelCreateInfo', modelInfo);
       this.$store.dispatch('current/createModelAsync', { user, modelInfo });
       this.$emit('close');
+
+      this.$router.push('prepareData');
+
     },
   },
   data() {

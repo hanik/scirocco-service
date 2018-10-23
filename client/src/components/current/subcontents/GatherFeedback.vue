@@ -38,7 +38,7 @@ import RButton from '@/components/common/RButton.vue';
 import GaugeBar from '@/components/common/GaugeBar.vue';
 import StepContents from '@/components/current/StepContents.vue';
 import CreateModelPopup from '@/components/current/CreateModelPopup.vue';
-import StatusCode from '@/StatusCode.js'
+import StatusCode from '@/StatusCode';
 
 const labels = {
   title: CURRENT.STEP_FEEDBACK,
@@ -91,11 +91,11 @@ export default {
       return 0;
     },
     isPrevented() {
-      if(this.currentStatusCode > 0) {
+      if (this.currentStatusCode > 0) {
         this.status = (StatusCode.getCodeStep(this.currentStatusCode) === 'step-feedback') ? '' : 'screenPrevent';
       }
-      return this.status === 'screenPrevent'
-    }
+      return this.status === 'screenPrevent';
+    },
   },
 };
 </script>

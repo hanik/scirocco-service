@@ -16,14 +16,14 @@ const COMMONS = {
 const CURRENT = {
   STEP_FEEDBACK: '피드백 수집',
   STEP_PREPARE_DATA: 'Data 준비 / 검증',
-  STEP_LEARNING: '학습과 적용',
+  STEP_TRAINING: '학습',
   STEP_VERIFY_MODEL: '모델 검증',
   STEP_RESTART_SERVICE: '서비스 재시작',
   STEP_FEEDBACK_DESCRIPTION: '플러그인을 통해 피드백을 수집하는 중입니다.\n' +
   '새로 수집 된 피드백을 적용하시려면 ‘피드백 적용’ 버튼을 클릭해 진행해주세요.',
   STEP_PREPARE_DATA_DESCRIPTION: '수집된 피드백을 정제된 data로 만드는 과정입니다.\n' +
     '작업 완료 후에는 자동으로 다음 프로세스를 진행합니다.',
-  STEP_LEARNING_DESCRIPTION: '검증된 데이터를 엔진에 학습하고 적용하는 단계입니다.\n' +
+  STEP_TRAINING_DESCRIPTION: '검증된 데이터를 엔진에 학습하고 적용하는 단계입니다.\n' +
     '작업 완료 후에는 담당자에게 알림 메일을 보냅니다.',
   STEP_VERIFY_MODEL_DESCRIPTION: '학습과 적용이 완료된 모델을 ' +
   '검증하는 단계입니다.\n ',
@@ -48,18 +48,18 @@ const CURRENT = {
   PREPARE_DATA_LABEL_DATA_CHECKING: 'Data 검증중…',
   PREPARE_DATA_WAITING: '대기중',
   PREPARE_DATA_WAITING_FEEDBACK: '피드백을 기다리고 있습니다.',
-  LEARNING_TRANSLATE_KO_EN: '한국어 원문을 영어로 번역중입니다.',
-  LEARNING_TRANSLATE_EN_KO: '영어 원문을 한국어로 번역중입니다.',
-  LEARNING_TRANSLATING: '번역중…',
-  LEARNING_DATA_LEARNING: '번역 data를 학습중입니다.',
-  LEARNING_WAIT_DATA: '학습할 번역 data를 기다리고 있습니다.',
-  LEARNING_WAITING: '대기중',
+  TRAINING_TRANSLATE_KO_EN: '한국어 원문을 영어로 번역중입니다.',
+  TRAINING_TRANSLATE_EN_KO: '영어 원문을 한국어로 번역중입니다.',
+  TRAINING_TRANSLATING: '번역중…',
+  TRAINING_DATA_TRAINING: '번역 data를 학습중입니다.',
+  TRAINING_WAIT_DATA: '학습할 번역 data를 기다리고 있습니다.',
+  TRAINING_WAITING: '대기중',
   VERIFY_MODEL_RESULT: '모델을 검증한 결과',
   VERIFY_MODEL_WAITING_MESSAGE: '검증할 모델을 기다리고 있습니다.',
   VERIFY_WAITING: '대기중',
   VERIFY_USE_MODEL_QUEST: '모델이 저장되었습니다.\n' +
     '현재 모델을 서비스에서 사용하시겠습니까?',
-  LEARNING_LEARNING: '학습중…',
+  TRAINING_TRAINING: '학습중…',
   VERIFY_UPDATING_MESSAGE: '모델을 서비스에 사용할 수 있도록\n' +
     '업데이트 중입니다.',
   VERIFY_UPDATING: '업데이트중…',

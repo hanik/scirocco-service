@@ -74,7 +74,7 @@ const state = async () => {
   const longDefault = await fileHelper.maxLineCountInDir(DEFAULT_DIR);
   const sumLog = await fileHelper.sumOfLineCountInDir(FEEDBACK_DIR);
   if (longTraining <= longDefault + sumLog) {
-    db.setCurrentState(30);
+    db.setCurrentState(22);
     return 'DONE';
   }
   return 'NOTYET';

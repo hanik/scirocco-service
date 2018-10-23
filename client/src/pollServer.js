@@ -116,56 +116,7 @@
 // poll.pollB();
 
 
-// new Vue({
-//   el: '#app',
-//   data: {
-//     items: []
-//   },
-//   methods: {
-//     loadData: function () {
-//       $.get('/api/data', function (response) {
-//         this.items = response.items;
-//       }.bind(this));
-//     }
-//   },
-//   ready: function () {
-//     this.loadData();
 
-//     setInterval(function () {
-//       this.loadData();
-//     }.bind(this), 30000); 
-//   }
-// });
-
-
-
-// 2
-// 3
-// 4
-// 5
-// 6
-// 7
-// 8
-// 9
-// 10
-// 11
-// 12
-// 13
-// 14
-// 15
-// 16
-// 17
-// 18
-// 19
-// 20
-// 21
-// 22
-// 23
-// 24
-// 25
-// 26
-// 27
-// 28
 // new Vue({
 //   el: '#pollingExample',
 //   data: {
@@ -190,51 +141,6 @@
 //      setTimeout(loadData,30000);
 //   }
 // });
-
-
-
-
-// (function poll(){
-//    setTimeout(function(){
-//       $.ajax({ url: "server", success: function(data){
-//         //Setup the next poll recursively if order status is not updated
-//         if (orderStatus not update)
-//             poll()
-//         else
-//             display order status
-//       }, dataType: "json"});
-//   }, 30000);
-// })();
-// With Deferred:
-
-// // The polling function
-// function poll(fn, timeout, interval) {
-//     var dfd = new Deferred();
-//     var endTime = Number(new Date()) + (timeout || 2000);
-//     interval = interval || 100;
-
-//     (function p() {
-//             // If the condition is met, we're done! 
-//             if(fn()) {
-//                 dfd.resolve();
-//             }
-//             // If the condition isn't met but the timeout hasn't elapsed, go again
-//             else if (Number(new Date()) < endTime) {
-//                 setTimeout(p, interval);
-//             }
-//             // Didn't match and too much time, reject!
-//             else {
-//                 dfd.reject(new Error('timed out for ' + fn + ': ' + arguments));
-//             }
-//     })();
-
-//     return dfd.promise;
-// }
-
-// // Usage:  ensure order status is updated
-// poll(function() {
-//     return response.body.order_status == "updated";
-// }, 2000, 150);
 
 
 
@@ -272,27 +178,3 @@
 
 
 
-
-
-
-
-// data () {
-// 	return {
-// 		polling: null
-// 	}
-// },
-// methods: {
-// 	pollData () {
-// 		this.polling = setInterval(() => {
-// 			this.$store.dispatch('RETRIEVE_DATA_FROM_BACKEND')
-// 		}, 3000)
-// 	}
-// },
-// beforeDestroy () {
-// 	clearInterval(this.polling)
-// },
-// created () {
-// 	this.pollData()
-// }
-
-//   //agenda은 투 머치..

@@ -60,6 +60,18 @@ const start = async () => {
   return 'OK';
 };
 
+const cancel = async () => {
+  return 'OK';
+};
+
+const state = async () => {
+  db.setCurrentState(32);
+  return 'DONE';
+};
+
+
 module.exports = {
   start,
+  cancel,
+  state,
 };

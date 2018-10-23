@@ -50,8 +50,36 @@ const prepareDataStart = async () => {
   return res;
 };
 
+const fetchPrepareDataStatus = async () => {
+  const res = await axios.post('/api/current/prepare/state')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+}
+
 const prepareDataCancel = async () => {
   const res = await axios.post('/api/current/prepare/cancel')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const trainingStart = async () => {
+  const res = await axios.post('/api/current/training/start')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const trainingCancel = async () => {
+  const res = await axios.post('/api/current/training/cancel')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const fetchTrainingStatus = async () => {
+  const res = await axios.post('/api/current/training/state')
     .then(response => response)
     .catch(error => error);
   return res;
@@ -64,4 +92,8 @@ export default {
   prepareDataStart,
   fetchPrepareInfo,
   prepareDataCancel,
+  fetchPrepareDataStatus,
+  trainingStart,
+  trainingCancel,
+  fetchTrainingStatus,
 };

@@ -59,16 +59,18 @@
       </template>
     </step-contents>
     <!-- 삭제 예정 -->
-    <button v-on:click="moveNext">다음 화면</button>
+    <button v-on:click="finishPrepareData">다음 화면</button>
 
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import { CURRENT } from '@/strings';
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
-import { CURRENT } from '@/strings';
+import api from '@/services/api.service';
+
 
 const labels = {
   title: CURRENT.STEP_PREPARE_DATA,
@@ -91,6 +93,7 @@ export default {
   data() {
     return {
       remainTime: '(5분)',
+      polling: null,
       labels,
     };
   },
@@ -110,21 +113,25 @@ export default {
         this.pollingServer();
         return 'checking';
       } else if (this.currentStatusCode === 22) {
-        this.moveNext();
-        return '';
-      } else {
+        this.finishPrepareData();
         return 'screenPrevent';
+      } else {
+        return 'preparing';
       }
     }
   },
+  beforeDestroy() {
+    clearInterval(this.polling);
+  },
   methods: {
     pollingServer() {
-      // TODO polling from server
-      console.log("????")
-      // this.$store.dispatch('current/setCurrentStep', 'step-learning');
-      setInterval(function() {
-        console.log("test")
-      }.bind(this), 3000);
+      this.polling = setInterval(async() => {
+        const result = await api.fetchPrepareDataStatus();
+        if(result.data === 'DONE') {
+          clearInterval(this.polling);
+          this.$store.dispatch('current/setCurrentStatusCode', 22);
+        }
+      }, 15000);
     },
     start() {
       this.$store.dispatch('current/prepareDataStartAsync');
@@ -133,12 +140,15 @@ export default {
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     cancel() {
+      clearInterval(this.polling);
       this.$store.dispatch('current/prepareDataCancelAsync');
     },
-    moveNext() {
-      // TODO move to next step
-      // this.$router.push('learning');
-      this.$store.dispatch('current/setCurrentStep', 'step-learning');
+    finishPrepareData() {
+      this.$store.dispatch('current/setCurrentStatusCode', 30);
+      this.$router.push({
+        path: 'training',
+      });
+
     },
   },
 };

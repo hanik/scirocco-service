@@ -61,7 +61,6 @@ const current = {
       if (response.status === 200) {
         commit('success', '');
       } else {
-        // 에러나기 전 status code를 넣어주기
         dispatch('setCurrentStatusCode', 20);
         commit('error', '');
       }
@@ -71,6 +70,25 @@ const current = {
       if (response.status === 200) {
         commit('success', '');
         dispatch('setCurrentStatusCode', 20);
+      } else {
+        commit('error', '');
+      }
+    },
+    async trainingStartAsync({ dispatch, commit }) {
+      dispatch('setCurrentStatusCode', 31);
+      const response = await api.trainingStart();
+      if (response.status === 200) {
+        commit('success', '');
+      } else {
+        dispatch('setCurrentStatusCode', 30);
+        commit('error', '');
+      }
+    },
+    async trainingCancelAsync({ dispatch, commit }) {
+      const response = await api.trainingCancel();
+      if (response.status === 200) {
+        commit('success', '');
+        dispatch('setCurrentStatusCode', 31);
       } else {
         commit('error', '');
       }
