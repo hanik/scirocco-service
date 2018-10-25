@@ -95,6 +95,21 @@ const labels = {
   complete: CURRENT.RESTART_COMPLETE,
 };
 
+const status = {
+  50: {
+    step: 'waiting',
+    label: labels.waiting,
+  },
+  51: {
+    step: 'restarting',
+    label: labels.restarting,
+  },
+  52: {
+    step: 'complete',
+    label: labels.complete,
+  },
+};
+
 export default {
   name: 'RestartService',
   components: {
@@ -114,24 +129,10 @@ export default {
       currentStatusCode: 'current/getCurrentStatusCode',
     }),
     getStepStatus() {
-      if (this.currentStatusCode === 50) {
-        return 'waiting';
-      } else if (this.currentStatusCode === 51) {
-        return 'restarting';
-      } else if (this.currentStatusCode === 52) {
-        return 'complete';
-      }
-      return 'screenPrevent';
+      return status[this.currentStatusCode] ? status[this.currentStatusCode].step : 'screenPrevent';
     },
     statusLabel() {
-      if (this.currentStatusCode === 50) {
-        return labels.waiting;
-      } else if (this.currentStatusCode === 51) {
-        return `${labels.restarting}`;
-      } else if (this.currentStatusCode === 52) {
-        return labels.complete;
-      }
-      return 'screenPrevent';
+      return status[this.currentStatusCode] ? status[this.currentStatusCode].label : 'screenPrevent';
     },
   },
   beforeDestroy() {

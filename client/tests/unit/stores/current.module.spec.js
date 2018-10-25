@@ -26,14 +26,6 @@ describe('current module', () => {
   });
 
   describe('mutations', () => {
-    it('set message state when called success', () => {
-      const { success } = current.mutations;
-      const state = { message: '' };
-
-      success(state, 'new message');
-
-      expect(state.message).toBe('new message');
-    });
     it('set feedbackInfo state when called fetchFeedbackInfoSuccess', () => {
       const { fetchFeedbackInfoSuccess } = current.mutations;
       const state = { feedbackInfo: '' };

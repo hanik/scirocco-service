@@ -15,7 +15,7 @@ describe('api services', () => {
   describe('success', () => {
     beforeEach(() => {
       mock.onPost('/api/current/feedback/info').reply(200, data);
-      mock.onPost('/api/current/feedback/create').reply(200, data);
+      mock.onPost('/api/current/feedback/create', { modelInfo: {} }).reply(200, data);
       mock.onPost('/api/current/prepare/info').reply(200, data);
       mock.onPost('/api/current/prepare/start').reply(200, data);
     });
@@ -28,7 +28,7 @@ describe('api services', () => {
     });
 
     it('returns data when createModel is called and success', async (done) => {
-      const res = await api.createModel();
+      const res = await api.createModel({ modelInfo: {} });
 
       expect(res).toEqual(data);
       done();
