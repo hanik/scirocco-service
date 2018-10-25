@@ -38,8 +38,6 @@
                     :message="labels.waitingFeedback"
                     @close="closeDialog"
                     @confirm="confirm"></confirm-dialog>
-    <!-- 삭제 예정 -->
-    <button v-on:click="moveNext">다음 화면</button>
   </div>
 </template>
 
@@ -77,48 +75,43 @@ export default {
       labels,
       dialogVisibility: false,
       status: 'waiting', // updating, waiting, screenPrevent
-      remainTime: '(6시간)',
     };
   },
   computed: {
     statusMessage() {
-      if (this.status === 'waiting'){
+      if (this.status === 'waiting') {
         return this.labels.useModelQuest;
       } else if (this.status === 'updating') {
         return this.labels.updateMessage;
-      } else if (this.status === 'screenPrevent') {
-        return 'Screen Prevent';
       }
+      return 'Screen Prevent';
     },
     statusLabel() {
-      if (this.status === 'waiting'){
+      if (this.status === 'waiting') {
         return this.labels.waiting;
       } else if (this.status === 'updating') {
-        return this.labels.updating + ' ' + this.remainTime;
-      } else if (this.status === 'screenPrevent') {
-        return 'Screen Prevent';
+        return `${this.labels.updating}`;
       }
+      return 'Screen Prevent';
     },
     statusCircle() {
-      if (this.status === 'waiting'){
+      if (this.status === 'waiting') {
         return '../../../assets/images/img-processfin.svg';
       } else if (this.status === 'updating') {
         return '../../../assets/images/img-processing-1.svg';
-      } else if (this.status === 'screenPrevent') {
-        return '../../../assets/images/img-processfin.svg';
       }
-      
-    }
+      return '../../../assets/images/img-processfin.svg';
+    },
   },
   methods: {
     cancelUpdateCurrentModel() {
       // TODO request cancel update model
     },
     restart() {
-      console.log('restart')
+      console.log('restart');
     },
     updateCurrentModel() {
-      this.status = 'updating';
+      this.$store.dispatch('current/useVerifiedModelAsync');
     },
     openDialog() {
       this.dialogVisibility = true;
@@ -128,15 +121,7 @@ export default {
     },
     confirm() {
       this.$router.push('feedback');
-      this.$store.dispatch('current/setCurrentStep', 'step-feedback');
     },
-    // 삭제 예정
-    moveNext() {
-      this.$router.push('restartService');
-      //current.module의 해당 api로 이동필요
-      this.$store.dispatch('current/setCurrentStep', 'step-restartService');
-    },
-
   },
 };
 </script>

@@ -4,8 +4,6 @@ const current = {
   namespaced: true,
   state: {
     currentStatusCode: -1,
-    type: null, // TODO 이것은 무슨 용도?
-    message: null,
     feedbackTotal: -1,
     feedbackCurrent: -1,
     feedbackInfo: {
@@ -42,90 +40,89 @@ const current = {
       const feedbackInfo = await api.fetchFeedbackInfo();
       commit('fetchFeedbackInfoSuccess', feedbackInfo);
     },
-    async createModelAsync({ dispatch, commit }, info) {
+    async createModelAsync({ dispatch }, info) {
       const response = await api.createModel(info);
       if (response.status === 200) {
-        commit('success', '');
         dispatch('setCurrentStatusCode', 20);
       } else {
-        commit('error', '');
+        console.log(response);
       }
     },
-    async fetchPrepareInfoAsync({ dispatch, commit }) {
+    async fetchPrepareInfoAsync({ commit }) {
       const prepareInfo = await api.fetchPrepareInfo();
       commit('fetchPrepareInfoSuccess', prepareInfo);
     },
-    async prepareDataStartAsync({ dispatch, commit }) {
+    async prepareDataStartAsync({ dispatch }) {
       dispatch('setCurrentStatusCode', 21);
       const response = await api.prepareDataStart();
       if (response.status === 200) {
-        commit('success', '');
       } else {
         dispatch('setCurrentStatusCode', 20);
-        commit('error', '');
+        console.log(response);
       }
     },
-    async prepareDataCancelAsync({ dispatch, commit }) {
+    async prepareDataCancelAsync({ dispatch }) {
       const response = await api.prepareDataCancel();
       if (response.status === 200) {
-        commit('success', '');
         dispatch('setCurrentStatusCode', 20);
       } else {
-        commit('error', '');
+        console.log(response);
       }
     },
-    async trainingStartAsync({ dispatch, commit }) {
+    async trainingStartAsync({ dispatch }) {
       dispatch('setCurrentStatusCode', 31);
       const response = await api.trainingStart();
       if (response.status === 200) {
-        commit('success', '');
       } else {
         dispatch('setCurrentStatusCode', 30);
-        commit('error', '');
+        console.log(response);
       }
     },
-    async trainingCancelAsync({ dispatch, commit }) {
+    async trainingCancelAsync({ dispatch }) {
       const response = await api.trainingCancel();
       if (response.status === 200) {
-        commit('success', '');
         dispatch('setCurrentStatusCode', 31);
       } else {
-        commit('error', '');
+        console.log(response);
+      }
+    },
+    async confirmVerifyAsync({ dispatch }) {
+      const response = await api.confirmVerify();
+      if (response.status === 200) {
+        dispatch('setCurrentStatusCode', 41);
+      } else {
+        console.log(response);
+      }
+    },
+    async useVerifiedModelAsync({ dispatch }) {
+      const response = await api.useVerifiedModel();
+      if (response.status === 200) {
+        dispatch('fetchCurrentStatusAsync');
+      } else {
+        console.log(response);
+      }
+    },
+    async restartServiceStartAsync({ dispatch }) {
+      const response = await api.restartServiceStart();
+      if (response.status === 200) {
+        dispatch('setCurrentStatusCode', 51);
+      } else {
+        console.log(response);
       }
     },
     setCurrentStatusCode({ commit }, stepCode) {
       commit('setCurrentStatusCodeMutation', stepCode);
     },
-    error({ commit }, message) {
-      commit('error', message);
-    },
-    clear({ commit }) {
-      commit('clear', '');
-    },
   },
   mutations: {
     fetchFeedbackInfoSuccess(state, feedbackInfo) {
-      state.type = 'fetch-feedback-info-success';
       state.feedbackInfo = feedbackInfo;
     },
     fetchPrepareInfoSuccess(state, prepareInfo) {
-      state.type = 'fetch-prepare-info-success';
       state.prepareInfo = prepareInfo;
     },
     setCurrentStatusCodeMutation(state, stepCode) {
       state.currentStatusCode = stepCode;
-    },
-    success(state, message) {
-      state.type = 'current-success';
-      state.message = message;
-    },
-    error(state, message) {
-      state.type = 'current-error';
-      state.message = message;
-    },
-    clear(state) {
-      state.type = '';
-      state.message = '';
     },
   },
   getters: {

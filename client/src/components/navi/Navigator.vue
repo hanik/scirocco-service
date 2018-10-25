@@ -47,7 +47,7 @@ export default {
   computed: {
     ...mapGetters({
       isLogin: 'authentication/isLogin',
-    })
+    }),
   },
   methods: {
     menuClicked(event) {

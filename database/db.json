@@ -1,9 +1,88 @@
 {
-  "history": [],
+  "history": [
+    {
+      "modelName": "Scirocco-YC-v0",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "Y"
+    },
+    {
+      "modelName": "Scirocco-YC-v1",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "Y"
+    },
+    {
+      "modelName": "Scirocco-YC-v2",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "N"
+    },
+    {
+      "modelName": "Scirocco-YC-v3",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "N"
+    },
+    {
+      "modelName": "Scirocco-YC-v4",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "Y"
+    },
+    {
+      "modelName": "Scirocco-YC-v5",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "Y"
+    },
+    {
+      "modelName": "Scirocco-YC-v6",
+      "createAt": "2018-10-13",
+      "startDate": "1998-10-23",
+      "endDate": "1998-11-10",
+      "improve": "10",
+      "fix": "10",
+      "base": "10",
+      "admin": "icebar2002@gmail.com",
+      "historyYn": "N"
+    }
+  ],
   "user": {},
-  "currentState": 22,
+  "currentState": 52,
   "currentModel": {
-    "modelName": "111111",
-    "createDate": "2018-10-23T07:28:15.911Z"
+    "modelName": "Take-13",
+    "createDate": "2018-10-25T01:29:00.737Z",
+    "path": "20181025_102902/EnKo/DATA_KO_20181025_102902_EnKo_data-model_epoch3_196.29.t7"
   }
 }

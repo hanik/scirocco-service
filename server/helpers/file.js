@@ -80,36 +80,42 @@ const minLineCountInDirWithPattern = async (pattern, dir) => {
 };
 
 const getLastModifiedFileNameInDir = (dir) => {
-  const files = fs.readdirSync(dir);
-  let time = 0;
   let latest = '';
-  files.forEach((file) => {
-    if (file.indexOf('.DS_') === 0 || file.indexOf('Thumbs.db') === 0) return;
-    const date = fs.statSync(`${dir}/${file}`).mtime;
-    if (time < date.getTime()) {
-      time = date.getTime();
-      latest = file;
-    }
-  });
+  if (fs.existsSync(dir)) {
+    const files = fs.readdirSync(dir);
+    let time = 0;
+    files.forEach((file) => {
+      if (file.indexOf('.DS_') === 0 || file.indexOf('Thumbs.db') === 0) return;
+      const date = fs.statSync(`${dir}/${file}`).mtime;
+      if (time < date.getTime()) {
+        time = date.getTime();
+        latest = file;
+      }
+    });
+  }
   return latest;
 };
 
 const removeAllFilesInDirSync = (path) => {
-  const files = fs.readdirSync(path);
-  files.forEach((file) => {
-    fs.unlinkSync(`${path}/${file}`);
-  });
+  if (fs.existsSync(path)) {
+    const files = fs.readdirSync(path);
+    files.forEach((file) => {
+      fs.unlinkSync(`${path}/${file}`);
+    });
+  }
 };
 
-const getTrainingSequence = (TRAINING_DIR) => {
-  const files = fs.readdirSync(TRAINING_DIR);
+const getTrainingSequence = (dir) => {
   let sequence = '';
-  const reg = new RegExp(/DATA_(EN|KO)_[\d]{8}_[\d]{6}_TRAIN.txt/g);
-  files.forEach((fileName) => {
-    if (reg.test(fileName)) {
-      sequence = fileName.match(/[\d]{8}_[\d]{6}/g);
-    }
-  });
+  if (fs.existsSync(dir)) {
+    const files = fs.readdirSync(dir);
+    const reg = new RegExp(/DATA_(EN|KO)_[\d]{8}_[\d]{6}_TRAIN.txt/g);
+    files.forEach((fileName) => {
+      if (reg.test(fileName)) {
+        sequence = fileName.match(/[\d]{8}_[\d]{6}/g);
+      }
+    });
+  }
   return sequence;
 };
 

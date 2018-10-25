@@ -7,20 +7,20 @@
       </template>
 
       <div class="single-border">
-        <div class="container-body" v-if="status === 'waiting'" >
+        <div class="container-body" v-if="getStepStatus === 'waiting'" >
           <div class="container-title">
             {{ labels.msgNeed }}
             {{ labels.msgInfoBefore }}<span class="highlight">&nbsp;{{ modelName }}</span>&nbsp;{{ labels.msgInfoAfter }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap-finish">
-              <div :class="[status === 'waiting' ? 'ic-process-finish' : '']"></div>
+              <div :class="[getStepStatus === 'waiting' ? 'ic-process-finish' : '']"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.waiting }}</div>
+          <div class="label-status">{{ statusLabel }}</div>
         </div>
 
-        <div class="container-body" v-if="status === 'restarting'">
+        <div class="container-body" v-if="getStepStatus === 'restarting'">
           <div class="container-title">
             {{ labels.msgRestarting }}
             {{ labels.msgInfoBefore }}<span class="highlight">&nbsp;{{ modelName }}</span>{{ labels.msgInfoAfter }}
@@ -28,25 +28,25 @@
           <div class="container-icon">
             <div class="ic-status-wrap-process">
               <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
-              <div :class="[status === 'restarting' ? 'ic-process-progress' : '']"></div>
+              <div :class="[getStepStatus === 'restarting' ? 'ic-process-progress' : '']"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.restarting }}{{ remainTime }}</div>
+          <div class="label-status">{{ statusLabel }}</div>
         </div>
 
-        <div class="container-body" v-if="status === 'complete'">
+        <div class="container-body" v-if="getStepStatus === 'complete'">
           <div class="container-title">
             {{ labels.msgComplete }}
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap-finish">
-              <div :class="[status === 'complete' ? 'ic-process-finish' : '']"></div>
+              <div :class="[getStepStatus === 'complete' ? 'ic-process-finish' : '']"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.complete}}</div>
+          <div class="label-status">{{ statusLabel }}</div>
         </div>
 
-        <div class="container-body" v-if="status === 'screenPrevent'" >
+        <div class="container-body" v-if="getStepStatus === 'screenPrevent'" >
           <div class="container-title">
             {{ labels.msgServiceRestarting }}
           </div>
@@ -55,25 +55,23 @@
               <div class="ic-process-finish"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.waiting }}</div>
+          <div class="label-status">{{ statusLabel }}</div>
         </div>
       </div>
 
       <template slot="buttons">
-        <div v-if="status === 'waiting' || status === 'screenPrevent' " >
+        <div v-if="getStepStatus === 'waiting' || getStepStatus === 'screenPrevent' " >
           <r-button :title="'재시작'" :type="'primary'" @button-clicked="serviceRestart" />
         </div>
-        <div v-if="status === 'restarting'">
+        <div v-if="getStepStatus === 'restarting'">
           <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
           <r-button :title="'재시작'" :type="'disabled'" @button-clicked="serviceRestart" />
         </div>
-        <div v-if="status === 'complete'" >
+        <div v-if="getStepStatus === 'complete'" >
           <r-button :title="'확인'" :type="'primary'" @button-clicked="complete" />
         </div>
       </template>
     </step-contents>
-    <!-- 삭제 예정 -->
-    <button v-on:click="completeRestartingService">완료 화면</button>
   </div>
 </template>
 
@@ -105,39 +103,59 @@ export default {
   },
   data() {
     return {
-      status: 'waiting', // waiting, restarting, complete, screenPrevent
+      // TODO 모델명 받아오기
       modelName: 'Sirocco-YC-v3',
-      remainTime: '(5분)',
       labels,
+      polling: null,
     };
-  },
-  mounted() {
-    if(this.currentStep !== 'step-restartService') {
-      this.status = 'screenPrevent';
-    }
   },
   computed: {
     ...mapGetters({
-      currentStep: 'current/getCurrentStatusCode',
+      currentStatusCode: 'current/getCurrentStatusCode',
     }),
+    getStepStatus() {
+      if (this.currentStatusCode === 50) {
+        return 'waiting';
+      } else if (this.currentStatusCode === 51) {
+        return 'restarting';
+      } else if (this.currentStatusCode === 52) {
+        return 'complete';
+      }
+      return 'screenPrevent';
+    },
+    statusLabel() {
+      if (this.currentStatusCode === 50) {
+        return labels.waiting;
+      } else if (this.currentStatusCode === 51) {
+        return `${labels.restarting}`;
+      } else if (this.currentStatusCode === 52) {
+        return labels.complete;
+      }
+      return 'screenPrevent';
+    },
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   methods: {
+    pollingRestartingServer() {
+      this.polling = setInterval(async () => {
+        await this.$store.dispatch('current/fetchCurrentStatusAsync');
+        if (this.currentStatusCode === 52) {
+          clearInterval(this.polling);
+          // await this.$store.dispatch('current/fetchCurrentStatusAsync');
+        }
+      }, 5000);
+    },
     cancel() {
-      // 재 시작 중인 서비스 올리는거 중지
       this.status = 'waiting';
-      //request server for stop restarting service
     },
     serviceRestart() {
-      // 현재 서비스를 재 시작함
-      this.status = 'restarting';
-      //request server for restarting service
+      this.$store.dispatch('current/restartServiceStartAsync');
+      this.pollingRestartingServer();
     },
     complete() {
-      console.log('complete')
-    },
-    completeRestartingService() {
-      // 서버에서 상태를 풀링해와서 상태 값으로 변경 필요함
-      this.status = 'complete';
+      console.log('complete');
     },
   },
 };

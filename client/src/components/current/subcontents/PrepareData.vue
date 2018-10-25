@@ -17,7 +17,7 @@
               <div :class="[getStepStatus === 'preparing' ? 'ic-process-datard' : '']"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.dataPreparing }}{{ remainTime }}</div>
+          <div class="label-status">{{ labels.dataPreparing }}</div>
         </div>
         <div class="container-body" v-if="getStepStatus === 'checking'">
           <div class="container-title">
@@ -29,7 +29,7 @@
               <div :class="[getStepStatus === 'checking' ? 'ic-process-datachk' : '']"></div>
             </div>
           </div>
-          <div class="label-status">{{ labels.dataChecking }}{{ remainTime }}</div>
+          <div class="label-status">{{ labels.dataChecking }}</div>
         </div>
         <div class="container-body" v-if="getStepStatus === 'screenPrevent'" >
           <div class="container-title">
@@ -51,16 +51,13 @@
         </div>
         <div v-if="getStepStatus === 'checking'">
           <r-button :title="'취소'" :type="'normal'" @button-clicked="cancel" />
-          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="restart" />
+          <r-button :title="'재시작'" :type="'disabled'" @button-clicked="start" />
         </div>
         <div v-if="getStepStatus === 'screenPrevent'" >
-          <r-button :title="'시작'" :type="'disabled'" @button-clicked="start" />
+          <r-button :title="'시작'" :type="'disabled'" />
         </div>
       </template>
     </step-contents>
-    <!-- 삭제 예정 -->
-    <button v-on:click="finishPrepareData">다음 화면</button>
-
   </div>
 </template>
 
@@ -92,7 +89,6 @@ export default {
   },
   data() {
     return {
-      remainTime: '(5분)',
       polling: null,
       labels,
     };
@@ -112,44 +108,31 @@ export default {
       } else if (this.currentStatusCode === 21) {
         this.pollingServer();
         return 'checking';
-      } else if (this.currentStatusCode === 22) {
-        this.finishPrepareData();
-        return 'screenPrevent';
-      } else {
-        return 'preparing';
       }
-    }
-  },
-  beforeDestroy() {
-    clearInterval(this.polling);
+      return 'screenPrevent';
+    },
   },
   methods: {
     pollingServer() {
-      this.polling = setInterval(async() => {
+      this.polling = setInterval(async () => {
         const result = await api.fetchPrepareDataStatus();
-        if(result.data === 'DONE') {
+        if (result.data === 'DONE') {
           clearInterval(this.polling);
-          this.$store.dispatch('current/setCurrentStatusCode', 22);
+          await this.$store.dispatch('current/setCurrentStatusCode', 31);
+          this.$router.push({ path: 'training' });
         }
-      }, 15000);
+      }, 5000);
     },
     start() {
-      this.$store.dispatch('current/prepareDataStartAsync');
-    },
-    restart() {
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     cancel() {
       clearInterval(this.polling);
       this.$store.dispatch('current/prepareDataCancelAsync');
     },
-    finishPrepareData() {
-      this.$store.dispatch('current/setCurrentStatusCode', 30);
-      this.$router.push({
-        path: 'training',
-      });
-
-    },
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
 };
 </script>

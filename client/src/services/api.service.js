@@ -19,7 +19,7 @@ const fetchCurrentStatus = async () => {
     .then(response => response.data)
     .catch(error => error);
   return res;
-}
+};
 
 const fetchFeedbackInfo = async () => {
   const res = await axios.post('/api/current/feedback/info')
@@ -85,6 +85,27 @@ const fetchTrainingStatus = async () => {
   return res;
 };
 
+const confirmVerify = async () => {
+  const res = await axios.post('/api/current/verify/confirm')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const useVerifiedModel = async () => {
+  const res = await axios.post('/api/current/verify/use')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const restartServiceStart = async () => {
+  const res = await axios.post('/api/current/translation/restart')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
 export default {
   fetchCurrentStatus,
   fetchFeedbackInfo,
@@ -96,4 +117,7 @@ export default {
   trainingStart,
   trainingCancel,
   fetchTrainingStatus,
+  confirmVerify,
+  useVerifiedModel,
+  restartServiceStart,
 };

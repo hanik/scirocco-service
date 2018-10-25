@@ -14,7 +14,7 @@
 <script>
 import { CURRENT } from '@/strings';
 import { mapGetters } from 'vuex';
-import StatusCode from '@/StatusCode.js';
+import StatusCode from '@/StatusCode';
 
 const steps = {
   'step-feedback': CURRENT.STEP_FEEDBACK,
@@ -41,7 +41,7 @@ export default {
     }),
     getCurrentStep() {
       return this.currentStatusCode > 0 ? StatusCode.getCodeStep(this.currentStatusCode) : 'step-feedback';
-    }
+    },
   },
   methods: {
     select(event) {

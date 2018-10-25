@@ -18,7 +18,7 @@
 
       <template slot="buttons">
         <div v-if="isPrevented">
-          <r-button :title="'피드백 적용'" :type="'disabled'" @button-clicked="openPopup()" />
+          <r-button :title="'피드백 적용'" :type="'disabled'"/>
         </div>
         <div v-else>
           <r-button :title="'피드백 적용'" :type="'primary'" @button-clicked="openPopup()" />
@@ -71,7 +71,6 @@ export default {
       labels,
       dialogVisibility: false,
       popupVisibility: false,
-      status: '', // screenPrevent
     };
   },
   mounted() {
@@ -91,10 +90,8 @@ export default {
       return 0;
     },
     isPrevented() {
-      if (this.currentStatusCode > 0) {
-        this.status = (StatusCode.getCodeStep(this.currentStatusCode) === 'step-feedback') ? '' : 'screenPrevent';
-      }
-      return this.status === 'screenPrevent';
+      return this.currentStatusCode > 0
+        && StatusCode.getCodeStep(this.currentStatusCode) !== 'step-feedback';
     },
   },
 };

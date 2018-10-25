@@ -52,10 +52,10 @@ export default {
       this.$emit('close');
     },
     async create() {
-      // TODO
       const user = {
         userId: 'test',
         userName: 'test',
+        // TODO TOKEN 정보
       };
 
       const modelInfo = {
@@ -68,7 +68,6 @@ export default {
       this.$emit('close');
 
       this.$router.push('prepareData');
-
     },
   },
   data() {

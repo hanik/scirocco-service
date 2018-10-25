@@ -3,6 +3,7 @@ const feedback = require('../services/current/feedback');
 const prepare = require('../services/current/prepare');
 const training = require('../services/current/training');
 const translation = require('../services/current/translation');
+const verify = require('../services/current/verify');
 const current = require('../services/current');
 
 const router = express.Router();
@@ -13,7 +14,7 @@ router.post('/feedback/info', async (req, res) => {
 });
 
 router.post('/feedback/create', async (req, res) => {
-  const create = await feedback.create(req.body.modelInfo);
+  const create = await feedback.create(req.body);
   res.send(create);
 });
 
@@ -52,11 +53,6 @@ router.post('/state', (req, res) => {
   res.send(state.toString());
 });
 
-router.post('/translation/restart', (req, res) => {
-  const restart = translation.restart();
-  res.send(restart);
-});
-
 router.post('/training/cancel', async (req, res) => {
   const cancel = await training.cancel();
   res.send(cancel);
@@ -65,6 +61,26 @@ router.post('/training/cancel', async (req, res) => {
 router.post('/prepare/cancel', async (req, res) => {
   const cancel = await prepare.cancel();
   res.send(cancel);
+});
+
+router.post('/verify/use', async (req, res) => {
+  const use = await verify.use();
+  res.send(use);
+});
+
+router.post('/verify/confirm', async (req, res) => {
+  const confirm = await verify.confirm();
+  res.send(confirm);
+});
+
+router.post('/translation/restart', (req, res) => {
+  const restart = translation.restart();
+  res.send(restart);
+});
+
+router.post('/setstate', (req, res) => {
+  const state = current.setState(req.body.state);
+  res.send(state.toString());
 });
 
 module.exports = router;

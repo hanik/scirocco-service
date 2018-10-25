@@ -24,12 +24,6 @@ const StatusCode = [
     value: 'prepareData',
   },
   {
-    code: 22,
-    name: 'FinishPrepareData',
-    step: 'step-prepareData',
-    value: 'prepareData',
-  },
-  {
     code: 30,
     name: 'Training',
     step: 'step-training',
@@ -42,12 +36,6 @@ const StatusCode = [
     value: 'training',
   },
   {
-    code: 32,
-    name: 'FinishTraining',
-    step: 'step-training',
-    value: 'training',
-  },
-  {
     code: 40,
     name: 'VerifyModelReport',
     step: 'step-verifyModel',
@@ -56,18 +44,6 @@ const StatusCode = [
   {
     code: 41,
     name: 'SavedVerifyModelReport',
-    step: 'step-verifyModel',
-    value: 'verifyModel',
-  },
-  {
-    code: 42,
-    name: 'StartUpdateVerifyModel',
-    step: 'step-verifyModel',
-    value: 'verifyModel',
-  },
-  {
-    code: 43,
-    name: 'FinishUpdateVerifyModel',
     step: 'step-verifyModel',
     value: 'verifyModel',
   },

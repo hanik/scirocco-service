@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       error: false,
-      remainTime: '(5시간)',
+      currentEpoch: 0,
       polling: null,
       labels,
     };
@@ -74,57 +74,54 @@ export default {
     }),
     getStepStatus() {
       if (this.currentStatusCode === 30) {
-        this.startTraining();
         return 'dataTraining';
       } else if (this.currentStatusCode === 31) {
         this.pollingTrainingStatus();
         return 'dataTraining';
-      } else if (this.currentStatusCode === 32) {
-        this.finishTraining();
-        return 'screenPrevent';
       }
       return 'screenPrevent';
     },
     statusMessage() {
-      if (this.status === 'dataTraining') {
+      if (this.getStepStatus === 'dataTraining') {
         return this.labels.dataTraining;
       }
       return this.labels.dataWaiting;
     },
     statusLabel() {
-      if (this.status === 'dataTraining') {
-        return this.labels.training;
+      if (this.getStepStatus === 'dataTraining') {
+        return `${this.labels.training} ${this.currentEpoch}`;
       }
       return this.labels.waiting;
     },
-    statusCircle(){
-      if (this.status === 'dataTraining') {
+    statusCircle() {
+      if (this.getStepStatus === 'dataTraining') {
         return '../../../assets/images/img-processfin.svg';
-      } else {
-        return '../../../assets/images/img-processing-1.svg';
       }
-    }
+      return '../../../assets/images/img-processing-1.svg';
+    },
   },
   beforeDestroy() {
     clearInterval(this.polling);
   },
   methods: {
     pollingTrainingStatus() {
-      this.polling = setInterval(async() => {
+      this.polling = setInterval(async () => {
         const result = await api.fetchTrainingStatus();
-        if(result.data === 'DONE') {
+        this.currentEpoch = result.data;
+        if (this.currentEpoch === 'DONE') {
           clearInterval(this.polling);
+          await this.$store.dispatch('current/setCurrentStatusCode', 40);
+          this.$router.push({
+            path: 'verifyModel',
+          });
         }
       }, 5000);
     },
     startTraining() {
-      this.$store.dispatch('current/trainingStartAsync')
+      this.$store.dispatch('current/trainingStartAsync');
     },
     cancel() {
       this.$store.dispatch('current/trainingCancelAsync');
-    },
-    finishTraining() {
-      this.$store.dispatch('current/setCurrentStatusCode', 40);
     },
   },
 };

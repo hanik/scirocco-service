@@ -7,7 +7,11 @@
         <div>{{ labels.description }}</div>
       </template>
     </step-contents>
-    <div class="header-status-label">
+    <!--  TODO 다른 프로세스 일 때의 화면에 대하여 그려야함-->
+    <div class="header-status-label" v-if="currentStatusCode === 40">
+      현재 모델은 시로코 입니다.
+    </div>
+    <div class="header-status-label" v-else>
       {{ labels.reportWaiting }}
     </div>
 
@@ -70,8 +74,6 @@
         </div>
       </template>
     </step-contents>
-    <!-- 삭제 예정 -->
-    <button v-on:click="saveCurrentModel">다음 화면</button>
   </div>
 </template>
 
@@ -99,10 +101,10 @@ export default {
     StepContents,
     RButton,
   },
-  props: ['reportDatas', 'reportSummaries'],
+  props: ['reportDatas', 'reportSummaries', 'currentStatusCode'],
   methods: {
     saveCurrentModel() {
-      this.$emit('content');
+      this.$store.dispatch('current/confirmVerifyAsync');
     },
   },
   data() {

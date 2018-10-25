@@ -26,7 +26,8 @@ const info = async () => {
   return counts;
 };
 
-const create = async (model) => {
+const create = async (reqBody) => {
+  const model = reqBody.modelInfo;
   db.setCurrentModel(model);
   db.setCurrentState(20);
   return 'OK';

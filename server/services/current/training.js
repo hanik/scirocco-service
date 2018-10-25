@@ -5,7 +5,7 @@ const fileHelper = require('../../helpers/file');
 const db = require('../../helpers/db');
 const { parsed } = require('dotenv').config();
 
-const { BASE_PATH, ENV } = parsed;
+const { BASE_PATH, ENV, END_EPOCH } = parsed;
 const TRAINING_DIR = BASE_PATH + parsed.DATA_TRAINING_DIR;
 const PREPROCESS_DIR = BASE_PATH + parsed.PREPROCESS_DIR;
 const MODEL_DIR = BASE_PATH + parsed.MODEL_DIR;
@@ -20,7 +20,7 @@ const _training = (sequence) => {
   const trainingDown = shell.exec(trainingDownCommand, { async: true });
   trainingDown.stdout.on('end', () => {
     console.log('======== REMOVE OLD TRAINING FILE ========');
-    const getLang = _getCurrentTrainingLanguage();
+    const getLang = getCurrentTrainingLanguage();
     const path = `${MODEL_DIR}/${sequence}/${getLang}`;
     fileHelper.removeAllFilesInDirSync(path);
     console.log('======== TRAINING START ========');
@@ -64,38 +64,44 @@ const start = async () => {
   return 'OK';
 };
 
-const _getCurrentTrainingLanguage = () => {
+const getCurrentTrainingLanguage = () => {
   const enko = 'EnKo';
   const koen = 'KoEn';
   const sequence = fileHelper.getTrainingSequence(TRAINING_DIR);
-  const files = fs.readdirSync(`${MODEL_DIR}/${sequence}`);
-  let lang = 'NONE';
-  if (files.length >= 2) {
-    // TODO 두가지다인경우는 아직 감안하지 않음
-    lang = enko;
-  } else if (files.length === 1) {
-    if (files.includes(enko)) lang = enko;
-    else if (files.includes(koen)) lang = koen;
+  const dir = `${MODEL_DIR}/${sequence}`;
+  let lang = enko;
+  if (fs.existsSync(dir)) {
+    const files = fs.readdirSync(`${MODEL_DIR}/${sequence}`);
+    if (files.length >= 2) {
+      // TODO 두가지다인경우는 아직 감안하지 않음
+      lang = enko;
+    } else if (files.length === 1) {
+      if (files.includes(enko)) lang = enko;
+      else if (files.includes(koen)) lang = koen;
+    }
   }
   return lang;
 };
 
 const state = () => {
   const sequence = fileHelper.getTrainingSequence(TRAINING_DIR);
-  const getLang = _getCurrentTrainingLanguage();
+  const getLang = getCurrentTrainingLanguage();
   const dir = `${MODEL_DIR}/${sequence}/${getLang}`;
   try {
     const lastFileName = fileHelper.getLastModifiedFileNameInDir(dir);
     const regex = new RegExp(/DATA_KO_[\d]{8}_[\d]{6}_(EnKo|KoEn)_data-model_epoch(\d){1,2}_.*.t7/g);
     if (regex.test(lastFileName)) {
       const number = lastFileName.match(/_epoch(\d){1,2}/g)[0].replace('_epoch', '');
-      return number;
+      if (number === END_EPOCH) {
+        return 'DONE';
+      }
+      return `${number}/${END_EPOCH}`;
     }
+    return `0/${END_EPOCH}`;
   } catch (e) {
     console.log(e);
-    return 'NOTYET';
+    return 'ERROR';
   }
-  return 'NOTYET';
 };
 
 const restart = () => {
@@ -104,6 +110,7 @@ const restart = () => {
 };
 
 const cancel = async () => {
+  // TODO : 학습단계에서 취소
   return 'OK';
 };
 
@@ -112,4 +119,5 @@ module.exports = {
   state,
   restart,
   cancel,
+  getCurrentTrainingLanguage,
 };

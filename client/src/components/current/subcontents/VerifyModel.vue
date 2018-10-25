@@ -1,7 +1,7 @@
 <template>
   <div id="content-verifyModel">
-    <verify-model-report :reportDatas="reportDatas" :reportSummaries="reportSummaries" v-if="status === 'report'"/>
-    <verify-model-content v-if="status === 'content'" />
+    <verify-model-content v-if="currentStatusCode === 41" />
+    <verify-model-report :reportDatas="reportDatas" :reportSummaries="reportSummaries" :currentStatusCode="currentStatusCode" v-else/>
   </div>
 </template>
 
@@ -16,20 +16,21 @@ export default {
     VerifyModelReport,
     VerifyModelContent,
   },
-  data() {
-    return {
-      status: 'content', // report, content, screenPrevent
-    };
-  },
   methods: {
     buttonClicked() {
     },
   },
+  beforeUpdate() {
+    if (this.currentStatusCode === 50) {
+      this.$router.push('restartService');
+    }
+  },
   computed: {
-    ...mapGetters( {
+    ...mapGetters({
       reportDatas: 'current/getVerityModelReportDatas',
       reportSummaries: 'current/getVerityModelReportSummaries',
-    })
+      currentStatusCode: 'current/getCurrentStatusCode',
+    }),
   },
 };
 </script>

@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 const fs = require('fs-extra');
 const readline = require('readline');
+const training = require('./training');
 const fileHelper = require('../../helpers/file');
 const db = require('../../helpers/db');
 const luxon = require('luxon');
@@ -74,7 +75,8 @@ const state = async () => {
   const longDefault = await fileHelper.maxLineCountInDir(DEFAULT_DIR);
   const sumLog = await fileHelper.sumOfLineCountInDir(FEEDBACK_DIR);
   if (longTraining <= longDefault + sumLog) {
-    db.setCurrentState(22);
+    db.setCurrentState(31);
+    await training.start();
     return 'DONE';
   }
   return 'NOTYET';
@@ -87,11 +89,9 @@ const info = async () => {
   };
 };
 
-const cancel = async () => {
+const cancel = async () =>
   // TODO 취소하는 로직이 필요할 것 같습니다
-  return 'OK';
-};
-
+  'OK';
 module.exports = {
   start,
   state,
