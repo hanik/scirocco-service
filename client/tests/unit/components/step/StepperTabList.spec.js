@@ -1,5 +1,9 @@
-import { shallowMount } from '@vue/test-utils';
+import { createLocalVue, shallowMount } from '@vue/test-utils';
 import StepperTabList from '@/components/current/StepperTabList.vue';
+import Vuex from 'vuex';
+
+const localVue = createLocalVue();
+localVue.use(Vuex);
 
 const stubPush = jest.fn();
 const $router = {
@@ -12,10 +16,14 @@ const $router = {
 };
 
 describe('StepperTabList.vue', () => {
+  let store;
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallowMount(StepperTabList, { mocks: { $router } });
+    store = new Vuex.Store({
+      getters: { 'current/getCurrentStatusCode': () => 10 },
+    });
+    wrapper = shallowMount(StepperTabList, { localVue, store, mocks: { $router } });
   });
 
   it('show stepper list, when rendered', () => {
