@@ -1,5 +1,5 @@
 // js file for temp data
-const gara = {
+const history = {
   state: {
     items: [
       {
@@ -75,4 +75,4 @@ const gara = {
   },
 };
 
-export default gara;
+export default history;

@@ -60,6 +60,7 @@ export default {
 
       const modelInfo = {
         modelName: this.modelName,
+        modelCreateAt: new Date(),
       };
 
       this.$emit('create');

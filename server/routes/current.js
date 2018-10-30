@@ -78,9 +78,24 @@ router.post('/translation/restart', (req, res) => {
   res.send(restart);
 });
 
+// router.post('/translation/restart/change-model', (req, res) => {
+//   const restart = translation.restartPast();
+//   res.send(restart);
+// });
+
+router.post('/translation/restart/after-verify', (req, res) => {
+  const restart = translation.restartAfterVerify();
+  res.send(restart);
+});
+
 router.post('/setstate', (req, res) => {
   const state = current.setState(req.body.state);
   res.send(state.toString());
+});
+
+router.post('/init', (req, res) => {
+  const init = current.init();
+  res.send(init.toString());
 });
 
 module.exports = router;

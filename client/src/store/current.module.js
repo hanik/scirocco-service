@@ -102,10 +102,17 @@ const current = {
         console.log(response);
       }
     },
-    async restartServiceStartAsync({ dispatch }) {
+    async restartServiceStartAsync() {
       const response = await api.restartServiceStart();
       if (response.status === 200) {
-        dispatch('setCurrentStatusCode', 51);
+      } else {
+        console.log(response);
+      }
+    },
+    async initCurrentStepAsync({ dispatch }) {
+      const response = await api.initCurrentStep();
+      if (response.status === 200) {
+        dispatch('setCurrentStatusCode', 10);
       } else {
         console.log(response);
       }

@@ -107,8 +107,9 @@ export default {
     pollingTrainingStatus() {
       this.polling = setInterval(async () => {
         const result = await api.fetchTrainingStatus();
+        const currentState = await api.fetchCurrentStatus();
         this.currentEpoch = result.data;
-        if (this.currentEpoch === 'DONE') {
+        if (this.currentEpoch === 'DONE' && currentState === 40) {
           clearInterval(this.polling);
           await this.$store.dispatch('current/setCurrentStatusCode', 40);
           this.$router.push({

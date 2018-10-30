@@ -138,13 +138,17 @@ export default {
   beforeDestroy() {
     clearInterval(this.polling);
   },
+  mounted() {
+    if (this.currentStatusCode === 51) {
+      this.pollingRestartingServer();
+    }
+  },
   methods: {
     pollingRestartingServer() {
       this.polling = setInterval(async () => {
         await this.$store.dispatch('current/fetchCurrentStatusAsync');
         if (this.currentStatusCode === 52) {
           clearInterval(this.polling);
-          // await this.$store.dispatch('current/fetchCurrentStatusAsync');
         }
       }, 5000);
     },
@@ -153,10 +157,11 @@ export default {
     },
     serviceRestart() {
       this.$store.dispatch('current/restartServiceStartAsync');
-      this.pollingRestartingServer();
+      // this.pollingRestartingServer();
     },
-    complete() {
-      console.log('complete');
+    async complete() {
+      await this.$store.dispatch('current/initCurrentStepAsync');
+      this.$router.push({ path: 'feedback' });
     },
   },
 };

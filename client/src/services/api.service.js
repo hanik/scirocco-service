@@ -29,7 +29,6 @@ const fetchFeedbackInfo = async () => {
 };
 
 const createModel = async (info) => {
-  info.modelInfo.createDate = new Date();
   const res = await axios.post('/api/current/feedback/create', info)
     .then(response => response)
     .catch(error => error);
@@ -55,7 +54,7 @@ const fetchPrepareDataStatus = async () => {
     .then(response => response)
     .catch(error => error);
   return res;
-}
+};
 
 const prepareDataCancel = async () => {
   const res = await axios.post('/api/current/prepare/cancel')
@@ -106,6 +105,20 @@ const restartServiceStart = async () => {
   return res;
 };
 
+const initCurrentStep = async () => {
+  const res = await axios.post('/api/current/init')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const fetchHistory = async () => {
+  const res = await axios.post('/api/models/list')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
 export default {
   fetchCurrentStatus,
   fetchFeedbackInfo,
@@ -120,4 +133,5 @@ export default {
   confirmVerify,
   useVerifiedModel,
   restartServiceStart,
+  initCurrentStep,
 };

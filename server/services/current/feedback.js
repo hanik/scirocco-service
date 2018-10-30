@@ -27,8 +27,8 @@ const info = async () => {
 };
 
 const create = async (reqBody) => {
-  const model = reqBody.modelInfo;
-  db.setCurrentModel(model);
+  const { modelInfo } = reqBody;
+  db.setCurrentModel(modelInfo);
   db.setCurrentState(20);
   return 'OK';
 };
@@ -37,4 +37,3 @@ module.exports = {
   info,
   create,
 };
-

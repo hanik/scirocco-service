@@ -23,6 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/users', require('./users/user.controller'));
 app.use('/api/current', require('./routes/current'));
+app.use('/api/models', require('./routes/models'));
 
 module.exports = app;
 // https://github.com/cornflourblue/node-jwt-authentication-api

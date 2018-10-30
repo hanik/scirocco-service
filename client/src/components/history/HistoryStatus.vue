@@ -7,7 +7,8 @@
     </div>
     <div class="right-buttons">
       <r-button :title="buttonMoveArchive" :width="140" />
-      <r-button :title="buttonChangeModel" :width="140" />
+      <!-- TODO 2번 /translation/restart/change-model -->
+      <r-button :title="buttonChangeModel" :width="140" @button-clicked="serviceRestart"/>
     </div>
   </div>
 </template>
@@ -28,6 +29,10 @@ export default {
       buttonChangeModel: HISTORY.BUTTON_CHANGE_MODEL,
       currentServiceModel: 'Sirocco-YC-v3',
     };
+  },
+  methods: {
+    serviceRestart() {
+    },
   },
 };
 </script>

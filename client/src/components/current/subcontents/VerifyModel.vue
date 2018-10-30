@@ -21,7 +21,7 @@ export default {
     },
   },
   beforeUpdate() {
-    if (this.currentStatusCode === 50) {
+    if (this.currentStatusCode === 51) {
       this.$router.push('restartService');
     }
   },

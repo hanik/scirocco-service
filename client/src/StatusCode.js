@@ -36,6 +36,12 @@ const StatusCode = [
     value: 'training',
   },
   {
+    code: 39,
+    name: 'ErrorTraining',
+    step: 'step-training',
+    value: 'error',
+  },
+  {
     code: 40,
     name: 'VerifyModelReport',
     step: 'step-verifyModel',
@@ -67,9 +73,7 @@ const StatusCode = [
   },
 ];
 
-const getCodeStep = (code) => {
-  return StatusCode.find(item => item.code === code).step;
-};
+const getCodeStep = code => StatusCode.find(item => item.code === code).step;
 
 export default {
   StatusCode,

@@ -1,5 +1,7 @@
+/* eslint-disable no-underscore-dangle */
 const low = require('lowdb');
 const FileSync = require('lowdb/adapters/FileSync');
+
 const { BASE_PATH, DB_PATH } = process.env;
 
 const adapter = new FileSync(`${BASE_PATH}${DB_PATH}/db.json`);
@@ -30,9 +32,37 @@ const setCurrentState = (state) => {
 
 const getCurrentState = () => db.get('currentState').value();
 
-const setCurrentModel = modelInfo => db.set('currentModel', modelInfo).write();
+const setCurrentModel = (modelInfo) => {
+  const model = {
+    modelName: '',
+    modelCreateAt: '',
+    seq: _getModelSequence(),
+    serviceStartAt: '',
+    serviceEndAt: '',
+    trainingStartAt: '',
+    trainingEndAt: '',
+    verifyResult: '0',
+    admin: '',
+    serviceYn: 'N',
+    path: '',
+    archive: 'N',
+  };
+  db.set('currentModel', Object.assign(model, modelInfo)).write();
+};
+
+const clearCurrentModel = () => db.set('currentModel', {}).write();
 
 const getCurrentModel = () => db.get('currentModel').value();
+
+const setServiceModel = modelInfo => db.set('serviceModel', modelInfo).write();
+
+const getServiceModel = () => db.get('serviceModel').value();
+
+const _getModelSequence = () => db.get('history').value().length + 1;
+
+const updateHistory = (where, values) => db.get('history').find(where).assign(values).write();
+
+const updateCurrentModel = values => db.get('currentModel').assign(values).write();
 
 module.exports = {
   pushHistory,
@@ -41,4 +71,9 @@ module.exports = {
   getCurrentState,
   setCurrentModel,
   getCurrentModel,
+  setServiceModel,
+  getServiceModel,
+  updateCurrentModel,
+  updateHistory,
+  clearCurrentModel,
 };

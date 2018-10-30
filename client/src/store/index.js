@@ -4,7 +4,7 @@ import Vuex from 'vuex';
 import alert from './alert.module';
 import authentication from './authentication.module';
 import users from './users.module';
-import gara from './gara.module';
+import gara from './history.module';
 import current from './current.module';
 import status from './status.module';
 

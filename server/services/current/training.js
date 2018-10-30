@@ -18,19 +18,30 @@ const _training = (sequence) => {
 
   console.log('======== TRAINING DOWN ========');
   const trainingDown = shell.exec(trainingDownCommand, { async: true });
+
   trainingDown.stdout.on('end', () => {
     console.log('======== REMOVE OLD TRAINING FILE ========');
     const getLang = getCurrentTrainingLanguage();
     const path = `${MODEL_DIR}/${sequence}/${getLang}`;
     fileHelper.removeAllFilesInDirSync(path);
     console.log('======== TRAINING START ========');
+    db.updateCurrentModel({ trainingStartAt: new Date() });
+
     shell.cd(DOCKER_DIR);
     const trainingUpCommand = `export FILE_SEQUENCE=${sequence}; 
       docker-compose -f ${ENV}.train.enko.yml up;`;
     const trainingUp = shell.exec(trainingUpCommand, { async: true });
+
     trainingUp.stdout.on('end', () => {
       console.log('======== TRAINING END ========');
-      db.setCurrentState(40);
+      const lastFileName = fileHelper.getLastModifiedFileNameInDir(path);
+      const pathForUpdateCurrentModel = `${sequence}/${getLang}`;
+      if (_isProperModelFileName(lastFileName)) {
+        db.updateCurrentModel({ trainingEndAt: new Date(), path: `${pathForUpdateCurrentModel}/${lastFileName}` });
+        db.setCurrentState(40);
+      } else {
+        db.setCurrentState(39);
+      }
     });
   });
 };
@@ -60,7 +71,6 @@ const start = async () => {
     _training(sequence);
   });
 
-  // TODO 로그 확인할 수 있도록 처리
   return 'OK';
 };
 
@@ -83,19 +93,23 @@ const getCurrentTrainingLanguage = () => {
   return lang;
 };
 
+const _isProperModelFileName = (lastFileName) => {
+  const regex = new RegExp(/DATA_KO_[\d]{8}_[\d]{6}_(EnKo|KoEn)_data-model_epoch(\d){1,2}_.*.t7/g);
+  return regex.test(lastFileName);
+};
+
 const state = () => {
   const sequence = fileHelper.getTrainingSequence(TRAINING_DIR);
   const getLang = getCurrentTrainingLanguage();
   const dir = `${MODEL_DIR}/${sequence}/${getLang}`;
   try {
     const lastFileName = fileHelper.getLastModifiedFileNameInDir(dir);
-    const regex = new RegExp(/DATA_KO_[\d]{8}_[\d]{6}_(EnKo|KoEn)_data-model_epoch(\d){1,2}_.*.t7/g);
-    if (regex.test(lastFileName)) {
+    if (_isProperModelFileName(lastFileName)) {
       const number = lastFileName.match(/_epoch(\d){1,2}/g)[0].replace('_epoch', '');
       if (number === END_EPOCH) {
         return 'DONE';
       }
-      return `${number}/${END_EPOCH}`;
+      return `${number}/${END_EPOCH}`; // TODO scirocco_base = BASE_PATH/.env 에서 가져오도록 변경하기!
     }
     return `0/${END_EPOCH}`;
   } catch (e) {
@@ -109,11 +123,9 @@ const restart = () => {
   _training(sequence);
 };
 
-const cancel = async () => {
+const cancel = async () =>
   // TODO : 학습단계에서 취소
-  return 'OK';
-};
-
+  'OK';
 module.exports = {
   start,
   state,
