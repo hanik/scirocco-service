@@ -1,15 +1,15 @@
 let timer = null;
 
 const pollingOn = (doPolling) => {
-  if (timer === null) {
-    timer = setInterval(doPolling, 1000);
+  if (timer) {
+    clearInterval(timer);
   }
+  timer = setInterval(doPolling, 1000);
 };
 
-const pollingOff = async () => {
+const pollingOff = () => {
   if (timer !== null) {
-    await clearInterval(timer);
-    timer = null;
+    clearInterval(timer);
   }
 };
 

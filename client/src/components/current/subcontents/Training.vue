@@ -13,7 +13,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
-              <img :class="['spin']" src="../../../assets/images/img-processfin.svg" />
+              <img :class="[{'spin': this.currentStatusCode === 31}]" src="../../../assets/images/img-processing-1.svg" />
               <div class="ic-training"></div>
             </div>
           </div>
@@ -40,6 +40,7 @@ import { mapGetters } from 'vuex';
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import api from '@/services/api.service';
+import { pollingOn, pollingOff } from '@/helpers/pollingHelper';
 
 const labels = {
   title: CURRENT.STEP_TRAINING,
@@ -63,8 +64,7 @@ export default {
   data() {
     return {
       error: false,
-      currentEpoch: 0,
-      polling: null,
+      currentEpoch: '',
       labels,
     };
   },
@@ -76,47 +76,33 @@ export default {
       if (this.currentStatusCode === 30) {
         return 'dataTraining';
       } else if (this.currentStatusCode === 31) {
-        this.pollingTrainingStatus();
+        pollingOn(this.pollingStart);
         return 'dataTraining';
       }
       return 'screenPrevent';
     },
     statusMessage() {
-      if (this.getStepStatus === 'dataTraining') {
-        return this.labels.dataTraining;
-      }
-      return this.labels.dataWaiting;
+      const { dataTraining, dataWaiting } = this.labels;
+      return this.getStepStatus === 'dataTraining' ? dataTraining : dataWaiting;
     },
     statusLabel() {
-      if (this.getStepStatus === 'dataTraining') {
-        return `${this.labels.training} ${this.currentEpoch}`;
-      }
-      return this.labels.waiting;
+      const { currentEpoch, labels: { training, waiting } } = this;
+      return this.getStepStatus === 'dataTraining' ?
+        `${training} ${currentEpoch}` : waiting;
     },
-    statusCircle() {
-      if (this.getStepStatus === 'dataTraining') {
-        return '../../../assets/images/img-processfin.svg';
-      }
-      return '../../../assets/images/img-processing-1.svg';
-    },
-  },
-  beforeDestroy() {
-    clearInterval(this.polling);
   },
   methods: {
-    pollingTrainingStatus() {
-      this.polling = setInterval(async () => {
-        const result = await api.fetchTrainingStatus();
-        const currentState = await api.fetchCurrentStatus();
-        this.currentEpoch = result.data;
-        if (this.currentEpoch === 'DONE' && currentState === 40) {
-          clearInterval(this.polling);
-          await this.$store.dispatch('current/setCurrentStatusCode', 40);
-          this.$router.push({
-            path: 'verifyModel',
-          });
-        }
-      }, 5000);
+    async pollingStart() {
+      const result = await api.fetchTrainingStatus();
+      const currentState = await api.fetchCurrentStatus();
+      this.currentEpoch = result.data;
+      if (this.currentEpoch === 'DONE' && currentState === 40) {
+        pollingOff();
+        await this.$store.dispatch('current/setCurrentStatusCode', 40);
+        this.$router.push({
+          path: 'verifyModel',
+        });
+      }
     },
     startTraining() {
       this.$store.dispatch('current/trainingStartAsync');

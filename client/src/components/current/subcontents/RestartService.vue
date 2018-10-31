@@ -80,6 +80,7 @@ import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import { CURRENT } from '@/strings';
 import { mapGetters } from 'vuex';
+import { pollingOn, pollingOff } from '@/helpers/pollingHelper';
 
 const labels = {
   title: CURRENT.STEP_RESTART_SERVICE,
@@ -121,7 +122,6 @@ export default {
       // TODO 모델명 받아오기
       modelName: 'Sirocco-YC-v3',
       labels,
-      polling: null,
     };
   },
   computed: {
@@ -135,29 +135,24 @@ export default {
       return status[this.currentStatusCode] ? status[this.currentStatusCode].label : 'screenPrevent';
     },
   },
-  beforeDestroy() {
-    clearInterval(this.polling);
-  },
   mounted() {
     if (this.currentStatusCode === 51) {
-      this.pollingRestartingServer();
+      pollingOn(this.pollStart);
     }
   },
   methods: {
-    pollingRestartingServer() {
-      this.polling = setInterval(async () => {
-        await this.$store.dispatch('current/fetchCurrentStatusAsync');
-        if (this.currentStatusCode === 52) {
-          clearInterval(this.polling);
-        }
-      }, 5000);
+    async pollStart() {
+      await this.$store.dispatch('current/fetchCurrentStatusAsync');
+      if (this.currentStatusCode === 52) {
+        pollingOff();
+      }
     },
     cancel() {
       this.status = 'waiting';
     },
     serviceRestart() {
       this.$store.dispatch('current/restartServiceStartAsync');
-      // this.pollingRestartingServer();
+      // pollingOn(this.pollStart);
     },
     async complete() {
       await this.$store.dispatch('current/initCurrentStepAsync');

@@ -13,7 +13,7 @@
           </div>
           <div class="container-icon">
             <div class="ic-status-wrap">
-              <img :class="['spin']" src="../../../assets/images/img-processing-1.svg" />
+              <img src="../../../assets/images/img-processing-1.svg" />
               <div :class="[getStepStatus === 'preparing' ? 'ic-process-datard' : '']"></div>
             </div>
           </div>
@@ -67,7 +67,7 @@ import { CURRENT } from '@/strings';
 import StepContents from '@/components/current/StepContents.vue';
 import RButton from '@/components/common/RButton.vue';
 import api from '@/services/api.service';
-
+import { pollingOn, pollingOff } from '@/helpers/pollingHelper';
 
 const labels = {
   title: CURRENT.STEP_PREPARE_DATA,
@@ -89,7 +89,6 @@ export default {
   },
   data() {
     return {
-      polling: null,
       labels,
     };
   },
@@ -106,33 +105,28 @@ export default {
       if (this.currentStatusCode === 20) {
         return 'preparing';
       } else if (this.currentStatusCode === 21) {
-        this.pollingServer();
+        pollingOn(this.pollingStart);
         return 'checking';
       }
       return 'screenPrevent';
     },
   },
   methods: {
-    pollingServer() {
-      this.polling = setInterval(async () => {
-        const result = await api.fetchPrepareDataStatus();
-        if (result.data === 'DONE') {
-          clearInterval(this.polling);
-          await this.$store.dispatch('current/setCurrentStatusCode', 31);
-          this.$router.push({ path: 'training' });
-        }
-      }, 5000);
+    async pollingStart() {
+      const result = await api.fetchPrepareDataStatus();
+      if (result.data === 'DONE') {
+        pollingOff();
+        await this.$store.dispatch('current/setCurrentStatusCode', 31);
+        this.$router.push({ path: 'training' });
+      }
     },
     start() {
       this.$store.dispatch('current/prepareDataStartAsync');
     },
     cancel() {
-      clearInterval(this.polling);
+      pollingOff();
       this.$store.dispatch('current/prepareDataCancelAsync');
     },
-  },
-  beforeDestroy() {
-    clearInterval(this.polling);
   },
 };
 </script>
