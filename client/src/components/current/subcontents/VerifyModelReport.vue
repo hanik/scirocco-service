@@ -70,7 +70,7 @@
     <step-contents>
       <template slot="buttons">
         <div>
-          <r-button :title="'저장'" :type="'primary'" @button-clicked="saveCurrentModel" />
+          <r-button :title="'저장'" :type="saveButtonType" @button-clicked="saveCurrentModel" />
         </div>
       </template>
     </step-contents>
@@ -114,6 +114,11 @@ export default {
       verifiedTaskSetItems: this.reportDatas,
       summaries: this.reportSummaries,
     };
+  },
+  computed: {
+    saveButtonType() {
+      return this.currentStatusCode === 40 ? 'primary' : 'disabled';
+    },
   },
 };
 </script>
