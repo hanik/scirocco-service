@@ -68,6 +68,11 @@ router.post('/verify/use', async (req, res) => {
   res.send(use);
 });
 
+router.post('/verify/no-use', async (req, res) => {
+  const noUse = await verify.noUse();
+  res.send(noUse);
+});
+
 router.post('/verify/confirm', async (req, res) => {
   const confirm = await verify.confirm();
   res.send(confirm);

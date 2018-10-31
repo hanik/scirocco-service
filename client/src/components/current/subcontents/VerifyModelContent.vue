@@ -120,6 +120,7 @@ export default {
       this.dialogVisibility = false;
     },
     confirm() {
+      this.$store.dispatch('current/noUseVerifiedModelAsync');
       this.$router.push('feedback');
     },
   },

@@ -32,7 +32,7 @@ const _setStateData = (serviceYn) => {
       const path = `${sequence}/${lang}/${modelName}`;
 
       db.pushHistory(Object.assign(model, { path }));
-      db.setCurrentModel({});
+      db.clearCurrentModel();
       db.setCurrentState(10);
     }
     return 'OK';

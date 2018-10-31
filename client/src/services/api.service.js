@@ -98,6 +98,13 @@ const useVerifiedModel = async () => {
   return res;
 };
 
+const noUseVerifiedModel = async () => {
+  const res = await axios.post('/api/current/verify/no-use')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
 const restartServiceStart = async () => {
   const res = await axios.post('/api/current/translation/restart')
     .then(response => response)
@@ -132,6 +139,7 @@ export default {
   fetchTrainingStatus,
   confirmVerify,
   useVerifiedModel,
+  noUseVerifiedModel,
   restartServiceStart,
   initCurrentStep,
 };

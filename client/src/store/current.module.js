@@ -102,6 +102,14 @@ const current = {
         console.log(response);
       }
     },
+    async noUseVerifiedModelAsync({ dispatch }) {
+      const response = await api.noUseVerifiedModel();
+      if (response.status === 200) {
+        dispatch('fetchCurrentStatusAsync');
+      } else {
+        console.log(response);
+      }
+    },
     async restartServiceStartAsync() {
       const response = await api.restartServiceStart();
       if (response.status === 200) {

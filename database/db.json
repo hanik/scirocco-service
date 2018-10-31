@@ -1,7 +1,104 @@
 {
-  "history": [],
+  "history": [
+    {
+      "modelName": "Take-51",
+      "modelCreateAt": "2018-10-31T05:26:35.783Z",
+      "seq": 1,
+      "serviceStartAt": "",
+      "serviceEndAt": "",
+      "trainingStartAt": "2018-10-31T05:26:46.929Z",
+      "trainingEndAt": "2018-10-31T05:27:39.048Z",
+      "verifyResult": "0",
+      "admin": "",
+      "serviceYn": "N",
+      "path": "20181031_142636/EnKo/DATA_KO_20181031_142636_EnKo_data-model_epoch1_131.40.t7",
+      "archive": "N"
+    },
+    {
+      "modelName": "Take-52",
+      "modelCreateAt": "2018-10-31T05:28:32.064Z",
+      "seq": 2,
+      "serviceStartAt": "2018-10-31T05:30:38.910Z",
+      "serviceEndAt": "",
+      "trainingStartAt": "2018-10-31T05:28:43.257Z",
+      "trainingEndAt": "2018-10-31T05:29:33.132Z",
+      "verifyResult": "0",
+      "admin": "",
+      "serviceYn": "Y",
+      "path": "20181031_142833/EnKo/DATA_KO_20181031_142833_EnKo_data-model_epoch1_131.40.t7",
+      "archive": "N"
+    },
+    {
+      "modelName": "Take-53",
+      "modelCreateAt": "2018-10-31T05:31:44.050Z",
+      "seq": 3,
+      "serviceStartAt": "2018-10-31T05:33:57.727Z",
+      "serviceEndAt": "",
+      "trainingStartAt": "2018-10-31T05:31:55.331Z",
+      "trainingEndAt": "2018-10-31T05:32:47.144Z",
+      "verifyResult": "0",
+      "admin": "",
+      "serviceYn": "Y",
+      "path": "20181031_143144/EnKo/DATA_KO_20181031_143144_EnKo_data-model_epoch1_131.40.t7",
+      "archive": "N"
+    },
+    {
+      "modelName": "Take-54",
+      "modelCreateAt": "2018-10-31T05:34:17.850Z",
+      "seq": 4,
+      "serviceStartAt": "",
+      "serviceEndAt": "",
+      "trainingStartAt": "2018-10-31T05:34:29.083Z",
+      "trainingEndAt": "2018-10-31T05:35:21.133Z",
+      "verifyResult": "0",
+      "admin": "",
+      "serviceYn": "N",
+      "path": "20181031_143419/EnKo/DATA_KO_20181031_143419_EnKo_data-model_epoch1_131.40.t7",
+      "archive": "N"
+    },
+    {
+      "modelName": "Take-56",
+      "modelCreateAt": "2018-10-31T06:23:41.766Z",
+      "seq": 5,
+      "serviceStartAt": "2018-10-31T06:26:43.393Z",
+      "serviceEndAt": "",
+      "trainingStartAt": "2018-10-31T06:24:40.780Z",
+      "trainingEndAt": "2018-10-31T06:25:32.536Z",
+      "verifyResult": "0",
+      "admin": "",
+      "serviceYn": "Y",
+      "path": "20181031_152430/EnKo/DATA_KO_20181031_152430_EnKo_data-model_epoch1_131.40.t7",
+      "archive": "N"
+    }
+  ],
   "user": {},
-  "serviceModel": {},
-  "currentState": 10,
-  "currentModel": {}
+  "currentState": 31,
+  "currentModel": {
+    "modelName": "Take-57",
+    "modelCreateAt": "2018-10-31T06:30:31.238Z",
+    "seq": 6,
+    "serviceStartAt": "",
+    "serviceEndAt": "",
+    "trainingStartAt": "",
+    "trainingEndAt": "",
+    "verifyResult": "0",
+    "admin": "",
+    "serviceYn": "N",
+    "path": "",
+    "archive": "N"
+  },
+  "serviceModel": {
+    "modelName": "Take-56",
+    "modelCreateAt": "2018-10-31T06:23:41.766Z",
+    "seq": 5,
+    "serviceStartAt": "2018-10-31T06:26:43.393Z",
+    "serviceEndAt": "",
+    "trainingStartAt": "2018-10-31T06:24:40.780Z",
+    "trainingEndAt": "2018-10-31T06:25:32.536Z",
+    "verifyResult": "0",
+    "admin": "",
+    "serviceYn": "Y",
+    "path": "20181031_152430/EnKo/DATA_KO_20181031_152430_EnKo_data-model_epoch1_131.40.t7",
+    "archive": "N"
+  }
 }

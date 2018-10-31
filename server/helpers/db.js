@@ -9,7 +9,9 @@ const adapter = new FileSync(`${BASE_PATH}${DB_PATH}/db.json`);
 const db = low(adapter);
 
 // Set some defaults (required if your JSON file is empty)
-// const init = () => db.defaults({ history: [], user: {}, currentState: 10, currentModel: {} }).write();
+db.defaults({
+  history: [], user: {}, currentState: 10, currentModel: {},
+}).write();
 
 const pushHistory = history => db.get('history')
   .push(history)
