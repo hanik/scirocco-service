@@ -66,6 +66,8 @@ const updateHistory = (where, values) => db.get('history').find(where).assign(va
 
 const updateCurrentModel = values => db.get('currentModel').assign(values).write();
 
+const getHistoryList = () => db.get('history').value();
+
 module.exports = {
   pushHistory,
   setUser,
@@ -78,4 +80,5 @@ module.exports = {
   updateCurrentModel,
   updateHistory,
   clearCurrentModel,
+  getHistoryList,
 };

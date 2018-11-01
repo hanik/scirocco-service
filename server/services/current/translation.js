@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-syntax,consistent-return,no-underscore-dangle */
-const fileHelper = require('../../helpers/file');
 const shell = require('shelljs');
 const fs = require('fs-extra');
 const { parsed } = require('dotenv').config();

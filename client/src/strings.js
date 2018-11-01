@@ -86,15 +86,14 @@ const HISTORY = {
   LABEL_SERVICE_MODEL: '서비스 중인 모델',
   BUTTON_MOVE_ARCHIVE: '아카이브 이동',
   BUTTON_CHANGE_MODEL: '기준 모델 변경',
-  TABLE_MODEL_NAME: 'modelName',
-  TABLE_START_DATE: 'startDate',
-  TABLE_END_DATE: 'endDate',
-  TABLE_IMPROVE: 'improve',
-  TABLE_FIX: 'fix',
-  TABLE_BASE: 'base',
+  TABLE_MODEL_NAME: '모델 명',
+  TABLE_START_DATE: '모델 생성 일자',
+  TABLE_SERVICE_START_DATE: '서비스 시작 일자',
+  TABLE_SERVICE_END_DATE: '서비스 종료 일자',
   TABLE_ADMIN: 'admin',
-  TABLE_VOLUME: 'volume',
-  TABLE_HISTORY: 'history',
+  TABLE_VERIFY_RESULT: '검증 결과',
+  TABLE_SERVICE_YN: '서비스 여부',
+  SERVICE_RESTART: '서비스 재시작',
 };
 
 export {

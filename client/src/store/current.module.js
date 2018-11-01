@@ -34,11 +34,11 @@ const current = {
     // 서버에서 현재 돌아가고 있는 상태가 있는지에 대한 코드를 받아옴
     async fetchCurrentStatusAsync({ dispatch }) {
       const currentStatus = await api.fetchCurrentStatus();
-      dispatch('setCurrentStatusCode', currentStatus);
+      dispatch('setCurrentStatusCode', currentStatus.data);
     },
     async fetchFeedbackInfoAsync({ commit }) {
       const feedbackInfo = await api.fetchFeedbackInfo();
-      commit('fetchFeedbackInfoSuccess', feedbackInfo);
+      commit('fetchFeedbackInfoSuccess', feedbackInfo.data);
     },
     async createModelAsync({ dispatch }, info) {
       const response = await api.createModel(info);
@@ -50,7 +50,7 @@ const current = {
     },
     async fetchPrepareInfoAsync({ commit }) {
       const prepareInfo = await api.fetchPrepareInfo();
-      commit('fetchPrepareInfoSuccess', prepareInfo);
+      commit('fetchPrepareInfoSuccess', prepareInfo.data);
     },
     async prepareDataStartAsync({ dispatch }) {
       dispatch('setCurrentStatusCode', 21);

@@ -16,14 +16,17 @@ const login = async () => {
 
 const fetchCurrentStatus = async () => {
   const res = await axios.post('/api/current/state')
-    .then(response => response.data)
-    .catch(error => error);
+    .then(response => response)
+    .catch((error) => {
+      console.log(error.message);
+      return error;
+    });
   return res;
 };
 
 const fetchFeedbackInfo = async () => {
   const res = await axios.post('/api/current/feedback/info')
-    .then(response => response.data)
+    .then(response => response)
     .catch(error => error);
   return res;
 };
@@ -37,7 +40,7 @@ const createModel = async (info) => {
 
 const fetchPrepareInfo = async () => {
   const res = await axios.post('/api/current/prepare/info')
-    .then(response => response.data)
+    .then(response => response)
     .catch(error => error);
   return res;
 };
@@ -119,8 +122,15 @@ const initCurrentStep = async () => {
   return res;
 };
 
-const fetchHistory = async () => {
+const fetchHistoryList = async () => {
   const res = await axios.post('/api/models/list')
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
+const fetchServiceModel = async () => {
+  const res = await axios.post('/api/models/service-model')
     .then(response => response)
     .catch(error => error);
   return res;
@@ -142,4 +152,6 @@ export default {
   noUseVerifiedModel,
   restartServiceStart,
   initCurrentStep,
+  fetchHistoryList,
+  fetchServiceModel,
 };
