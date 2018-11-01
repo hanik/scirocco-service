@@ -93,14 +93,14 @@ router.post('/translation/restart', (req, res) => {
   res.send(restart);
 });
 
-// router.post('/translation/restart/change-model', (req, res) => {
-//   const restart = translation.restartPast();
+router.post('/translation/restart/change-model', (req, res) => {
+  const restart = translation.restartChangeModel(req.body);
+  res.send('OK');
+});
+
+// router.post('/translation/restart/after-verify', (req, res) => {
+//   const restart = translation.restartAfterVerify();
 //   res.send(restart);
 // });
-
-router.post('/translation/restart/after-verify', (req, res) => {
-  const restart = translation.restartAfterVerify();
-  res.send(restart);
-});
 
 module.exports = router;

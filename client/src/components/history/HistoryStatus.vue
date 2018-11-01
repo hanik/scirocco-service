@@ -9,15 +9,18 @@
     </div>
     <div class="right-buttons">
       <!--<r-button :title="labels.buttonMoveArchive" :width="140" />-->
-      <!-- TODO 2번 /translation/restart/change-model -->
-      <r-button :title="labels.buttonChangeModel" :width="140" />
+      <r-button :title="labels.buttonChangeModel" :width="140" @button-clicked="changeModel"/>
     </div>
+    <alert-dialog v-show="alertDialogVisibility"
+                  :message="'일단 암거나 띄워볼게요'"
+                  @close="closeAlertDialog"/>
   </div>
 </template>
 
 <script>
 import { HISTORY } from '@/strings';
 import RButton from '@/components/common/RButton.vue';
+import AlertDialog from '@/components/common/AlertDialog.vue';
 import { mapGetters } from 'vuex';
 
 const labels = {
@@ -31,10 +34,12 @@ export default {
   name: 'HistoryStatus',
   components: {
     RButton,
+    AlertDialog,
   },
   data() {
     return {
       labels,
+      alertDialogVisibility: false,
     };
   },
   computed: {
@@ -45,6 +50,23 @@ export default {
   methods: {
     serviceRestart() {
       this.$store.dispatch('current/restartServiceStartAsync');
+    },
+    changeModel() {
+      // TODO Validation
+      // 여러개 선택된 경우 || 선택안된경우 --> 한개만 선택하도록 Alert;
+      // 현재 사용중인 모델일 경우에 ---> 이미 사용중 alert
+      // TODO 2번 /translation/restart/change-model
+      this.alertDialogVisibility = true;
+
+      const modelInfo = {
+        modelName: 'Take-02',
+        seq: '2',
+      };
+
+      this.$store.dispatch('models/restartChangeModelAsync', modelInfo);
+    },
+    closeAlertDialog() {
+      this.alertDialogVisibility = false;
     },
   },
 };

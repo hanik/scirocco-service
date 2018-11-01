@@ -115,6 +115,13 @@ const restartServiceStart = async () => {
   return res;
 };
 
+const restartChangeModel = async (modelInfo) => {
+  const res = await axios.post('/api/current/translation/restart/change-model', modelInfo)
+    .then(response => response)
+    .catch(error => error);
+  return res;
+};
+
 const initCurrentStep = async () => {
   const res = await axios.post('/api/current/init')
     .then(response => response)
@@ -154,4 +161,5 @@ export default {
   initCurrentStep,
   fetchHistoryList,
   fetchServiceModel,
+  restartChangeModel,
 };

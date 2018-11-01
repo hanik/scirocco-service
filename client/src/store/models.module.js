@@ -25,6 +25,15 @@ const models = {
         console.log(response);
       }
     },
+    async restartChangeModelAsync({ commit }, modelInfo) {
+      const response = await api.restartChangeModel(modelInfo);
+      if (response.status === 200) {
+        const serviceModel = response.data;
+        commit('fetchServiceModelSuccess', serviceModel);
+      } else {
+        console.log(response);
+      }
+    },
   },
   mutations: {
     fetchHistoryListSuccess(state, historyList) {

@@ -82,8 +82,12 @@ const _changeCurrentModelInEnv = (currentModelPath) => {
 };
 
 const restartChangeModel = (modelInfo) => {
-  _changeCurrentModelInEnv(modelInfo.path);
-  restart(modelInfo);
+  console.log(modelInfo);
+  console.log(modelInfo.modelName);
+  console.log(modelInfo.seq);
+  // { modelName: 'Take-02', seq: '2' }
+  // _changeCurrentModelInEnv(modelInfo.path);
+  // restart(modelInfo);
 };
 
 function _getRestartRestCommand(currentModelPath) {
