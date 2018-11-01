@@ -1,7 +1,7 @@
 <template>
   <div id="history-container">
     <HistoryStatus />
-    <HistoryTable :items="items"/>
+    <HistoryTable :historyList="historyList"/>
   </div>
 </template>
 
@@ -16,9 +16,13 @@ export default {
     HistoryTable,
     HistoryStatus,
   },
+  mounted() {
+    this.$store.dispatch('models/fetchHistoryListAsync');
+    this.$store.dispatch('models/fetchServiceModelAsync');
+  },
   computed: {
     ...mapGetters({
-      items: 'getHistoryItems',
+      historyList: 'models/getHistoryList',
     }),
   },
 };

@@ -4,26 +4,20 @@
       <div class="checkbox"><input type="checkbox" /> </div>
       <div class="modelName">{{ modelName }}</div>
       <div class="startDate">{{ startDate }}</div>
-      <div class="endDate">{{ endDate }}</div>
-      <div class="improve">{{ improve }}</div>
-      <div class="fix">{{ fix }}</div>
-      <div class="base">{{ base }}</div>
-      <div class="admin">{{ admin }}</div>
-      <div class="volume">{{ volume }}</div>
-      <div class="history">{{ history }}</div>
+      <div class="serviceStartDate">{{ serviceStartDate }}</div>
+      <div class="serviceEndDate">{{ serviceEndDate }}</div>
+      <div class="verifyResult">{{ verifyResult }}</div>
+      <div class="serviceYn">{{ serviceYn }}</div>
     </div>
     <div class="table-body">
-      <div class="table-row" v-for="item in items" :key="item.modelName">
+      <div class="table-row" v-for="item in historyList" :key="item.seq">
         <div class="checkbox"><input type="checkbox" /></div>
         <div class="modelName">{{ item.modelName }}</div>
-        <div class="startDate">{{ item.startDate }}</div>
-        <div class="endDate">{{ item.endDate }}</div>
-        <div class="improve">{{ item.improve }}</div>
-        <div class="fix">{{ item.fix }}</div>
-        <div class="base">{{ item.base }}</div>
-        <div class="admin">{{ item.admin }}</div>
-        <div class="volume">{{ item.volume }}</div>
-        <div class="history">{{ item.history }}</div>
+        <div class="startDate">{{ item.modelCreateAt }}</div>
+        <div class="serviceStartDate">{{ item.serviceStartAt }}</div>
+        <div class="serviceEndDate">{{ item.serviceEndAt }}</div>
+        <div class="verifyResult">{{ item.verifyResult }}</div>
+        <div class="serviceYn">{{ item.serviceYn }}</div>
       </div>
     </div>
   </div>
@@ -34,19 +28,16 @@ import { HISTORY } from '@/strings';
 
 export default {
   name: 'HistoryTable',
-  props: ['items'],
+  props: ['historyList'],
   data() {
     return {
       modelName: HISTORY.TABLE_MODEL_NAME,
       startDate: HISTORY.TABLE_START_DATE,
-      endDate: HISTORY.TABLE_END_DATE,
-      improve: HISTORY.TABLE_IMPROVE,
-      fix: HISTORY.TABLE_FIX,
-      base: HISTORY.TABLE_BASE,
+      serviceStartDate: HISTORY.TABLE_SERVICE_START_DATE,
+      serviceEndDate: HISTORY.TABLE_SERVICE_END_DATE,
       admin: HISTORY.TABLE_ADMIN,
-      volume: HISTORY.TABLE_VOLUME,
-      history: HISTORY.TABLE_HISTORY,
-
+      verifyResult: HISTORY.TABLE_VERIFY_RESULT,
+      serviceYn: HISTORY.TABLE_SERVICE_YN,
     };
   },
 };
@@ -80,37 +71,30 @@ export default {
 .table-row, .table-header {
   & > div {
     padding: 0 22px;
+    overflow: hidden;
   }
 
   .checkbox {
     flex: 1;
   }
   .modelName {
-    flex: 6;
+    flex: 3;
   }
   .startDate {
-    flex: 5;
+    flex: 4;
   }
-  .endDate {
-    flex: 5;
+  .serviceStartDate {
+    flex: 4;
   }
-  .improve {
+  .serviceEndDate {
+    flex: 4;
+  }
+  .verifyResult {
     flex: 3;
   }
-  .fix {
+  .serviceYn {
     flex: 3;
-  }
-  .base {
-    flex: 3;
-  }
-  .admin {
-    flex: 7;
-  }
-  .volume {
-    flex: 3;
-  }
-  .history {
-    flex: 1;
+
   }
 }
 </style>
