@@ -8,6 +8,21 @@ const current = require('../services/current');
 
 const router = express.Router();
 
+router.post('/state', (req, res) => {
+  const state = current.state();
+  res.send(state.toString());
+});
+
+router.post('/set-state', (req, res) => {
+  const state = current.setState(req.body.state);
+  res.send(state.toString());
+});
+
+router.post('/init', (req, res) => {
+  const init = current.init();
+  res.send(init.toString());
+});
+
 router.post('/feedback/info', async (req, res) => {
   const info = await feedback.info();
   res.send(info);
@@ -33,6 +48,11 @@ router.post('/prepare/info', async (req, res) => {
   res.send(info);
 });
 
+router.post('/prepare/cancel', async (req, res) => {
+  const cancel = await prepare.cancel();
+  res.send(cancel);
+});
+
 router.post('/training/start', async (req, res) => {
   const start = await training.start();
   res.send(start);
@@ -48,18 +68,8 @@ router.post('/training/restart', (req, res) => {
   res.send(restart);
 });
 
-router.post('/state', (req, res) => {
-  const state = current.state();
-  res.send(state.toString());
-});
-
 router.post('/training/cancel', async (req, res) => {
   const cancel = await training.cancel();
-  res.send(cancel);
-});
-
-router.post('/prepare/cancel', async (req, res) => {
-  const cancel = await prepare.cancel();
   res.send(cancel);
 });
 
@@ -91,16 +101,6 @@ router.post('/translation/restart', (req, res) => {
 router.post('/translation/restart/after-verify', (req, res) => {
   const restart = translation.restartAfterVerify();
   res.send(restart);
-});
-
-router.post('/setstate', (req, res) => {
-  const state = current.setState(req.body.state);
-  res.send(state.toString());
-});
-
-router.post('/init', (req, res) => {
-  const init = current.init();
-  res.send(init.toString());
 });
 
 module.exports = router;
