@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import LoginPage from './components/LoginPage.vue';
 import Current from './components/current/StepperTabArea.vue';
-import History from './components/history/HistoryContainer.vue';
+import History from './components/models/HistoryContainer.vue';
 
 import ContentGatherFeedback from './components/current/subcontents/GatherFeedback.vue';
 import ContentTraining from './components/current/subcontents/Training.vue';

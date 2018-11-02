@@ -26,11 +26,7 @@ const status = {
     },
   },
   getters: {
-    getITAdmin: state => state.itAdmin,
-    getLegalAdmin: state => state.legalAdmin,
-    getModelName: state => state.modelName,
-    getCreateDate: state => state.createDate,
-    getEndDate: state => state.endDate,
+    getCurrentModelStatus: state => state,
   },
 };
 

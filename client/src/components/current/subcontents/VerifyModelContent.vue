@@ -94,14 +94,6 @@ export default {
       }
       return 'Screen Prevent';
     },
-    statusCircle() {
-      if (this.status === 'waiting') {
-        return '../../../assets/images/img-processfin.svg';
-      } else if (this.status === 'updating') {
-        return '../../../assets/images/img-processing-1.svg';
-      }
-      return '../../../assets/images/img-processfin.svg';
-    },
   },
   methods: {
     cancelUpdateCurrentModel() {

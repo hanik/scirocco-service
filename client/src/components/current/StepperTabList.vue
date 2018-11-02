@@ -34,6 +34,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('current/fetchCurrentStatusAsync');
+    this.$store.dispatch('models/fetchServiceModelAsync');
   },
   computed: {
     ...mapGetters({

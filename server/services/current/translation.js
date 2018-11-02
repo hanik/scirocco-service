@@ -87,13 +87,15 @@ const restartChangeModel = (modelInfo) => {
 };
 
 function _getRestartRestCommand(currentModelPath) {
-  return `export CURRENT_MODEL=${currentModelPath};
+  const command = `export CURRENT_MODEL=${currentModelPath};
       docker-compose -f ${ENV}.server.enko.yml down;
       docker-compose -f ${ENV}.server.enko.yml up`;
+  return command;
 }
 
 function _getRestartFlaskCommand() {
-  return `docker-compose -f ${ENV}.yc.yml down; docker-compose -f ${ENV}.yc.yml up`;
+  return `docker-compose -f ${ENV}.yc.yml down; 
+  docker-compose -f ${ENV}.yc.yml up`;
 }
 
 module.exports = {

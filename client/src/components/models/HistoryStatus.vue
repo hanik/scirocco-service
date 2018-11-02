@@ -18,16 +18,16 @@
 </template>
 
 <script>
-import { HISTORY } from '@/strings';
+import { MODELS } from '@/strings';
 import RButton from '@/components/common/RButton.vue';
 import AlertDialog from '@/components/common/AlertDialog.vue';
 import { mapGetters } from 'vuex';
 
 const labels = {
-  labelServiceModel: HISTORY.LABEL_SERVICE_MODEL,
-  buttonMoveArchive: HISTORY.BUTTON_MOVE_ARCHIVE,
-  buttonChangeModel: HISTORY.BUTTON_CHANGE_MODEL,
-  restartService: HISTORY.SERVICE_RESTART,
+  labelServiceModel: MODELS.LABEL_SERVICE_MODEL,
+  buttonMoveArchive: MODELS.BUTTON_MOVE_ARCHIVE,
+  buttonChangeModel: MODELS.BUTTON_CHANGE_MODEL,
+  restartService: MODELS.SERVICE_RESTART,
 };
 
 export default {

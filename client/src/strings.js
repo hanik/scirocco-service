@@ -29,7 +29,8 @@ const CURRENT = {
   '검증하는 단계입니다.\n ',
   STEP_RESTART_SERVICE_DESCRIPTION: '새로운 모델을 서버에 업데이트 하기 위해 서비스를 재시작합니다.\n' +
     '작업 완료 후에는 담당자에게 알림을 보냅니다.',
-  STATUS_PROCESS_NAME: '프로세싱 모델',
+  STATUS_SERVICE_MODEL_NAME: '서비스중인 모델',
+  STATUS_PROCESS_MODEL_NAME: '프로세싱중인 모델',
   STATUS_CREATE_DATE: '생성 일시',
   STATUS_END_DATE: '종료 일시',
   STATUS_MANAGER: '관리자',
@@ -82,7 +83,7 @@ const CURRENT = {
   POPUP_ADMIN_LEGAL: '관리자(Legal)',
 };
 
-const HISTORY = {
+const MODELS = {
   LABEL_SERVICE_MODEL: '서비스 중인 모델',
   BUTTON_MOVE_ARCHIVE: '아카이브 이동',
   BUTTON_CHANGE_MODEL: '기준 모델 변경',
@@ -99,5 +100,5 @@ const HISTORY = {
 export {
   COMMONS,
   CURRENT,
-  HISTORY,
+  MODELS,
 };

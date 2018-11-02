@@ -24,20 +24,20 @@
 </template>
 
 <script>
-import { HISTORY } from '@/strings';
+import { MODELS } from '@/strings';
 
 export default {
   name: 'HistoryTable',
   props: ['historyList'],
   data() {
     return {
-      modelName: HISTORY.TABLE_MODEL_NAME,
-      startDate: HISTORY.TABLE_START_DATE,
-      serviceStartDate: HISTORY.TABLE_SERVICE_START_DATE,
-      serviceEndDate: HISTORY.TABLE_SERVICE_END_DATE,
-      admin: HISTORY.TABLE_ADMIN,
-      verifyResult: HISTORY.TABLE_VERIFY_RESULT,
-      serviceYn: HISTORY.TABLE_SERVICE_YN,
+      modelName: MODELS.TABLE_MODEL_NAME,
+      startDate: MODELS.TABLE_START_DATE,
+      serviceStartDate: MODELS.TABLE_SERVICE_START_DATE,
+      serviceEndDate: MODELS.TABLE_SERVICE_END_DATE,
+      admin: MODELS.TABLE_ADMIN,
+      verifyResult: MODELS.TABLE_VERIFY_RESULT,
+      serviceYn: MODELS.TABLE_SERVICE_YN,
     };
   },
   methods: {

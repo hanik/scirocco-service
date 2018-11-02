@@ -13,10 +13,10 @@
           <div class="label">{{ labels.createDate }}</div><input type="text" disabled :value="createDate"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled :value="itAdmin"/>
+          <div class="label">{{ labels.itAdmin }}</div><input type="text" disabled :value="currentModelStatus.itAdmin"/>
         </div>
         <div class="input-group">
-          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled :value="legalAdmin"/>
+          <div class="label">{{ labels.legalAdmin }}</div><input type="text" disabled :value="currentModelStatus.legalAdmin"/>
         </div>
       </div>
       <div class="buttons">
@@ -80,8 +80,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      itAdmin: 'status/getITAdmin',
-      legalAdmin: 'status/getLegalAdmin',
+      currentModelStatus: 'status/getCurrentModelStatus',
     }),
   },
 };

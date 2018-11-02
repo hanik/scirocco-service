@@ -44,29 +44,6 @@
         <div class="report-info">{{ labels.reportInfo }}</div>
       </div>
     </div>
-    <div class="result-task-set">
-      <div class="container-icon">
-        <div class="ic-status-wrap">
-          <img src="../../../assets/images/img-processfin.svg" />
-          <div class="ic-process-datachk"></div>
-        </div>
-        <div class="label-subtitle">{{ labels.taskSet }}</div>
-      </div>
-      <div class="result-table">
-        <div class="table-header">
-          <div>{{ labels.korean }}</div>
-          <div>{{ labels.english }}</div>
-        </div>
-        <div class="table-body">
-          <div class="table-row" v-for="(item, index) in verifiedBasicSetItems" :key="index">
-            <div :class="['table-item', {new: item.isNew}]">{{ item.ko }}</div>
-            <div :class="['table-item', {new: item.isNew}]">{{ item.en }}</div>
-          </div>
-        </div>
-        <div class="report-info">{{ labels.reportInfo }}</div>
-      </div>
-    </div>
-
     <step-contents>
       <template slot="buttons">
         <div>
@@ -175,7 +152,7 @@ export default {
     margin-top: 20px;
   }
 
-  .result-basic-set, .result-task-set {
+  .result-basic-set {
     @include set-area;
 
     .container-icon {

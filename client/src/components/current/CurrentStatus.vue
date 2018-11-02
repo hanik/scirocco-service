@@ -1,27 +1,33 @@
 <template>
   <div class="status-container" v-if="loggingIn">
     <div class="status-content">
-      <label>{{ labels.modelName }}</label>
-      <span :class="['content-span',  {'no-data': isDateNull(processingModel)}]" id="model-name">
-        {{ modelNameNullCheck(processingModel) }}
+      <label>{{ labels.serviceModelName }}</label>
+      <span :class="['content-span',  {'no-data': isDateNull(serviceModel.modelName)}]" id="service-model-name">
+        {{ modelNameNullCheck(serviceModel.modelName) }}
+      </span>
+    </div>
+    <div class="status-content">
+      <label>{{ labels.processModelName }}</label>
+      <span :class="['content-span',  {'no-data': isDateNull(currentModelStatus.modelName)}]" id="process-model-name">
+        {{ modelNameNullCheck(currentModelStatus.modelName) }}
       </span>
     </div>
     <div class="status-content">
       <label>{{ labels.createDate }}</label>
-      <span :class="['content-span',  {'no-data': isDateNull(createDate)}]" id="model-create-date">
-        {{ dateNullCheck(createDate) }}
+      <span :class="['content-span',  {'no-data': isDateNull(currentModelStatus.createDate)}]" id="model-create-date">
+        {{ dateNullCheck(currentModelStatus.createDate) }}
       </span>
     </div>
     <div class="status-content">
       <label>{{ labels.endDate }}</label>
-      <span :class="['content-span',  {'no-data': isDateNull(endDate)}]" id="model-finished-date">
-        {{ dateNullCheck(endDate) }}
+      <span :class="['content-span',  {'no-data': isDateNull(currentModelStatus.endDate)}]" id="model-finished-date">
+        {{ dateNullCheck(currentModelStatus.endDate) }}
       </span>
     </div>
     <div class="status-content">
       <label>{{ labels.manager }}</label>
       <span class="content-span" id="admin-manager">
-        icebar2002@gmail.com(service), yclaw01@gmail.com(legal)
+        {{ currentModelStatus.itAdmin }}, {{ currentModelStatus.legalAdmin }}
       </span>
     </div>
   </div>
@@ -32,7 +38,8 @@ import { mapGetters } from 'vuex';
 import { CURRENT } from '@/strings';
 
 const labels = {
-  modelName: CURRENT.STATUS_PROCESS_NAME,
+  serviceModelName: CURRENT.STATUS_SERVICE_MODEL_NAME,
+  processModelName: CURRENT.STATUS_PROCESS_MODEL_NAME,
   createDate: CURRENT.STATUS_CREATE_DATE,
   endDate: CURRENT.STATUS_END_DATE,
   manager: CURRENT.STATUS_MANAGER,
@@ -51,9 +58,8 @@ export default {
   computed: {
     ...mapGetters({
       loggingIn: 'authentication/isLogin',
-      processingModel: 'status/getModelName',
-      createDate: 'status/getCreateDate',
-      endDate: 'status/getEndDate',
+      currentModelStatus: 'status/getCurrentModelStatus',
+      serviceModel: 'models/getServiceModel',
     }),
   },
   methods: {
