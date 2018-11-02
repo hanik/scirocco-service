@@ -96,7 +96,7 @@ export default {
       const result = await api.fetchTrainingStatus();
       const currentState = await api.fetchCurrentStatus();
       this.currentEpoch = result.data;
-      if (this.currentEpoch === 'DONE' && currentState === 40) {
+      if (this.currentEpoch === 'DONE' && currentState.data === 40) {
         pollingOff();
         await this.$store.dispatch('current/setCurrentStatusCode', 40);
         this.$router.push({
