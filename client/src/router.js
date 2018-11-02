@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import HomePage from './views/Home.vue';
 import LoginPage from './components/LoginPage.vue';
 import Current from './components/current/StepperTabArea.vue';
 import History from './components/history/HistoryContainer.vue';
@@ -17,7 +16,7 @@ Vue.use(Router);
 const router = new Router({
   mode: 'history',
   routes: [
-    { path: '/', component: HomePage },
+    { path: '/', redirect: '/current/feedback' },
     { path: '/login', component: LoginPage },
     {
       path: '/current',

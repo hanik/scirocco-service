@@ -95,7 +95,7 @@ router.post('/translation/restart', (req, res) => {
 
 router.post('/translation/restart/change-model', (req, res) => {
   const restart = translation.restartChangeModel(req.body);
-  res.send('OK');
+  res.send(restart);
 });
 
 // router.post('/translation/restart/after-verify', (req, res) => {
