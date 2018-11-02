@@ -10,8 +10,8 @@
       <div class="serviceYn">{{ serviceYn }}</div>
     </div>
     <div class="table-body">
-      <div class="table-row" v-for="item in historyList" :key="item.seq">
-        <div class="checkbox"><input type="checkbox" /></div>
+      <div class="table-row" v-for="(item, index) in historyList" :key="item.seq">
+        <div class="checkbox"><input :id="index" type="checkbox" @click="historyTableCheckEvent"/></div>
         <div class="modelName">{{ item.modelName }}</div>
         <div class="startDate">{{ item.modelCreateAt }}</div>
         <div class="serviceStartDate">{{ item.serviceStartAt }}</div>
@@ -39,6 +39,12 @@ export default {
       verifyResult: HISTORY.TABLE_VERIFY_RESULT,
       serviceYn: HISTORY.TABLE_SERVICE_YN,
     };
+  },
+  methods: {
+    historyTableCheckEvent(event) {
+      const selectedItemIndex = event.currentTarget.id;
+      this.$emit('model-checked', selectedItemIndex);
+    },
   },
 };
 </script>

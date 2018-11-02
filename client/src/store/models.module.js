@@ -45,7 +45,7 @@ const models = {
   },
   getters: {
     getHistoryList: state => state.history,
-    getServiceModelName: state => state.serviceModel.modelName,
+    getServiceModel: state => state.serviceModel,
   },
 };
 

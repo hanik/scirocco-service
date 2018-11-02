@@ -3,16 +3,16 @@
     <div class="left-title">
       <div>
         <div>{{ labels.labelServiceModel }}</div>
-        <div>{{ currentServiceModelName }} </div>
+        <div>{{ currentServiceModel.modelName }} </div>
         <r-button r-button :title="labels.restartService" :width="101" @button-clicked="serviceRestart" />
       </div>
     </div>
     <div class="right-buttons">
       <!--<r-button :title="labels.buttonMoveArchive" :width="140" />-->
-      <r-button :title="labels.buttonChangeModel" :width="140" @button-clicked="changeModel"/>
+      <r-button :title="labels.buttonChangeModel" :width="140" @button-clicked="changeModel" v-show="isHistoryListNotEmpty"/>
     </div>
     <alert-dialog v-show="alertDialogVisibility"
-                  :message="'일단 암거나 띄워볼게요'"
+                  :message="alertMessage"
                   @close="closeAlertDialog"/>
   </div>
 </template>
@@ -40,30 +40,38 @@ export default {
     return {
       labels,
       alertDialogVisibility: false,
+      alertMessage: '',
     };
   },
+  props: ['historyList', 'selected'],
   computed: {
     ...mapGetters({
-      currentServiceModelName: 'models/getServiceModelName',
+      currentServiceModel: 'models/getServiceModel',
     }),
+    isHistoryListNotEmpty() {
+      return this.historyList.length !== 0;
+    },
   },
   methods: {
     serviceRestart() {
       this.$store.dispatch('current/restartServiceStartAsync');
     },
     changeModel() {
-      // TODO Validation
-      // 여러개 선택된 경우 || 선택안된경우 --> 한개만 선택하도록 Alert;
-      // 현재 사용중인 모델일 경우에 ---> 이미 사용중 alert
-      // TODO 2번 /translation/restart/change-model
-      this.alertDialogVisibility = true;
+      const { selected, currentServiceModel } = this;
 
-      const modelInfo = {
-        modelName: 'Take-02',
-        seq: '2',
-      };
-
-      this.$store.dispatch('models/restartChangeModelAsync', modelInfo);
+      if (selected.length !== 1) {
+        this.alertMessage = '변경 모델은 하나를 선택해야 합니다.';
+        this.alertDialogVisibility = true;
+      } else {
+        const selectedModel = this.historyList[selected[0]];
+        if (selectedModel.modelName === currentServiceModel.modelName
+          && selectedModel.seq === currentServiceModel.seq) {
+          this.alertMessage = '이미 적용중인 모델입니다.';
+          this.alertDialogVisibility = true;
+        } else {
+          this.$store.dispatch('models/restartChangeModelAsync', selectedModel);
+        }
+      }
     },
     closeAlertDialog() {
       this.alertDialogVisibility = false;

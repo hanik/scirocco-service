@@ -1,7 +1,7 @@
 <template>
   <div id="history-container">
-    <HistoryStatus />
-    <HistoryTable :historyList="historyList"/>
+    <HistoryStatus :historyList="historyList" :selected="selectedItemsIndex"/>
+    <HistoryTable :historyList="historyList" @model-checked="selected"/>
   </div>
 </template>
 
@@ -16,9 +16,25 @@ export default {
     HistoryTable,
     HistoryStatus,
   },
+  data() {
+    return {
+      selectedItemsIndex: [],
+    };
+  },
   mounted() {
     this.$store.dispatch('models/fetchHistoryListAsync');
     this.$store.dispatch('models/fetchServiceModelAsync');
+  },
+  methods: {
+    selected(itemIndex) {
+      const { selectedItemsIndex } = this;
+      const selected = selectedItemsIndex.indexOf(itemIndex);
+      if (selected === -1) {
+        selectedItemsIndex.push(itemIndex);
+      } else {
+        selectedItemsIndex.splice(selected, 1);
+      }
+    },
   },
   computed: {
     ...mapGetters({
