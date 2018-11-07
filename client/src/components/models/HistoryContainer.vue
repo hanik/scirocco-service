@@ -8,7 +8,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import HistoryTable from '@/components/models/HistoryTable.vue';
-import HistoryStatus from '@/components/models//HistoryStatus.vue';
+import HistoryStatus from '@/components/models/HistoryStatus.vue';
 
 export default {
   name: 'HistoryContainer',
