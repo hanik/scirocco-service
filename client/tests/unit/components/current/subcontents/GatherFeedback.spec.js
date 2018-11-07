@@ -1,4 +1,4 @@
-import { mount, createLocalVue } from '@vue/test-utils';
+import { mount, shallowMount, createLocalVue } from '@vue/test-utils';
 import Vuex from 'vuex';
 import GatherFeedback from '@/components/current/subcontents/GatherFeedback.vue';
 
@@ -8,17 +8,27 @@ localVue.use(Vuex);
 describe('GatherFeedback.vue', () => {
   let wrapper;
   let store;
-  let actions;
+
+  const actions = {
+    'current/fetchFeedbackInfoAsync': jest.fn(),
+  };
+
+  let getters = {
+    'current/getFeedbackInfo': () => ({ progressCount: 2, totalCount: 10 }),
+    'current/getCurrentStatusCode': () => 10,
+    'status/getCurrentModelStatus': () => ({
+      modelName: null,
+      createDate: null,
+      endDate: null,
+      itAdmin: 'icebar2002@gmail.com',
+      legalAdmin: 'yclaw01@gmail.com',
+    }),
+  };
 
   beforeEach(() => {
-    actions = {
-      'current/fetchFeedbackInfoAsync': jest.fn(),
-    };
     store = new Vuex.Store({
       actions,
-      getters: {
-        'current/getFeedbackInfo': () => ({ processCount: 2, totalCount: 19 }),
-      },
+      getters,
     });
     wrapper = mount(GatherFeedback, { localVue, store });
   });
@@ -29,22 +39,38 @@ describe('GatherFeedback.vue', () => {
     });
 
     it('must exist feedbackInfo value when component mounted', () => {
-      expect(wrapper.vm.feedbackInfo).toEqual({ processCount: 2, totalCount: 19 });
+      expect(wrapper.vm.feedbackInfo).toEqual({ progressCount: 2, totalCount: 10 });
     });
   });
 
-  describe('events', () => {
-    it('should open popup when create feedback button clicked', () => {
-      // TODO
-      // console.log(wrapper.find('#content-feedback').html());
-      // wrapper.findAll('#rbutton').at(1).trigger('button-clicked');
-      // wrapper.findAll('#rbutton > div').at(1).trigger('click');
+  describe('methods', () => {
+    it('popupVisibility should be true when call openPopup ', () => {
+      wrapper.vm.openPopup();
 
-      // console.log(wrapper.find('.buttons').html());
-      // expect(wrapper.vm.popupVisibility).toBe(true);
+      expect(wrapper.find('#create-model-popup-area').isVisible()).toBe(true);
+    });
 
-      // mount 해도 child 의 child component 의 이벤트 까지는 바인딩 안하나 보다.....
-      // 테스트 불가 ?!
+    it('popupVisibility should be false when call closePopup ', () => {
+      wrapper.vm.closePopup();
+
+      expect(wrapper.find('#create-model-popup-area').isVisible()).toBe(false);
+    });
+  });
+
+  describe('computed', () => {
+    it('displayFeedbackInfo should return 0 when feedbackInfo state is empty', () => {
+      expect(wrapper.vm.displayFeedbackInfo).toBe(20);
+    });
+
+    it('displayFeedbackInfo should return 0 when feedbackInfo state is empty', () => {
+      getters = {
+        'current/getFeedbackInfo': () => ({}),
+        'current/getCurrentStatusCode': () => 10,
+      };
+      store = new Vuex.Store({ actions, getters });
+      wrapper = shallowMount(GatherFeedback, { localVue, store });
+
+      expect(wrapper.vm.displayFeedbackInfo).toBe(0);
     });
   });
 });

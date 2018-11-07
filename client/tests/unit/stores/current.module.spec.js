@@ -55,7 +55,7 @@ describe('current module', () => {
       const spyFetchFeedbackInfo = jest.spyOn(api, 'fetchFeedbackInfo');
 
       const { fetchFeedbackInfoAsync } = current.actions;
-      spyFetchFeedbackInfo.mockReturnValueOnce({ id: 11, name: 'unknown object' });
+      spyFetchFeedbackInfo.mockReturnValueOnce({ data: { id: 11, name: 'unknown object' }});
 
       expect.assertions(2);
 
@@ -71,7 +71,7 @@ describe('current module', () => {
       const spyFetchPrepareInfo = jest.spyOn(api, 'fetchPrepareInfo');
 
       const { fetchPrepareInfoAsync } = current.actions;
-      spyFetchPrepareInfo.mockReturnValueOnce({ id: 11, name: 'unknown object' });
+      spyFetchPrepareInfo.mockReturnValueOnce({ data: { id: 11, name: 'unknown object' }});
 
       expect.assertions(2);
 

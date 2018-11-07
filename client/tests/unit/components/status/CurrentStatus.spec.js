@@ -11,7 +11,15 @@ describe('CurrentStatus.vue', () => {
 
   beforeEach(() => {
     store = new Vuex.Store({
-      getters: { 'authentication/isLogin': () => true },
+      getters: {
+        'authentication/isLogin': () => true,
+        'status/getCurrentModelStatus': () => ({
+          modelName: 'currentModelName',
+        }),
+        'models/getServiceModel': () => ({
+          modelName: 'serviceModelName',
+        }),
+      },
     });
   });
 
